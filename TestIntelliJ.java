@@ -6,4 +6,6 @@ public class TestIntelliJ {
     public TestIntelliJ(int operand){
         System.out.println("Not default constructor");
     }
+
+    //test
 }
