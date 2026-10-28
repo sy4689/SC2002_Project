@@ -7,5 +7,5 @@ public class TestIntelliJ {
         System.out.println("Not default constructor");
     }
 
-    //test
+    //testing
 }
