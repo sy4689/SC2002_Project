@@ -1,2 +1,3 @@
-public class Restaurant {
+public class Restaurant{
+
 }

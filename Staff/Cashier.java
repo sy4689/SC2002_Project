@@ -1,3 +1,5 @@
+package Staff;
+
 public class Cashier {
     private int payCapacity = 1;
 

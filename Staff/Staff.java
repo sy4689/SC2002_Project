@@ -1,3 +1,5 @@
+package Staff;
+
 public class Staff {
     private String name;
     private boolean busyThisTurn = false;
