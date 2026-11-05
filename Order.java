@@ -1,2 +1,68 @@
+import java.util.List;
+
 public class Order {
+    private int orderID;
+    private int tableID;
+    private int remainingPrepUnits;
+    private int turnReady = -1;
+    private OrderStatus status;
+    private int finalPriceinCents;
+    private MenuItem item;
+
+    public Order(int orderID, int tableID, MenuItem item){
+        this.orderID = orderID;
+        this.tableID = tableID;
+        this.item = item;
+        this.remainingPrepUnits = item.getPrepUnits();
+        this.status = OrderStatus.PENDING;
+        this.finalPriceinCents = item.getPriceinCents();
+    }
+
+    public int getRemainingPrepUnits() {
+        return remainingPrepUnits;
+    }
+
+    public int getFinalPriceinCents(){
+        return finalPriceinCents
+    }
+    public MenuItem getItem(){
+        return item;
+    }
+    public OrderStatus getStatus() {
+        return status;
+    }
+
+    public void decrementPrepUnits(int currentTurn){
+        if (status != OrderStatus.PENDING && status != OrderStatus.IN_KITCHEN){
+            System.out.println("Order cannot be prepared");
+        }
+        else if (remainingPrepUnits <= 0) {
+            System.out.println("Order is already prepared");
+        }
+        else remainingPrepUnits--;
+    }
+
+    public void markServed(){
+        if (status != OrderStatus.READY) {
+            System.out.println("Order is not ready");
+        }
+        else status = OrderStatus.SERVED;
+    }
+    public void markPaid(){
+        if (status != OrderStatus.READY_TO_PAY) {
+            System.out.print("Order is not ready for payment");
+        }
+        else status = OrderStatus.PAID;
+    }
+    public void markAbandoned(){
+        if (status == OrderStatus.PAID || status == OrderStatus.SERVED || status == OrderStatus.READY_TO_PAY) {
+            System.out.println("Order cannot be abandoned");
+
+        }
+        else status = OrderStatus.ABANDONED;
+    }
+    public void isReady(){
+        return status == OrderStatus.READY && turnReady < currentTurn;
+
+    }
 }
