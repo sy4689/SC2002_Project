@@ -15,15 +15,15 @@ public class Order {
         this.item = item;
         this.remainingPrepUnits = item.getPrepUnits();
         this.status = OrderStatus.PENDING;
-        this.finalPriceinCents = item.getPriceinCents();
+        this.finalPriceinCents = item.getPriceInCents();
     }
 
     public int getRemainingPrepUnits() {
         return remainingPrepUnits;
     }
 
-    public int getFinalPriceinCents(){
-        return finalPriceinCents
+    public int getFinalPriceInCents(){
+        return finalPriceinCents;
     }
     public MenuItem getItem(){
         return item;
@@ -50,7 +50,7 @@ public class Order {
     }
     public void markPaid(){
         if (status != OrderStatus.READY_TO_PAY) {
-            System.out.print("Order is not ready for payment");
+            System.out.println("Order is not ready for payment");
         }
         else status = OrderStatus.PAID;
     }
@@ -61,8 +61,8 @@ public class Order {
         }
         else status = OrderStatus.ABANDONED;
     }
-    public void isReady(){
-        return status == OrderStatus.READY && turnReady < currentTurn;
+    public boolean isReady(){
+        return status == OrderStatus.READY;
 
     }
 }

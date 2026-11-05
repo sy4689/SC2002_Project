@@ -7,6 +7,7 @@ public abstract class Customer {
     private int eatingTurnsLeft = 1;
     private Order currentOrder;
 
+
     public Customer(int customerID, int arrivalTurn){
         this.customerID = customerID;
         this.arrivalTurn = arrivalTurn;
@@ -45,7 +46,7 @@ public abstract class Customer {
     public MenuItem chooseMenuItem(Menu menu){
         Random random = new Random(42); //the seed ensure every game generate the same random sequence
         int index = random.nextInt(menu.getItems().size());
-        return menu.getItembyIndex(index);
+        return menu.getItemByIndex(index);
     }
 
     public void decrementEatingTurns(){
@@ -58,6 +59,7 @@ public abstract class Customer {
         if (state == CustomerState.EATING && eatingTurnsLeft == 0){
             return true;
         }
+
         else return false;
     }
 
@@ -67,7 +69,5 @@ public abstract class Customer {
         }
         else return false;
     }
-
-
 
 }
