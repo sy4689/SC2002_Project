@@ -1,3 +1,5 @@
+import java.util.List;
+
 public class RegularCustomer extends Customer{
 
     private int regularPenalty = 8;
@@ -11,7 +13,7 @@ public class RegularCustomer extends Customer{
                 getState() == CustomerState.SEATED ||
                 getState() == CustomerState.ORDERED){
 
-            satisfaction = Math.max(0, satisfaction - 8);
+            satisfaction = Math.max(0, satisfaction - regularPenalty);
 
             if (satisfaction == 0) {
                 setState(CustomerState.ABANDONED);

@@ -44,7 +44,7 @@ public abstract class Customer {
     public abstract void applyWaitingPenalty();
 
     public MenuItem chooseMenuItem(Menu menu){
-        Random random = new Random(42); //the seed ensure every game generate the same random sequence
+        Random random = new Random(41); //the seed ensure every game generate the same random sequence
         int index = random.nextInt(menu.getItems().size());
         return menu.getItemByIndex(index);
     }
@@ -69,5 +69,6 @@ public abstract class Customer {
         }
         else return false;
     }
+
 
 }
