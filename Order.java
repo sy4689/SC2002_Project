@@ -6,7 +6,7 @@ public class Order {
     private int remainingPrepUnits;
     private int turnReady = -1;
     private OrderStatus status;
-    private int finalPriceinCents;
+    private int finalPriceInCents;
     private MenuItem item;
 
     public Order(int orderID, int tableID, MenuItem item){
@@ -15,7 +15,7 @@ public class Order {
         this.item = item;
         this.remainingPrepUnits = item.getPrepUnits();
         this.status = OrderStatus.PENDING;
-        this.finalPriceinCents = item.getPriceInCents();
+        this.finalPriceInCents = item.getPriceInCents();
     }
 
     public int getRemainingPrepUnits() {
@@ -23,7 +23,7 @@ public class Order {
     }
 
     public int getFinalPriceInCents(){
-        return finalPriceinCents;
+        return finalPriceInCents;
     }
     public MenuItem getItem(){
         return item;
@@ -34,35 +34,41 @@ public class Order {
 
     public void decrementPrepUnits(int currentTurn){
         if (status != OrderStatus.PENDING && status != OrderStatus.IN_KITCHEN){
-            System.out.println("Order cannot be prepared");
+            throw new IllegalStateException("Order cannot be prepared in its current state");
         }
-        else if (remainingPrepUnits <= 0) {
-            System.out.println("Order is already prepared");
+        if (remainingPrepUnits <= 0) {
+            throw new IllegalStateException("Order has no preparation units remaining");
         }
-        else remainingPrepUnits--;
+        remainingPrepUnits--;
+
+        if (remainingPrepUnits ==0){
+            status = OrderStatus.READY;
+            turnReady = currentTurn;
+        } else {
+            status = OrderStatus.IN_KITCHEN;
+        }
     }
 
     public void markServed(){
         if (status != OrderStatus.READY) {
-            System.out.println("Order is not ready");
+            throw new IllegalStateException("Only a READY order can be served");
         }
-        else status = OrderStatus.SERVED;
+        status = OrderStatus.SERVED;
     }
     public void markPaid(){
         if (status != OrderStatus.READY_TO_PAY) {
-            System.out.println("Order is not ready for payment");
+            throw new IllegalStateException("Order is not ready for payment");
         }
-        else status = OrderStatus.PAID;
+        status = OrderStatus.PAID;
     }
     public void markAbandoned(){
         if (status == OrderStatus.PAID || status == OrderStatus.SERVED || status == OrderStatus.READY_TO_PAY) {
-            System.out.println("Order cannot be abandoned");
-
+            throw new IllegalStateException("Order cannot be abandoned");
         }
         else status = OrderStatus.ABANDONED;
     }
     public boolean isReady(){
-        return status == OrderStatus.READY;
+        return status == OrderStatus.READY && turnReady < currentTurn;
 
     }
 }
