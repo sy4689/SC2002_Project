@@ -1,3 +1,5 @@
+package Control;
+
 public enum WaiterActionType {
     SERVE_ORDER,
     TAKE_ORDER,

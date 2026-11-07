@@ -1,3 +1,5 @@
+package Entity;
+
 public interface MenuItem {
 
     public int getPriceInCents();

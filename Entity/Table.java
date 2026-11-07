@@ -1,3 +1,5 @@
+package Entity;
+
 public class Table {
     private int tableID;
     private boolean isOccupied = false;
@@ -21,11 +23,11 @@ public class Table {
     public void assignCustomer(Customer cust) {
         //check whether customer exists
         if (cust == null){
-            throw new IllegalArgumentException("Customer cannot be null");
+            throw new IllegalArgumentException("Entity.Customer cannot be null");
         }
         //check whether table is available
         if (isOccupied){
-            throw new IllegalStateException("Table is already occupied");
+            throw new IllegalStateException("Entity.Table is already occupied");
         }
         //assign customer to this table
         currentCustomer = cust;

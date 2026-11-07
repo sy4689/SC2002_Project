@@ -1,4 +1,6 @@
-public enum MenuItemType implements MenuItem{
+package Entity;
+
+public enum MenuItemType implements MenuItem {
     SALAD(900,1),
     BURGER(1500,1),
     PASTA(1800,2);

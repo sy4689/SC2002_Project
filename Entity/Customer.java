@@ -1,3 +1,5 @@
+package Entity;
+
 import java.util.Random;
 public abstract class Customer {
     protected int satisfaction = 100;

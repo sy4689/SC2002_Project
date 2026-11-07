@@ -1,6 +1,6 @@
-import java.util.List;
+package Entity;
 
-public class RegularCustomer extends Customer{
+public class RegularCustomer extends Customer {
 
     private int regularPenalty = 8;
 

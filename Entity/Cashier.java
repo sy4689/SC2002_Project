@@ -9,7 +9,7 @@
 //
 //    }
 //
-//    public int processPayment (Table t, Restaurant r) {
+//    public int processPayment (Entity.Table t, Entity.Restaurant r) {
 //        return 0;
 //    }
 //}
