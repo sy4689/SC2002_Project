@@ -1,8 +1,8 @@
-package Control;
+package control;
 
 public enum WaiterActionType {
-    SERVE_ORDER,
-    TAKE_ORDER,
     SEAT_CUSTOMER,
+    TAKE_ORDER,
+    SERVE_ORDER,
     WAIT
 }

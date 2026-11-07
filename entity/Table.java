@@ -1,4 +1,7 @@
-package Entity;
+package entity;
+
+import entity.customer.Customer;
+import entity.customer.CustomerState;
 
 public class Table {
     private int tableID;
@@ -21,22 +24,15 @@ public class Table {
         return isOccupied;
     }
     public void assignCustomer(Customer cust) {
-        //check whether customer exists
-        if (cust == null){
-            throw new IllegalArgumentException("Entity.Customer cannot be null");
-        }
-        //check whether table is available
-        if (isOccupied){
-            throw new IllegalStateException("Entity.Table is already occupied");
-        }
-        //assign customer to this table
         currentCustomer = cust;
         isOccupied = true;
-        //update customer state
         cust.setState(CustomerState.SEATED);
     }
 
     public Customer releaseTable() {
+        if (currentCustomer == null) {
+            return null;
+        }
         if (currentCustomer.getState() == CustomerState.PAID_AND_LEFT || currentCustomer.getState() == CustomerState.ABANDONED) {
 
             Customer customer_left = currentCustomer;

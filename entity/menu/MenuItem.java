@@ -1,6 +1,8 @@
-package Entity;
+package entity.menu;
 
 public interface MenuItem {
+
+    public String getFoodName();
 
     public int getPriceInCents();
 

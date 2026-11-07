@@ -1,11 +1,10 @@
-package Entity;
+package entity.customer;
 
-public class RegularCustomer extends Customer {
+public class RegularCustomer extends Customer{
 
     private int regularPenalty = 8;
 
     public RegularCustomer(int customerID, int arrivalTurn) {
-
         super(customerID, arrivalTurn);
     }
     @Override

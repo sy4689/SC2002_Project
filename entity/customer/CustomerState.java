@@ -1,3 +1,5 @@
+package entity.customer;
+
 public enum CustomerState {
     WAITING_IN_QUEUE,
     SEATED,

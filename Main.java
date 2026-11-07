@@ -1,8 +1,15 @@
+import boundary.GameCLI;
+import control.GameUI;
+import control.Manager;
+import entity.Restaurant;
+import entity.menu.Menu;
+
 public class Main
 {
     public static void main(String[]args)
     {
-        TestIntelliJ t1 = new TestIntelliJ();
-        TestIntelliJ t2 = new TestIntelliJ(1);
+        GameUI ui = new GameCLI();
+        Restaurant restaurant = new Restaurant(new Menu());
+        new Manager(ui, restaurant).startGame();
     }
 }

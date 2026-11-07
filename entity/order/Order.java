@@ -1,4 +1,6 @@
-package Entity;
+package entity.order;
+
+import entity.menu.MenuItem;
 
 public class Order {
     private int orderID;
@@ -6,7 +8,7 @@ public class Order {
     private int remainingPrepUnits;
     private int turnReady = -1;
     private OrderStatus status;
-    private int finalPriceInCents;
+    private int finalPriceinCents;
     private MenuItem item;
 
     public Order(int orderID, int tableID, MenuItem item){
@@ -15,7 +17,7 @@ public class Order {
         this.item = item;
         this.remainingPrepUnits = item.getPrepUnits();
         this.status = OrderStatus.PENDING;
-        this.finalPriceInCents = item.getPriceInCents();
+        this.finalPriceinCents = item.getPriceInCents();
     }
 
     public int getRemainingPrepUnits() {
@@ -23,7 +25,7 @@ public class Order {
     }
 
     public int getFinalPriceInCents(){
-        return finalPriceInCents;
+        return finalPriceinCents;
     }
     public MenuItem getItem(){
         return item;
@@ -32,16 +34,25 @@ public class Order {
         return status;
     }
 
-    public void decrementPrepUnits(int currentTurn){
-        if (status != OrderStatus.PENDING && status != OrderStatus.IN_KITCHEN){
-            throw new IllegalStateException("Entity.Order cannot be prepared in its current state");
-        }
-        if (remainingPrepUnits <= 0) {
-            throw new IllegalStateException("Entity.Order has no preparation units remaining");
-        }
-        remainingPrepUnits--;
+    public int getOrderID() {
+        return orderID;
+    }
 
-        if (remainingPrepUnits ==0){
+    public int getTableID() {
+        return tableID;
+    }
+
+    public void decrementPrepUnits(int currentTurn, int prepCapacity){
+        if (status != OrderStatus.PENDING && status != OrderStatus.IN_KITCHEN){
+            System.out.println("Order cannot be prepared");
+        }
+        else if (remainingPrepUnits <= 0) {
+            System.out.println("Order is already prepared");
+        }
+        else {
+            remainingPrepUnits -= prepCapacity;
+        }
+        if (remainingPrepUnits == 0) {
             status = OrderStatus.READY;
             turnReady = currentTurn;
         } else {
@@ -51,23 +62,31 @@ public class Order {
 
     public void markServed(){
         if (status != OrderStatus.READY) {
-            throw new IllegalStateException("Only a READY order can be served");
+            System.out.println("Order is not ready");
         }
-        status = OrderStatus.SERVED;
+        else status = OrderStatus.SERVED;
     }
     public void markPaid(){
         if (status != OrderStatus.READY_TO_PAY) {
-            throw new IllegalStateException("Entity.Order is not ready for payment");
+            System.out.println("Order is not ready for payment");
         }
-        status = OrderStatus.PAID;
+        else status = OrderStatus.PAID;
     }
     public void markAbandoned(){
         if (status == OrderStatus.PAID || status == OrderStatus.SERVED || status == OrderStatus.READY_TO_PAY) {
-            throw new IllegalStateException("Entity.Order cannot be abandoned");
+            System.out.println("Order cannot be abandoned");
+
         }
         else status = OrderStatus.ABANDONED;
     }
-    public boolean isReady(){
+
+    public void markReadyToPay() {
+        if (status != OrderStatus.SERVED) {
+            System.out.println("Order is not served yet.");
+        }
+        else status = OrderStatus.READY_TO_PAY;
+    }
+    public boolean isReady(int currentTurn){
         return status == OrderStatus.READY && turnReady < currentTurn;
 
     }

@@ -1,17 +1,21 @@
-package Entity;
+package entity.menu;
 
 public enum MenuItemType implements MenuItem {
-    SALAD(900,1),
-    BURGER(1500,1),
-    PASTA(1800,2);
+    SALAD("Salad",900,1),
+    BURGER("Burger",1500,1),
+    PASTA("Pasta", 1800,2);
 
+    private final String foodName;
     private final int priceInCents;
     private final int prepUnits;
 
-    MenuItemType(int priceInCents, int prepUnits){
+    MenuItemType(String name, int priceInCents, int prepUnits){
+        foodName = name;
         this.priceInCents = priceInCents;
         this.prepUnits = prepUnits;
     }
+
+    public String getFoodName() { return foodName; }
     public int getPriceInCents(){
         return priceInCents;
     }
