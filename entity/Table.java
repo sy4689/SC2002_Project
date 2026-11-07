@@ -1,3 +1,8 @@
+package entity;
+
+import entity.customer.Customer;
+import entity.customer.CustomerState;
+
 public class Table {
     private int tableID;
     private boolean isOccupied = false;
@@ -25,6 +30,9 @@ public class Table {
     }
 
     public Customer releaseTable() {
+        if (currentCustomer == null) {
+            return null;
+        }
         if (currentCustomer.getState() == CustomerState.PAID_AND_LEFT || currentCustomer.getState() == CustomerState.ABANDONED) {
 
             Customer customer_left = currentCustomer;

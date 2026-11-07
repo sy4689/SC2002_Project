@@ -1,4 +1,6 @@
-import java.util.List;
+package entity.order;
+
+import entity.menu.MenuItem;
 
 public class Order {
     private int orderID;
@@ -32,14 +34,30 @@ public class Order {
         return status;
     }
 
-    public void decrementPrepUnits(int currentTurn){
+    public int getOrderID() {
+        return orderID;
+    }
+
+    public int getTableID() {
+        return tableID;
+    }
+
+    public void decrementPrepUnits(int currentTurn, int prepCapacity){
         if (status != OrderStatus.PENDING && status != OrderStatus.IN_KITCHEN){
             System.out.println("Order cannot be prepared");
         }
         else if (remainingPrepUnits <= 0) {
             System.out.println("Order is already prepared");
         }
-        else remainingPrepUnits--;
+        else {
+            remainingPrepUnits -= prepCapacity;
+        }
+        if (remainingPrepUnits == 0) {
+            status = OrderStatus.READY;
+            turnReady = currentTurn;
+        } else {
+            status = OrderStatus.IN_KITCHEN;
+        }
     }
 
     public void markServed(){
@@ -61,8 +79,15 @@ public class Order {
         }
         else status = OrderStatus.ABANDONED;
     }
-    public boolean isReady(){
-        return status == OrderStatus.READY;
+
+    public void markReadyToPay() {
+        if (status != OrderStatus.SERVED) {
+            System.out.println("Order is not served yet.");
+        }
+        else status = OrderStatus.READY_TO_PAY;
+    }
+    public boolean isReady(int currentTurn){
+        return status == OrderStatus.READY && turnReady < currentTurn;
 
     }
 }

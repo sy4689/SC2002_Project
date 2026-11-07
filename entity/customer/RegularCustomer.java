@@ -1,4 +1,4 @@
-import java.util.List;
+package entity.customer;
 
 public class RegularCustomer extends Customer{
 

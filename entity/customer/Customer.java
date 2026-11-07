@@ -1,3 +1,8 @@
+package entity.customer;
+
+import entity.order.Order;
+import entity.menu.Menu;
+import entity.menu.MenuItem;
 import java.util.Random;
 public abstract class Customer {
     protected int satisfaction = 100;
@@ -6,6 +11,7 @@ public abstract class Customer {
     private CustomerState state;
     private int eatingTurnsLeft = 1;
     private Order currentOrder;
+    private int servedTurn = -1;
 
 
     public Customer(int customerID, int arrivalTurn){
@@ -49,9 +55,15 @@ public abstract class Customer {
         return menu.getItemByIndex(index);
     }
 
-    public void decrementEatingTurns(){
-        if (state == CustomerState.EATING && eatingTurnsLeft >0) {
-            eatingTurnsLeft--;
+    public void startEating(int currentTurn) {
+        servedTurn = currentTurn;
+        state = CustomerState.EATING;
+    }
+    public void decrementEatingTurns(int currentTurn){
+        if (currentTurn > servedTurn) {
+            if (state == CustomerState.EATING && eatingTurnsLeft > 0) {
+                eatingTurnsLeft--;
+            }
         }
     }
 
