@@ -4,6 +4,7 @@ import java.util.List;
 
 import entity.customer.RegularCustomer;
 import entity.customer.Customer;
+import entity.menu.Menu;
 import entity.order.OrderStatus;
 import entity.staff.Cashier;
 import entity.staff.Chef;
@@ -11,34 +12,30 @@ import entity.staff.Waiter;
 import entity.Restaurant;
 import entity.Table;
 import entity.order.Order;
-import control.WaiterActionType;
-import control.GameUI;
+import boundary.GameUI;
 
 public class Manager {
     public static final int MAX_TURNS = 18;
     private static final int[] ARRIVAL_TURNS = {1,4,7,10,13,16};
 
-    private final GameUI ui;
-    private final Restaurant restaurant;
+    private static final Restaurant restaurant = new Restaurant(new Menu());
     private final Waiter waiter = new Waiter("Waiter");
     private final Chef chef = new Chef("Chef");
     private final Cashier cashier = new Cashier("Cashier");
+    private final ViewBuilder viewBuilder = new ViewBuilder();
 
+    private GameDisplay ui;
     private int currentTurn = 1;
     private int turnsCompleted = 0;
     private int nextCustomerID = 1;
     private WaiterAction decidedWaiterAction;
 
-    public Manager(GameUI ui, Restaurant restaurant) {
-        this.ui = ui;
-        this.restaurant = restaurant;
-    }
-
-    public void startGame() {
+    public void startGame(GameDisplay display) {
+        this.ui = display;
         for (currentTurn = 1 ; currentTurn <= MAX_TURNS; currentTurn ++) {
             runTurn();
         }
-        ui.displayFinalResult(checkEndCondition(), restaurant);
+        ui.displayFinalResult(checkEndCondition(), viewBuilder.buildSummaryView(restaurant), MAX_TURNS);
     }
 
     public void runTurn() {
@@ -46,15 +43,15 @@ public class Manager {
         chef.resetTurnStatus();
         cashier.resetTurnStatus();
 
-        ui.displayTurnHeader(currentTurn);
+        ui.displayTurnHeader(currentTurn, MAX_TURNS);
         processArrival(currentTurn);
-        ui.displayRestaurantState(restaurant);
+        ui.displayRestaurantState(viewBuilder.buildRestaurantView(restaurant));
         handlePlayerChoice();
         executeKitchenAndServing();
         processEatingAndPayment();
         updateWaitingAndAbandonment();
         turnsCompleted++;
-        ui.displayEndOfTurnSummary(restaurant, currentTurn);
+        ui.displayEndOfTurnSummary(viewBuilder.buildSummaryView(restaurant), currentTurn, MAX_TURNS);
     }
 
     private void processArrival(int turn) {
@@ -79,13 +76,73 @@ public class Manager {
 
     private void handlePlayerChoice() {
         while (true) {
+            WaiterAction action = ui.promptWaiterTask(viewBuilder.buildRestaurantView(restaurant));
             try {
-                decidedWaiterAction = ui.promptWaiterTask(restaurant);
+                validateWaiterAction(action);
+                decidedWaiterAction = action;
                 return;
             } catch (InvalidChoiceException e) {
                 ui.displayError(e.getMessage());
             }
         }
+    }
+
+    private void validateWaiterAction(WaiterAction action) throws InvalidChoiceException {
+        switch (action.getActionType()) {
+            case SEAT_CUSTOMER:
+                if (restaurant.getWaitingQueue().isEmpty()) {
+                    throw new InvalidChoiceException("No customer is waiting in the queue.");
+                }
+                if (restaurant.getAvailableTables().isEmpty()) {
+                    throw new InvalidChoiceException(("Every table is occupied."));
+                }
+                validateCustomer(restaurant.getWaitingQueue(), action.getTargetCustomerID());
+                validateTable(restaurant.getAvailableTables(), action.getTargetTableID());
+                break;
+            case TAKE_ORDER:
+                if (restaurant.getTablesAwaitingOrder().isEmpty()) {
+                    throw new InvalidChoiceException("No seated customer is waiting to order.");
+                }
+                validateTable(restaurant.getTablesAwaitingOrder(), action.getTargetTableID());
+                break;
+            case SERVE_ORDER:
+                if (restaurant.getTablesWithReadyOrder().isEmpty()) {
+                    throw new InvalidChoiceException("No order is READY to serve.");
+                }
+                validateTable(restaurant.getTablesWithReadyOrder(), action.getTargetTableID());
+                break;
+            default:
+                break;
+        }
+    }
+    private static void validateCustomer(List<Customer> options, int id) throws InvalidChoiceException {
+        for (Customer c : options) {
+            if (c.getCustomerID() == id) {
+                return;
+            }
+        }
+        throw new InvalidChoiceException("Customer #" + id + " is not one of the offered customers.");
+    }
+
+    private static void validateTable(List<Table> options, int id) throws InvalidChoiceException {
+        for (Table t : options) {
+            if (t.getTableID() == id) {
+                return;
+            }
+        }
+        throw new InvalidChoiceException("Table " + id + " is not one of the offered tables.");
+    }
+
+    private static void validateOrder(int orderID) throws InvalidChoiceException {
+        if (orderID == GameDisplay.WAIT_CHOICE) {
+            return;
+        }
+        for (Order o : restaurant.getPrepQueue()) {
+            if (o.getOrderID() == orderID) {
+                return;
+            }
+        }
+        throw new InvalidChoiceException("Order " + orderID + " is not one of the offered orders.");
     }
 
     private void executeKitchenAndServing() {
@@ -108,12 +165,7 @@ public class Manager {
                 Table t = restaurant.findTable(action.getTargetTableID());
                 Customer c = t.getCurrentCustomer();
                 Order o = waiter.takeOrder(t, restaurant.getMenu(), restaurant);
-                ui.displayAction(" ORDER TAKEN \n"
-                        + "Customer ID : " + c.getCustomerID() + "\n"
-                        + "Order ID :    " + o.getOrderID() + "\n"
-                        + "Item Name :   " + o.getItem().getFoodName() + "\n"
-                        + "Preparation Units: " + o.getItem().getPrepUnits() + " unit(s)" + "\n"
-                        + "Bill:         " + formatMoney(o.getFinalPriceInCents()) + ".");
+                ui.displayOrderTaken(c.getCustomerID(), viewBuilder.orderView(o));
                 break;
             }
             case SERVE_ORDER: {
@@ -138,14 +190,15 @@ public class Manager {
         }
         int id;
         while (true) {
+            id = ui.promptChefOrderPriority(viewBuilder.buildRestaurantView(restaurant));
             try {
-                id = ui.promptChefOrderPriority(foodQueue);
+                validateOrder(id);
                 break;
             } catch (InvalidChoiceException e) {
                 ui.displayError(e.getMessage());
             }
         }
-        if (id == GameUI.WAIT_CHOICE) {
+        if (id == GameDisplay.WAIT_CHOICE) {
             chef.waitTurn();
             ui.displayAction("Chef waits.");
             return;
@@ -172,7 +225,7 @@ public class Manager {
         if (tableReadyToPay != null) {
             Customer c = tableReadyToPay.getCurrentCustomer();
             int amount = cashier.processPayment(tableReadyToPay, restaurant);
-            ui.displayAction("PAYMENT DONE\n"
+            ui.displayAction("PAYMENT DONE ==========\n"
                             + "Amount Paid: " + formatMoney(amount) + "\n"
                             + "Customer ID: " + c.getCustomerID() + "\n"
                             + "Satisfaction Score: " + c.getSatisfaction() + "\n"

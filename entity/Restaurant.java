@@ -169,6 +169,7 @@ public class Restaurant{
     }
 
     public void recordAbandoned(Customer cust) {
+        cust.setState(CustomerState.ABANDONED);
         if (!waitingQueue.dequeueCustomer(cust)) {
             for (Table t : tables) {
                 if (t.getCurrentCustomer() == cust) {
@@ -182,7 +183,6 @@ public class Restaurant{
             order.markAbandoned();
             prepQueue.remove(order);
         }
-        cust.setState(CustomerState.ABANDONED);
         unhappyDeparture++;
     }
 

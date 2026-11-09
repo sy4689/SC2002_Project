@@ -41,7 +41,6 @@ public class Order {
     public int getTableID() {
         return tableID;
     }
-
     public void decrementPrepUnits(int currentTurn, int prepCapacity){
         if (status != OrderStatus.PENDING && status != OrderStatus.IN_KITCHEN){
             System.out.println("Order cannot be prepared");

@@ -11,7 +11,7 @@ public class Chef extends Staff {
     }
 
     public void prepOrder (Order order, int currentTurn) {
-        if (order.getStatus() == OrderStatus.PENDING && order.getStatus() == OrderStatus.IN_KITCHEN)
+        if (order.getStatus() != OrderStatus.PENDING && order.getStatus() != OrderStatus.IN_KITCHEN)
             throw new IllegalStateException("Order " + order.getOrderID() + " do not need to be prepared.");
         markBusy();
         order.decrementPrepUnits(currentTurn, prepCapacity);
@@ -20,5 +20,4 @@ public class Chef extends Staff {
     public void waitTurn() {
         markBusy();
     }
-
 }

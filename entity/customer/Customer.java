@@ -50,8 +50,7 @@ public abstract class Customer {
     public abstract void applyWaitingPenalty();
 
     public MenuItem chooseMenuItem(Menu menu){
-        Random random = new Random(41); //the seed ensure every game generate the same random sequence
-        int index = random.nextInt(menu.getItems().size());
+        int index = customerID % menu.getItems().size();
         return menu.getItemByIndex(index);
     }
 
