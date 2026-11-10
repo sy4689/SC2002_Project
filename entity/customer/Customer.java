@@ -6,6 +6,7 @@ import entity.menu.MenuItem;
 import java.util.Random;
 public abstract class Customer {
     protected int satisfaction = 100;
+    protected int penalty;
     private int customerID;
     private int arrivalTurn;
     private CustomerState state;
@@ -67,18 +68,11 @@ public abstract class Customer {
     }
 
     public boolean isFinishedEating(){
-        if (state == CustomerState.EATING && eatingTurnsLeft == 0){
-            return true;
-        }
-
-        else return false;
+        return state == CustomerState.EATING && eatingTurnsLeft == 0;
     }
 
     public boolean isAbandoned(){
-        if (state == CustomerState.ABANDONED){
-            return true;
-        }
-        else return false;
+        return (state == CustomerState.ABANDONED);
     }
 
 

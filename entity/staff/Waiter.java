@@ -121,12 +121,13 @@ public class Waiter extends Staff {
 
     public boolean seatCustomer(Customer cust, Table t) {
         if (t.isOccupied()) {
-            return false;
+            markBusy();
+            t.assignCustomer(cust);
+            cust.setState(CustomerState.SEATED);
+        } else{
+            throw new IllegalStateException("Table chosen is occupied");
         }
-        markBusy();
-        t.assignCustomer(cust);
-        cust.setState(CustomerState.SEATED);
-        return true;
+        return t.isOccupied();
     }
 
     public Order takeOrder(Table t, Menu menu, Restaurant r) {

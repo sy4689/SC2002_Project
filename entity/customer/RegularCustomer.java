@@ -1,11 +1,9 @@
 package entity.customer;
 
 public class RegularCustomer extends Customer{
-
-    private int regularPenalty = 8;
-
     public RegularCustomer(int customerID, int arrivalTurn) {
         super(customerID, arrivalTurn);
+        penalty = 8;
     }
     @Override
     public void applyWaitingPenalty() {
@@ -13,7 +11,7 @@ public class RegularCustomer extends Customer{
                 getState() == CustomerState.SEATED ||
                 getState() == CustomerState.ORDERED){
 
-            satisfaction = Math.max(0, satisfaction - regularPenalty);
+            satisfaction = Math.max(0, satisfaction - penalty);
 
             if (satisfaction == 0) {
                 setState(CustomerState.ABANDONED);

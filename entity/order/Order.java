@@ -62,21 +62,23 @@ public class Order {
     public void markServed(){
         if (status != OrderStatus.READY) {
             System.out.println("Order is not ready");
+        } else {
+            status = OrderStatus.SERVED;
         }
-        else status = OrderStatus.SERVED;
     }
     public void markPaid(){
         if (status != OrderStatus.READY_TO_PAY) {
             System.out.println("Order is not ready for payment");
+        } else {
+            status = OrderStatus.PAID;
         }
-        else status = OrderStatus.PAID;
     }
     public void markAbandoned(){
         if (status == OrderStatus.PAID || status == OrderStatus.SERVED || status == OrderStatus.READY_TO_PAY) {
             System.out.println("Order cannot be abandoned");
-
+        } else {
+            status = OrderStatus.ABANDONED;
         }
-        else status = OrderStatus.ABANDONED;
     }
 
     public void markReadyToPay() {

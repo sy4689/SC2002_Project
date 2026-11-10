@@ -70,8 +70,7 @@ public class Restaurant{
                 return t;
             }
         }
-
-        return null;
+        throw new IllegalStateException("Table " + tableID + " is not one of the offered tables.");
     }
 
     public List<Table> getAvailableTables() {
@@ -125,6 +124,14 @@ public class Restaurant{
     }
 
     public void removeFromPrepQueue(Order order) {
+        if (prepQueue.isEmpty()){
+            throw new IllegalStateException("Preparing queue in kitchen is empty. Can't remove any READY order");
+        }
+
+        if(!prepQueue.contains(order)){
+            throw new IllegalStateException("Supposed READY order that need be removed can't be found from the current preparing queue in the kitchen");
+        }
+
         prepQueue.remove(order);
     }
 
@@ -137,7 +144,11 @@ public class Restaurant{
         List<Customer> finished = new ArrayList<>();
         for (Table t : tables) {
             Customer c = t.getCurrentCustomer();
-            if (c != null && c.getState() == CustomerState.EATING) {
+            if (c == null){
+                throw new IllegalStateException("Customer that suppose to eat his/her table is absent ");
+            }else if( c.getState() != CustomerState.EATING) {
+                throw new IllegalStateException("Customer that suppose to be eating is not eating");
+            }else{
                 c.decrementEatingTurns(currentTurn);
                 if (c.isFinishedEating()) {
                     c.setState(CustomerState.WAITING_TO_PAY);
@@ -182,6 +193,8 @@ public class Restaurant{
         if (order != null) {
             order.markAbandoned();
             prepQueue.remove(order);
+        }else{
+            throw new IllegalStateException("Can't find order for abandoned customer");
         }
         unhappyDeparture++;
     }

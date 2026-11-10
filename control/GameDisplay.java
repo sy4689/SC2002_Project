@@ -19,6 +19,8 @@ public interface GameDisplay {
 
     void displayEndOfTurnSummary(SummaryView summary, int turn, int maxTurns);
     void displayFinalResult(GameState result, SummaryView summary, int maxTurns);
-    void displayError(String msg);
+    void displayStateError(String msg);
+
+    void displayChoiceError(String msg);
 
 }

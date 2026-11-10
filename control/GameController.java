@@ -12,9 +12,9 @@ import entity.staff.Waiter;
 import entity.Restaurant;
 import entity.Table;
 import entity.order.Order;
-import boundary.GameUI;
 
-public class Manager {
+public class GameController
+{
     public static final int MAX_TURNS = 18;
     private static final int[] ARRIVAL_TURNS = {1,4,7,10,13,16};
 
@@ -82,7 +82,7 @@ public class Manager {
                 decidedWaiterAction = action;
                 return;
             } catch (InvalidChoiceException e) {
-                ui.displayError(e.getMessage());
+                ui.displayChoiceError(e.getMessage());
             }
         }
     }
@@ -150,73 +150,89 @@ public class Manager {
         performChefAction();
     }
 
-    private void performWaiterAction(WaiterAction action) {
-        switch (action.getActionType()) {
-            case SEAT_CUSTOMER: {
-                Customer c = restaurant.findQueuedCustomer(action.getTargetCustomerID());
-                Table t = restaurant.findTable(action.getTargetTableID());
-                if (waiter.seatCustomer(c, t)) {
-                    restaurant.dequeueCustomer(c);
-                    ui.displayAction("Waiter seats customer #" + c.getCustomerID() + " at table " + t.getTableID() + ".");
+    private void performWaiterAction(WaiterAction action)
+    {
+        try
+        {
+            switch (action.getActionType())
+            {
+                case SEAT_CUSTOMER:
+                {
+                    Customer c = restaurant.findQueuedCustomer(action.getTargetCustomerID());
+                    Table t = restaurant.findTable(action.getTargetTableID());
+                    if (waiter.seatCustomer(c, t))
+                    {
+                        restaurant.dequeueCustomer(c);
+                        ui.displayAction("Waiter seats customer #" + c.getCustomerID() + " at table " + t.getTableID() + ".");
+                    }
+                    break;
                 }
-                break;
+                case TAKE_ORDER:
+                {
+                    Table t = restaurant.findTable(action.getTargetTableID());
+                    Customer c = t.getCurrentCustomer();
+                    Order o = waiter.takeOrder(t, restaurant.getMenu(), restaurant);
+                    ui.displayOrderTaken(c.getCustomerID(), viewBuilder.orderView(o));
+                    break;
+                }
+                case SERVE_ORDER:
+                {
+                    Table t = restaurant.findTable(action.getTargetTableID());
+                    Customer c = t.getCurrentCustomer();
+                    waiter.serveOrder(t, currentTurn);
+                    ui.displayAction("Waiter serves customer #" + c.getCustomerID() + " at table " + t.getTableID() + ".");
+                    break;
+                }
+                default:
+                    waiter.waitTurn();
+                    ui.displayAction("Waiter waits.");
             }
-            case TAKE_ORDER: {
-                Table t = restaurant.findTable(action.getTargetTableID());
-                Customer c = t.getCurrentCustomer();
-                Order o = waiter.takeOrder(t, restaurant.getMenu(), restaurant);
-                ui.displayOrderTaken(c.getCustomerID(), viewBuilder.orderView(o));
-                break;
-            }
-            case SERVE_ORDER: {
-                Table t = restaurant.findTable(action.getTargetTableID());
-                Customer c = t.getCurrentCustomer();
-                waiter.serveOrder(t, currentTurn);
-                ui.displayAction("Waiter serves customer #" + c.getCustomerID() + " at table " + t.getTableID() + ".");
-                break;
-            }
-            default:
-                waiter.waitTurn();
-                ui.displayAction("Waiter waits.");
+        }catch(IllegalStateException e){
+            ui.displayStateError(e.getMessage());
         }
     }
 
     private void performChefAction() {
-        List<Order> foodQueue = restaurant.getPrepQueue();
-        if (foodQueue.isEmpty()) {
-            chef.waitTurn();
-            ui.displayAction("Chef has nothing to prepare.");
-            return;
-        }
-        int id;
-        while (true) {
-            id = ui.promptChefOrderPriority(viewBuilder.buildRestaurantView(restaurant));
-            try {
-                validateOrder(id);
-                break;
-            } catch (InvalidChoiceException e) {
-                ui.displayError(e.getMessage());
+        try{
+            List<Order> foodQueue = restaurant.getPrepQueue();
+            if (foodQueue.isEmpty()) {
+                chef.waitTurn();
+                ui.displayAction("Chef has nothing to prepare.");
+                return;
             }
-        }
-        if (id == GameDisplay.WAIT_CHOICE) {
-            chef.waitTurn();
-            ui.displayAction("Chef waits.");
-            return;
-        }
-        Order targetOrder = null;
-        for (Order order : foodQueue) {
-            if (order.getOrderID() == id) {
-                targetOrder = order;
-                break;
+            int id;
+            while (true) {
+                id = ui.promptChefOrderPriority(viewBuilder.buildRestaurantView(restaurant));
+                try {
+                    validateOrder(id);
+                    break;
+                } catch (InvalidChoiceException e) {
+                    ui.displayChoiceError(e.getMessage());
+                }
             }
-        }
+            if (id == GameDisplay.WAIT_CHOICE) {
+                chef.waitTurn();
+                ui.displayAction("Chef waits.");
+                return;
+            }
+            Order targetOrder = null;
+            for (Order order : foodQueue) {
+                if (order.getOrderID() == id) {
+                    targetOrder = order;
+                    break;
+                }
+            }
 
-        chef.prepOrder(targetOrder, currentTurn);
-        if (targetOrder.getStatus() == OrderStatus.PENDING || targetOrder.getStatus() == OrderStatus.IN_KITCHEN) {
-            ui.displayAction("Chef works on Order " + targetOrder.getOrderID() + " : " + targetOrder.getRemainingPrepUnits() + " unit(s) left.");
-        } else {
-            restaurant.removeFromPrepQueue(targetOrder);
-            ui.displayAction("Chef finishes Order " + targetOrder.getOrderID() + " : READY (can be served next turn).");
+            chef.prepOrder(targetOrder, currentTurn);
+            if (targetOrder.getStatus() == OrderStatus.PENDING || targetOrder.getStatus() == OrderStatus.IN_KITCHEN) {
+                ui.displayAction("Chef works on Order " + targetOrder.getOrderID() + " : " + targetOrder.getRemainingPrepUnits() + " unit(s) left.");
+            } else {
+                restaurant.removeFromPrepQueue(targetOrder);
+                ui.displayAction("Chef finishes Order " + targetOrder.getOrderID() + " : READY (can be served next turn).");
+            }
+
+        }catch(IllegalStateException e){
+            ui.displayStateError(e.getMessage());
         }
     }
 
@@ -224,16 +240,24 @@ public class Manager {
         Table tableReadyToPay = restaurant.findTableToCollect();
         if (tableReadyToPay != null) {
             Customer c = tableReadyToPay.getCurrentCustomer();
-            int amount = cashier.processPayment(tableReadyToPay, restaurant);
-            ui.displayAction("PAYMENT DONE ==========\n"
-                            + "Amount Paid: " + formatMoney(amount) + "\n"
-                            + "Customer ID: " + c.getCustomerID() + "\n"
-                            + "Satisfaction Score: " + c.getSatisfaction() + "\n"
-                            + "Table being released: " + tableReadyToPay.getTableID());
+            try {
+                int amount = cashier.processPayment(tableReadyToPay, restaurant);
+                ui.displayAction("PAYMENT DONE ==========\n"
+                        + "Amount Paid: " + formatMoney(amount) + "\n"
+                        + "Customer ID: " + c.getCustomerID() + "\n"
+                        + "Satisfaction Score: " + c.getSatisfaction() + "\n"
+                        + "Table being released: " + tableReadyToPay.getTableID());
+            }catch(IllegalStateException e){
+                ui.displayStateError(e.getMessage());
+            }
         }
 
-        for (Customer c : restaurant.processEatingCust(currentTurn)) {
-            ui.displayAction("Customer #" + c.getCustomerID() + " finishes eating and is ready to pay.");
+        try {
+            for (Customer c : restaurant.processEatingCust(currentTurn)) {
+                ui.displayAction("Customer #" + c.getCustomerID() + " finishes eating and is ready to pay.");
+            }
+        }catch(IllegalStateException e){
+            ui.displayStateError(e.getMessage());
         }
     }
 
@@ -241,7 +265,11 @@ public class Manager {
         for (Customer c : restaurant.getUnservedCustomer()) {
             c.applyWaitingPenalty();
             if (c.getSatisfaction() == 0) {
-                restaurant.recordAbandoned(c);
+                try {
+                    restaurant.recordAbandoned(c);
+                }catch(IllegalStateException e){
+                    ui.displayStateError(e.getMessage());
+                }
                 ui.displayAction("Customer #" + c.getCustomerID() + " runs out of patience and leave without paying.");
             }
         }

@@ -3,24 +3,17 @@ package boundary;
 import java.util.Scanner;
 import java.util.List;
 
-import control.InvalidChoiceException;
-import control.Manager;
+import control.GameController;
 import control.view.*;
-import entity.Restaurant;
-import entity.customer.Customer;
-import entity.customer.CustomerState;
-import entity.order.Order;
-import entity.order.OrderStatus;
-import entity.Table;
 import control.GameState;
 import control.WaiterAction;
 import control.GameDisplay;
 
 public class GameCLI implements GameUI, GameDisplay {
     private final Scanner sc = new Scanner(System.in);
-    private final Manager manager;
+    private final GameController manager;
 
-    public GameCLI(Manager manager) {
+    public GameCLI(GameController manager) {
         this.manager = manager;
     }
 
@@ -119,9 +112,14 @@ public class GameCLI implements GameUI, GameDisplay {
     }
 
     @Override
-    public void displayError(String msg) {
+    public void displayChoiceError(String msg) {
         System.out.println("!!! Invalid choice: " + msg + " Please choose again.");
     }
+
+    public void displayStateError(String msg){
+        System.out.println("!!! Invalid state (Error from entity class): " + msg + "Please check entity class");
+    }
+
 
     // --- PROMPTS ---
     @Override
@@ -158,7 +156,7 @@ public class GameCLI implements GameUI, GameDisplay {
                 case WAIT_CHOICE:
                     return WaiterAction.waiting();
                 default:
-                    displayError("Please enter a number based on the option given");
+                    displayChoiceError("Please enter a number based on the option given");
             }
         }
 
@@ -199,33 +197,6 @@ public class GameCLI implements GameUI, GameDisplay {
 
     private static String averageSatisfactionText(Double average) {
         return (average == null ? "N/A" : String.format("%.1f", average));
-    }
-
-    private static void validateCustomer(List<Customer> options, int id) throws InvalidChoiceException {
-        for (Customer c : options) {
-            if (c.getCustomerID() == id) {
-                return;
-            }
-        }
-        throw new InvalidChoiceException("Customer #" + id + " is not one of the offered customers.");
-    }
-
-    private static void validateTable(List<Table> options, int id) throws InvalidChoiceException {
-        for (Table t : options) {
-            if (t.getTableID() == id) {
-                return;
-            }
-        }
-        throw new InvalidChoiceException("Table " + id + " is not one of the offered tables.");
-    }
-
-    private static void validateOrder(List<Order> options, int id) throws InvalidChoiceException {
-        for (Order o : options) {
-            if (o.getOrderID() == id) {
-                return;
-            }
-        }
-        throw new InvalidChoiceException("Order " + id + " is not one of the offered orders.");
     }
 
     private int inputHandling(String prompt) {
