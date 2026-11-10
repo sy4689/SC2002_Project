@@ -117,7 +117,7 @@ public class GameCLI implements GameUI, GameDisplay {
     }
 
     public void displayStateError(String msg){
-        System.out.println("!!! Invalid state (Error from entity class): " + msg + "Please check entity class");
+        System.out.println("!!! Invalid state (Error from entity class): " + msg + " Please check entity class");
     }
 
 

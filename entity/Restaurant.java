@@ -144,11 +144,7 @@ public class Restaurant{
         List<Customer> finished = new ArrayList<>();
         for (Table t : tables) {
             Customer c = t.getCurrentCustomer();
-            if (c == null){
-                throw new IllegalStateException("Customer that suppose to eat his/her table is absent ");
-            }else if( c.getState() != CustomerState.EATING) {
-                throw new IllegalStateException("Customer that suppose to be eating is not eating");
-            }else{
+            if (c != null && c.getState() == CustomerState.EATING){
                 c.decrementEatingTurns(currentTurn);
                 if (c.isFinishedEating()) {
                     c.setState(CustomerState.WAITING_TO_PAY);
@@ -193,8 +189,6 @@ public class Restaurant{
         if (order != null) {
             order.markAbandoned();
             prepQueue.remove(order);
-        }else{
-            throw new IllegalStateException("Can't find order for abandoned customer");
         }
         unhappyDeparture++;
     }
