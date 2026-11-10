@@ -121,9 +121,9 @@ SC2002_Project
 
 **Checklist for Stage 1 (Basic restuarant operation)**
 - Complete playable game containing:
-  > Regular customers and three menu items
-  > Waiter, Chef, Cashier, Table, Order and the waiting queue
-  > Complete turn sequence: Satisfaction, abandonment, payment, victory and defeat
+  > - Regular customers and three menu items
+  > - Waiter, Chef, Cashier, Table, Order and the waiting queue
+  > - Complete turn sequence: Satisfaction, abandonment, payment, victory and defeat
 - Player able to:
-  > Sets seating, ordering, and serving priority through Waiter
-  > Sets kitchen priority through Chef 
+  > - Sets seating, ordering, and serving priority through Waiter
+  > - Sets kitchen priority through Chef 
