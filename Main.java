@@ -1,8 +1,12 @@
+import boundary.GameCLI;
+import boundary.GameUI;
+import control.GameController;
+
 public class Main
 {
     public static void main(String[]args)
     {
-        TestIntelliJ t1 = new TestIntelliJ();
-        TestIntelliJ t2 = new TestIntelliJ(1);
+        GameUI ui = new GameCLI(new GameController());
+        ui.start();
     }
 }
