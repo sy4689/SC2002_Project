@@ -1,5 +1,5 @@
 # SC2002_Project Stage 1
-**FOLDER STRUCTURE**
+**FOLDER STRUCTURE (Obeying BCE framework)**
 ```bash
 SC2002_Project
 │   Main.java
