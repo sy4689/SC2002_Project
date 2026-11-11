@@ -1,5 +1,7 @@
 package entity.customer;
 
+import entity.DiscountPolicy.DiscountPolicy;
+import entity.DiscountPolicy.VIPDiscountPolicy;
 import entity.order.Order;
 import entity.menu.Menu;
 import entity.menu.MenuItem;
@@ -81,6 +83,8 @@ public abstract class Customer {
         }
         else return false;
     }
-
+    public DiscountPolicy getDiscountPolicy() {
+        return null;
+    }
 
 }
