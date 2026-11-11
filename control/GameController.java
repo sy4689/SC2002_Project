@@ -18,7 +18,7 @@ public class GameController
     public static final int MAX_TURNS = 18;
     private static final int[] ARRIVAL_TURNS = {1,4,7,10,13,16};
 
-    private static final Restaurant restaurant = new Restaurant(new Menu());
+    private final Restaurant restaurant = new Restaurant(new Menu());
     private final Waiter waiter = new Waiter("Waiter");
     private final Chef chef = new Chef("Chef");
     private final Cashier cashier = new Cashier("Cashier");
@@ -133,7 +133,7 @@ public class GameController
         throw new InvalidChoiceException("Table " + id + " is not one of the offered tables.");
     }
 
-    private static void validateOrder(int orderID) throws InvalidChoiceException {
+    private void validateOrder(int orderID) throws InvalidChoiceException {
         if (orderID == GameDisplay.WAIT_CHOICE) {
             return;
         }
