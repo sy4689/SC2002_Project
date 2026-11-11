@@ -136,3 +136,9 @@ SC2002_Project
   > - Sets kitchen priority through Chef
 - Deterministic food-choice rule for customer:
   > - Food choice index = Customer ID % Menu size
+- Enumeration with self-explanatory naming:
+  > - GameState
+  > - WaiterActionType
+  > - CustomerState
+  > - OrderStatus
+  > - MenuItemType
