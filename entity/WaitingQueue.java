@@ -13,14 +13,6 @@ public class WaitingQueue {
     }
 
     public boolean dequeueCustomer(Customer cust) {
-        if (custList.isEmpty()){
-            throw new IllegalStateException("Waiting queue is empty. Can't remove any customer");
-        }
-
-        if (!custList.contains(cust)){
-            throw new IllegalStateException("Customer that need be removed can't be found from the current waiting queue");
-        }
-
         return custList.remove(cust);
     }
 
