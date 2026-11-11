@@ -1,0 +1,701 @@
+"C:\Program Files\Java\jdk-26.0.2\bin\java.exe" "-javaagent:C:\Users\Admin\IntelliJ IDEA 2026.2.4\lib\idea_rt.jar=50603" -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath C:\Users\Admin\Documents\SC2002\Final_Project\out\production\Final_Project Main
+
+==================== TURN 1 / 18 ====================
+ >>>>> Customer #1 joins the queue. <<<<<
+Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
+Waiting queue:
+ #1  satisfaction100
+Tables:
+   Table 1: free
+   Table 2: free
+Staff tasks available:
+   Waiter (1 task) : seat (1 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 1
+Queued Customers:
+   #1    satisfaction 100
+Customer ID: 1
+Free tables:  1 2
+Table ID: 1
+ >>>>> Waiter seats customer #1 at table 1. <<<<<
+ >>>>> Chef has nothing to prepare. <<<<<
+-------------------- END OF TURN 1 --------------------
+Customers Served And Paid: 0
+Unhappy Departures 0
+Revenue: $0.00
+Average Satisfaction (Paid): N/A
+Turns used: 1/18
+
+==================== TURN 2 / 18 ====================
+ >>>>> No customer joins the queue this turn! <<<<<
+Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
+Waiting queue: (Empty)
+Tables:
+   Table 1: #1  satisfaction 92 SEATED no order yet
+   Table 2: free
+Staff tasks available:
+   Waiter (1 task) : seat (0 queued, 1 free table(s)) | take order (1) | serve (0 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 2
+Tables awaiting an order:  1
+Table ID: 1
+ >>>>> ORDER TAKEN
+Customer ID : 1
+Order ID    : 1
+Item Name   : Burger
+Preparation Units : 1 unit(s)
+Bill        : $15.00 <<<<<
+
+Chef - orders to prepare:
+   Order #1  table 1 Burger 1 unit(s) left
+Order ID (0 = Wait): 1
+ >>>>> Chef finishes Order 1 : READY (can be served next turn). <<<<<
+-------------------- END OF TURN 2 --------------------
+Customers Served And Paid: 0
+Unhappy Departures 0
+Revenue: $0.00
+Average Satisfaction (Paid): N/A
+Turns used: 2/18
+
+==================== TURN 3 / 18 ====================
+ >>>>> No customer joins the queue this turn! <<<<<
+Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
+Waiting queue: (Empty)
+Tables:
+   Table 1: #1  satisfaction 84 ORDERED Order 1 Burger $15.00 [READY]
+   Table 2: free
+Staff tasks available:
+   Waiter (1 task) : seat (0 queued, 1 free table(s)) | take order (0) | serve (1 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 2
+!!! Invalid choice: No seated customer is waiting to order. Please choose again.
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 3
+Tables with a READY order:  1
+Table ID: 1
+ >>>>> Waiter serves customer #1 at table 1. <<<<<
+ >>>>> Chef has nothing to prepare. <<<<<
+-------------------- END OF TURN 3 --------------------
+Customers Served And Paid: 0
+Unhappy Departures 0
+Revenue: $0.00
+Average Satisfaction (Paid): N/A
+Turns used: 3/18
+
+==================== TURN 4 / 18 ====================
+ >>>>> Customer #2 joins the queue. <<<<<
+Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
+Waiting queue:
+ #2  satisfaction100
+Tables:
+   Table 1: #1  satisfaction 84 EATING Order 1 Burger $15.00 [SERVED]
+   Table 2: free
+Staff tasks available:
+   Waiter (1 task) : seat (1 queued, 1 free table(s)) | take order (0) | serve (0 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 1
+Queued Customers:
+   #2    satisfaction 100
+Customer ID: 2
+Free tables:  2
+Table ID: 2
+ >>>>> Waiter seats customer #2 at table 2. <<<<<
+ >>>>> Chef has nothing to prepare. <<<<<
+ >>>>> Customer #1 finishes eating and is ready to pay. <<<<<
+-------------------- END OF TURN 4 --------------------
+Customers Served And Paid: 0
+Unhappy Departures 0
+Revenue: $0.00
+Average Satisfaction (Paid): N/A
+Turns used: 4/18
+
+==================== TURN 5 / 18 ====================
+ >>>>> No customer joins the queue this turn! <<<<<
+Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
+Waiting queue: (Empty)
+Tables:
+   Table 1: #1  satisfaction 84 WAITING_TO_PAY Order 1 Burger $15.00 [READY_TO_PAY]
+   Table 2: #2  satisfaction 92 SEATED no order yet
+Staff tasks available:
+   Waiter (1 task) : seat (0 queued, 0 free table(s)) | take order (1) | serve (0 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 1 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 2
+Tables awaiting an order:  2
+Table ID: 2
+ >>>>> ORDER TAKEN
+Customer ID : 2
+Order ID    : 2
+Item Name   : Pasta
+Preparation Units : 2 unit(s)
+Bill        : $18.00 <<<<<
+
+Chef - orders to prepare:
+   Order #2  table 2 Pasta 2 unit(s) left
+Order ID (0 = Wait): 0
+ >>>>> Chef waits. <<<<<
+ >>>>> PAYMENT DONE ==========
+Amount Paid: $15.00
+Customer ID: 1
+Satisfaction Score: 84
+Table being released: 1 <<<<<
+-------------------- END OF TURN 5 --------------------
+Customers Served And Paid: 1
+Unhappy Departures 0
+Revenue: $15.00
+Average Satisfaction (Paid): 84.0
+Turns used: 5/18
+
+==================== TURN 6 / 18 ====================
+ >>>>> No customer joins the queue this turn! <<<<<
+Revenue: $15.00     Paid customers: 1     Average satisfaction (paid) : 84.0
+Waiting queue: (Empty)
+Tables:
+   Table 1: free
+   Table 2: #2  satisfaction 84 ORDERED Order 2 Pasta $18.00 [PENDING, 2 unit(s) left]
+Staff tasks available:
+   Waiter (1 task) : seat (0 queued, 1 free table(s)) | take order (0) | serve (0 READY) | wait
+   Chef (1 prep unit): 1 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 1
+!!! Invalid choice: No customer is waiting in the queue. Please choose again.
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 2
+!!! Invalid choice: No seated customer is waiting to order. Please choose again.
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 3
+!!! Invalid choice: No order is READY to serve. Please choose again.
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 0
+ >>>>> Waiter waits. <<<<<
+
+Chef - orders to prepare:
+   Order #2  table 2 Pasta 2 unit(s) left
+Order ID (0 = Wait): 2
+ >>>>> Chef works on Order 2 : 1 unit(s) left. <<<<<
+-------------------- END OF TURN 6 --------------------
+Customers Served And Paid: 1
+Unhappy Departures 0
+Revenue: $15.00
+Average Satisfaction (Paid): 84.0
+Turns used: 6/18
+
+==================== TURN 7 / 18 ====================
+ >>>>> Customer #3 joins the queue. <<<<<
+Revenue: $15.00     Paid customers: 1     Average satisfaction (paid) : 84.0
+Waiting queue:
+ #3  satisfaction100
+Tables:
+   Table 1: free
+   Table 2: #2  satisfaction 76 ORDERED Order 2 Pasta $18.00 [IN_KITCHEN, 1 unit(s) left]
+Staff tasks available:
+   Waiter (1 task) : seat (1 queued, 1 free table(s)) | take order (0) | serve (0 READY) | wait
+   Chef (1 prep unit): 1 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 1
+Queued Customers:
+   #3    satisfaction 100
+Customer ID: 3
+Free tables:  1
+Table ID: 1
+ >>>>> Waiter seats customer #3 at table 1. <<<<<
+
+Chef - orders to prepare:
+   Order #2  table 2 Pasta 1 unit(s) left
+Order ID (0 = Wait): 2
+ >>>>> Chef finishes Order 2 : READY (can be served next turn). <<<<<
+-------------------- END OF TURN 7 --------------------
+Customers Served And Paid: 1
+Unhappy Departures 0
+Revenue: $15.00
+Average Satisfaction (Paid): 84.0
+Turns used: 7/18
+
+==================== TURN 8 / 18 ====================
+ >>>>> No customer joins the queue this turn! <<<<<
+Revenue: $15.00     Paid customers: 1     Average satisfaction (paid) : 84.0
+Waiting queue: (Empty)
+Tables:
+   Table 1: #3  satisfaction 92 SEATED no order yet
+   Table 2: #2  satisfaction 68 ORDERED Order 2 Pasta $18.00 [READY]
+Staff tasks available:
+   Waiter (1 task) : seat (0 queued, 0 free table(s)) | take order (1) | serve (1 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 1
+!!! Invalid choice: No customer is waiting in the queue. Please choose again.
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 2
+Tables awaiting an order:  1
+Table ID: 1
+ >>>>> ORDER TAKEN
+Customer ID : 3
+Order ID    : 3
+Item Name   : Salad
+Preparation Units : 1 unit(s)
+Bill        : $9.00 <<<<<
+
+Chef - orders to prepare:
+   Order #3  table 1 Salad 1 unit(s) left
+Order ID (0 = Wait): 3
+ >>>>> Chef finishes Order 3 : READY (can be served next turn). <<<<<
+-------------------- END OF TURN 8 --------------------
+Customers Served And Paid: 1
+Unhappy Departures 0
+Revenue: $15.00
+Average Satisfaction (Paid): 84.0
+Turns used: 8/18
+
+==================== TURN 9 / 18 ====================
+ >>>>> No customer joins the queue this turn! <<<<<
+Revenue: $15.00     Paid customers: 1     Average satisfaction (paid) : 84.0
+Waiting queue: (Empty)
+Tables:
+   Table 1: #3  satisfaction 84 ORDERED Order 3 Salad $9.00 [READY]
+   Table 2: #2  satisfaction 60 ORDERED Order 2 Pasta $18.00 [READY]
+Staff tasks available:
+   Waiter (1 task) : seat (0 queued, 0 free table(s)) | take order (0) | serve (2 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 3
+Tables with a READY order:  1 2
+Table ID: 1
+ >>>>> Waiter serves customer #3 at table 1. <<<<<
+ >>>>> Chef has nothing to prepare. <<<<<
+-------------------- END OF TURN 9 --------------------
+Customers Served And Paid: 1
+Unhappy Departures 0
+Revenue: $15.00
+Average Satisfaction (Paid): 84.0
+Turns used: 9/18
+
+==================== TURN 10 / 18 ====================
+ >>>>> Customer #4 joins the queue. <<<<<
+Revenue: $15.00     Paid customers: 1     Average satisfaction (paid) : 84.0
+Waiting queue:
+ #4  satisfaction100
+Tables:
+   Table 1: #3  satisfaction 84 EATING Order 3 Salad $9.00 [SERVED]
+   Table 2: #2  satisfaction 52 ORDERED Order 2 Pasta $18.00 [READY]
+Staff tasks available:
+   Waiter (1 task) : seat (1 queued, 0 free table(s)) | take order (0) | serve (1 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 1
+!!! Invalid choice: Every table is occupied. Please choose again.
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 3
+Tables with a READY order:  2
+Table ID: 2
+ >>>>> Waiter serves customer #2 at table 2. <<<<<
+ >>>>> Chef has nothing to prepare. <<<<<
+ >>>>> Customer #3 finishes eating and is ready to pay. <<<<<
+-------------------- END OF TURN 10 --------------------
+Customers Served And Paid: 1
+Unhappy Departures 0
+Revenue: $15.00
+Average Satisfaction (Paid): 84.0
+Turns used: 10/18
+
+==================== TURN 11 / 18 ====================
+ >>>>> No customer joins the queue this turn! <<<<<
+Revenue: $15.00     Paid customers: 1     Average satisfaction (paid) : 84.0
+Waiting queue:
+ #4  satisfaction92
+Tables:
+   Table 1: #3  satisfaction 84 WAITING_TO_PAY Order 3 Salad $9.00 [READY_TO_PAY]
+   Table 2: #2  satisfaction 52 EATING Order 2 Pasta $18.00 [SERVED]
+Staff tasks available:
+   Waiter (1 task) : seat (1 queued, 0 free table(s)) | take order (0) | serve (0 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 1 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 0
+ >>>>> Waiter waits. <<<<<
+ >>>>> Chef has nothing to prepare. <<<<<
+ >>>>> PAYMENT DONE ==========
+Amount Paid: $9.00
+Customer ID: 3
+Satisfaction Score: 84
+Table being released: 1 <<<<<
+ >>>>> Customer #2 finishes eating and is ready to pay. <<<<<
+-------------------- END OF TURN 11 --------------------
+Customers Served And Paid: 2
+Unhappy Departures 0
+Revenue: $24.00
+Average Satisfaction (Paid): 84.0
+Turns used: 11/18
+
+==================== TURN 12 / 18 ====================
+ >>>>> No customer joins the queue this turn! <<<<<
+Revenue: $24.00     Paid customers: 2     Average satisfaction (paid) : 84.0
+Waiting queue:
+ #4  satisfaction84
+Tables:
+   Table 1: free
+   Table 2: #2  satisfaction 52 WAITING_TO_PAY Order 2 Pasta $18.00 [READY_TO_PAY]
+Staff tasks available:
+   Waiter (1 task) : seat (1 queued, 1 free table(s)) | take order (0) | serve (0 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 1 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 1
+Queued Customers:
+   #4    satisfaction 84
+Customer ID: 4
+Free tables:  1
+Table ID: 1
+ >>>>> Waiter seats customer #4 at table 1. <<<<<
+ >>>>> Chef has nothing to prepare. <<<<<
+ >>>>> PAYMENT DONE ==========
+Amount Paid: $18.00
+Customer ID: 2
+Satisfaction Score: 52
+Table being released: 2 <<<<<
+-------------------- END OF TURN 12 --------------------
+Customers Served And Paid: 3
+Unhappy Departures 0
+Revenue: $42.00
+Average Satisfaction (Paid): 73.3
+Turns used: 12/18
+
+==================== TURN 13 / 18 ====================
+ >>>>> Customer #5 joins the queue. <<<<<
+Revenue: $42.00     Paid customers: 3     Average satisfaction (paid) : 73.3
+Waiting queue:
+ #5  satisfaction100
+Tables:
+   Table 1: #4  satisfaction 76 SEATED no order yet
+   Table 2: free
+Staff tasks available:
+   Waiter (1 task) : seat (1 queued, 1 free table(s)) | take order (1) | serve (0 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 2
+Tables awaiting an order:  1
+Table ID: 1
+ >>>>> ORDER TAKEN
+Customer ID : 4
+Order ID    : 4
+Item Name   : Burger
+Preparation Units : 1 unit(s)
+Bill        : $15.00 <<<<<
+
+Chef - orders to prepare:
+   Order #4  table 1 Burger 1 unit(s) left
+Order ID (0 = Wait): 4
+ >>>>> Chef finishes Order 4 : READY (can be served next turn). <<<<<
+-------------------- END OF TURN 13 --------------------
+Customers Served And Paid: 3
+Unhappy Departures 0
+Revenue: $42.00
+Average Satisfaction (Paid): 73.3
+Turns used: 13/18
+
+==================== TURN 14 / 18 ====================
+ >>>>> No customer joins the queue this turn! <<<<<
+Revenue: $42.00     Paid customers: 3     Average satisfaction (paid) : 73.3
+Waiting queue:
+ #5  satisfaction92
+Tables:
+   Table 1: #4  satisfaction 68 ORDERED Order 4 Burger $15.00 [READY]
+   Table 2: free
+Staff tasks available:
+   Waiter (1 task) : seat (1 queued, 1 free table(s)) | take order (0) | serve (1 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 1
+Queued Customers:
+   #5    satisfaction 92
+Customer ID: 5
+Free tables:  2
+Table ID: 2
+ >>>>> Waiter seats customer #5 at table 2. <<<<<
+ >>>>> Chef has nothing to prepare. <<<<<
+-------------------- END OF TURN 14 --------------------
+Customers Served And Paid: 3
+Unhappy Departures 0
+Revenue: $42.00
+Average Satisfaction (Paid): 73.3
+Turns used: 14/18
+
+==================== TURN 15 / 18 ====================
+ >>>>> No customer joins the queue this turn! <<<<<
+Revenue: $42.00     Paid customers: 3     Average satisfaction (paid) : 73.3
+Waiting queue: (Empty)
+Tables:
+   Table 1: #4  satisfaction 60 ORDERED Order 4 Burger $15.00 [READY]
+   Table 2: #5  satisfaction 84 SEATED no order yet
+Staff tasks available:
+   Waiter (1 task) : seat (0 queued, 0 free table(s)) | take order (1) | serve (1 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 1
+!!! Invalid choice: No customer is waiting in the queue. Please choose again.
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 3
+Tables with a READY order:  1
+Table ID: 1
+ >>>>> Waiter serves customer #4 at table 1. <<<<<
+ >>>>> Chef has nothing to prepare. <<<<<
+-------------------- END OF TURN 15 --------------------
+Customers Served And Paid: 3
+Unhappy Departures 0
+Revenue: $42.00
+Average Satisfaction (Paid): 73.3
+Turns used: 15/18
+
+==================== TURN 16 / 18 ====================
+ >>>>> Customer #6 joins the queue. <<<<<
+Revenue: $42.00     Paid customers: 3     Average satisfaction (paid) : 73.3
+Waiting queue:
+ #6  satisfaction100
+Tables:
+   Table 1: #4  satisfaction 60 EATING Order 4 Burger $15.00 [SERVED]
+   Table 2: #5  satisfaction 76 SEATED no order yet
+Staff tasks available:
+   Waiter (1 task) : seat (1 queued, 0 free table(s)) | take order (1) | serve (0 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 1
+!!! Invalid choice: Every table is occupied. Please choose again.
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 2
+Tables awaiting an order:  2
+Table ID: 2
+ >>>>> ORDER TAKEN
+Customer ID : 5
+Order ID    : 5
+Item Name   : Pasta
+Preparation Units : 2 unit(s)
+Bill        : $18.00 <<<<<
+
+Chef - orders to prepare:
+   Order #5  table 2 Pasta 2 unit(s) left
+Order ID (0 = Wait): 5
+ >>>>> Chef works on Order 5 : 1 unit(s) left. <<<<<
+ >>>>> Customer #4 finishes eating and is ready to pay. <<<<<
+-------------------- END OF TURN 16 --------------------
+Customers Served And Paid: 3
+Unhappy Departures 0
+Revenue: $42.00
+Average Satisfaction (Paid): 73.3
+Turns used: 16/18
+
+==================== TURN 17 / 18 ====================
+ >>>>> No customer joins the queue this turn! <<<<<
+Revenue: $42.00     Paid customers: 3     Average satisfaction (paid) : 73.3
+Waiting queue:
+ #6  satisfaction92
+Tables:
+   Table 1: #4  satisfaction 60 WAITING_TO_PAY Order 4 Burger $15.00 [READY_TO_PAY]
+   Table 2: #5  satisfaction 68 ORDERED Order 5 Pasta $18.00 [IN_KITCHEN, 1 unit(s) left]
+Staff tasks available:
+   Waiter (1 task) : seat (1 queued, 0 free table(s)) | take order (0) | serve (0 READY) | wait
+   Chef (1 prep unit): 1 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 1 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 0
+ >>>>> Waiter waits. <<<<<
+
+Chef - orders to prepare:
+   Order #5  table 2 Pasta 1 unit(s) left
+Order ID (0 = Wait): 5
+ >>>>> Chef finishes Order 5 : READY (can be served next turn). <<<<<
+ >>>>> PAYMENT DONE ==========
+Amount Paid: $15.00
+Customer ID: 4
+Satisfaction Score: 60
+Table being released: 1 <<<<<
+-------------------- END OF TURN 17 --------------------
+Customers Served And Paid: 4
+Unhappy Departures 0
+Revenue: $57.00
+Average Satisfaction (Paid): 70.0
+Turns used: 17/18
+
+==================== TURN 18 / 18 ====================
+ >>>>> No customer joins the queue this turn! <<<<<
+Revenue: $57.00     Paid customers: 4     Average satisfaction (paid) : 70.0
+Waiting queue:
+ #6  satisfaction84
+Tables:
+   Table 1: free
+   Table 2: #5  satisfaction 60 ORDERED Order 5 Pasta $18.00 [READY]
+Staff tasks available:
+   Waiter (1 task) : seat (1 queued, 1 free table(s)) | take order (0) | serve (1 READY) | wait
+   Chef (1 prep unit): 0 order(s) to prepare | wait
+   Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Waiter Task:
+   0) Wait
+   1) Seat a queued customer
+   2) Take a seated customer's order
+   3) Serve a READY order
+Choice (e.g. 1): 1
+Queued Customers:
+   #6    satisfaction 84
+Customer ID: 6
+Free tables:  1
+Table ID: 1
+ >>>>> Waiter seats customer #6 at table 1. <<<<<
+ >>>>> Chef has nothing to prepare. <<<<<
+-------------------- END OF TURN 18 --------------------
+Customers Served And Paid: 4
+Unhappy Departures 0
+Revenue: $57.00
+Average Satisfaction (Paid): 70.0
+Turns used: 18/18
+
+==================== GAME OVER ====================
+ Paid Customers: 4 (Target: 4)
+Revenue: $57.00 (Target: $45.00)
+Average Satisfaction (Paid): 70.0 (Target: 60)
+Unhappy departures: 0
+Turns used: 18/18
+RESULT: VICTORY
+
+Process finished with exit code 0
