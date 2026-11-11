@@ -1,6 +1,7 @@
 package entity.customer;
 
 import entity.order.Order;
+import entity.order.OrderStatus;
 import entity.menu.Menu;
 import entity.menu.MenuItem;
 import java.util.Random;
@@ -69,6 +70,10 @@ public abstract class Customer {
     public void startEating(int currentTurn) {
         if (state != CustomerState.ORDERED){
             throw new IllegalStateException("Only customer that had ordered food can start eating");
+        }
+
+        if (currentOrder == null || currentOrder.getStatus() != OrderStatus.SERVED) {
+            throw new IllegalStateException("The customer's order must be served before eating.");
         }
         servedTurn = currentTurn;
         state = CustomerState.EATING;
