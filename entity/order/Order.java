@@ -61,31 +61,28 @@ public class Order {
 
     public void markServed(){
         if (status != OrderStatus.READY) {
-            System.out.println("Order is not ready");
-        } else {
-            status = OrderStatus.SERVED;
-        }
+            throw new IllegalStateException("Order is not ready");
+        } 
+        status = OrderStatus.SERVED;
     }
     public void markPaid(){
         if (status != OrderStatus.READY_TO_PAY) {
-            System.out.println("Order is not ready for payment");
-        } else {
-            status = OrderStatus.PAID;
-        }
+            throw new IllegalStateException("Order is not ready for payment");
+        } 
+        status = OrderStatus.PAID;
     }
     public void markAbandoned(){
         if (status == OrderStatus.PAID || status == OrderStatus.SERVED || status == OrderStatus.READY_TO_PAY) {
-            System.out.println("Order cannot be abandoned");
-        } else {
-            status = OrderStatus.ABANDONED;
+            throw new IllegalStateException("Order cannot be abandoned in state" + status");
         }
+        status = OrderStatus.ABANDONED;
     }
 
     public void markReadyToPay() {
         if (status != OrderStatus.SERVED) {
-            System.out.println("Order is not served yet.");
+            throw new IllegalStateException("Order has not served yet.");
         }
-        else status = OrderStatus.READY_TO_PAY;
+        status = OrderStatus.READY_TO_PAY;
     }
     public boolean isReady(int currentTurn){
         return status == OrderStatus.READY && turnReady < currentTurn;
