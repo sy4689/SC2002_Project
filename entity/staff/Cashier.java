@@ -2,6 +2,7 @@
 package entity.staff;
 
 import entity.order.Order;
+import entity.order.OrderStatus;
 import entity.Table;
 import entity.Restaurant;
 import entity.customer.Customer;
@@ -16,16 +17,24 @@ public class Cashier extends Staff {
 
     public int processPayment(Table t, Restaurant r) {
         Customer cust = t.getCurrentCustomer();
+        
         if (cust == null || cust.getState() != CustomerState.WAITING_TO_PAY) {
             throw new IllegalStateException("Nobody at table " + t.getTableID() + " is ready to pay");
         }
 
-        markBusy();
         Order order = cust.getCurrentOrder();
+
+        if (order == null || order.getStatus() != OrderStatus.READY_TO_PAY){
+            throw new IllegalStateException("Customer's order is not ready for payment");
+        }
+        
+        markBusy();
         int bill = order.getFinalPriceInCents();
-        r.recordPayment(cust, bill);
+        
         order.markPaid();
         cust.setState(CustomerState.PAID_AND_LEFT);
+        
+        r.recordPayment(cust, bill);
         t.releaseTable();
         return bill;
     }
