@@ -14,14 +14,21 @@ public class Waiter extends Staff {
     }
 
     public boolean seatCustomer(Customer cust, Table t) {
-        if (!t.isOccupied() && cust.getState() == WAITING_IN_QUEUE) {
-            markBusy();
-            t.assignCustomer(cust);
-            cust.setState(CustomerState.SEATED);
-        } else{
-            throw new IllegalStateException("Table chosen is occupied");
+        if (cust == null || t == null) {
+        throw new IllegalArgumentException("Customer and table must be provided. Can't seat a customer");
         }
-        return t.isOccupied();
+
+        if (t.isOccupied()) {
+            throw new IllegalStateException("Table chosen is already occupied. Can't seat a customer");
+        }
+    
+        if (cust.getState() != CustomerState.WAITING_IN_QUEUE) {
+            throw new IllegalStateException("Only a customer waiting in the queue can be seated.");
+        }
+    
+        markBusy();
+        t.assignCustomer(cust);
+        return true;
     }
 
     public Order takeOrder(Table t, Menu menu, Restaurant r) {
