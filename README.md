@@ -133,4 +133,6 @@ SC2002_Project
   > - Complete turn sequence: Satisfaction, abandonment, payment, victory and defeat
 - Player able to:
   > - Sets seating, ordering, and serving priority through Waiter
-  > - Sets kitchen priority through Chef 
+  > - Sets kitchen priority through Chef
+- Deterministic food-choice rule for customer:
+  > - Food choice index = Customer ID % Menu size
