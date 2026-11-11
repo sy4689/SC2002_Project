@@ -24,6 +24,9 @@ public class Table {
         return isOccupied;
     }
     public void assignCustomer(Customer cust) {
+        if (isOccupied){
+            throw new IllegalStateException("Table chosen is already occupied");
+        }
         currentCustomer = cust;
         isOccupied = true;
         cust.setState(CustomerState.SEATED);
