@@ -67,6 +67,9 @@ public abstract class Customer {
     }
 
     public void startEating(int currentTurn) {
+        if (state != CustomerState.ORDERED){
+            throw new IllegalStateException("Only customer that had ordered food can start eating");
+        }
         servedTurn = currentTurn;
         state = CustomerState.EATING;
     }
