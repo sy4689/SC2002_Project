@@ -14,7 +14,7 @@ public class Waiter extends Staff {
     }
 
     public boolean seatCustomer(Customer cust, Table t) {
-        if (!t.isOccupied()) {
+        if (!t.isOccupied() && cust.getState() == WAITING_IN_QUEUE) {
             markBusy();
             t.assignCustomer(cust);
             cust.setState(CustomerState.SEATED);
