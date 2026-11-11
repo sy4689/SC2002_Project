@@ -48,7 +48,18 @@ public abstract class Customer {
         this.currentOrder = order;
     }
 
-    public abstract void applyWaitingPenalty();
+    public void applyWaitingPenalty() {
+        if (getState() == CustomerState.WAITING_IN_QUEUE ||
+                getState() == CustomerState.SEATED ||
+                getState() == CustomerState.ORDERED){
+
+            satisfaction = Math.max(0, satisfaction - penalty);
+
+            if (satisfaction == 0) {
+                setState(CustomerState.ABANDONED);
+            }
+        }
+    }
 
     public MenuItem chooseMenuItem(Menu menu){
         int index = customerID % menu.getItems().size();
