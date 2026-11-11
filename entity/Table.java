@@ -24,9 +24,18 @@ public class Table {
         return isOccupied;
     }
     public void assignCustomer(Customer cust) {
-        if (isOccupied){
-            throw new IllegalStateException("Table chosen is already occupied");
+        if (cust == null) {
+            throw new IllegalArgumentException("Customer must be provided to be assigned to a table.");
         }
+
+        if (isOccupied) {
+            throw new IllegalStateException("Table chosen is already occupied. Can't assign customer to table.");
+        }
+    
+        if (cust.getState() != CustomerState.WAITING_IN_QUEUE) {
+            throw new IllegalStateException("Only a customer waiting in the queue can be assigned.");
+        }
+    
         currentCustomer = cust;
         isOccupied = true;
         cust.setState(CustomerState.SEATED);
