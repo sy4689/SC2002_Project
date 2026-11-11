@@ -43,14 +43,14 @@ public class Order {
     }
     public void decrementPrepUnits(int currentTurn, int prepCapacity){
         if (status != OrderStatus.PENDING && status != OrderStatus.IN_KITCHEN){
-            System.out.println("Order cannot be prepared");
+            throw new IllegalStateException("Order cannot be prepared in state" + status);
         }
-        else if (remainingPrepUnits <= 0) {
-            System.out.println("Order is already prepared");
+        if (remainingPrepUnits <= 0 || prepCapacity <= 0) {
+            throw new IllegalStateException("Invalid preparation or already completed order");
         }
-        else {
-            remainingPrepUnits -= prepCapacity;
-        }
+
+        remainingPrepUnits = Math.max(0, remainingPrepUnits - prepCapacity);
+        
         if (remainingPrepUnits == 0) {
             status = OrderStatus.READY;
             turnReady = currentTurn;
