@@ -73,7 +73,7 @@ public class Order {
     }
     public void markAbandoned(){
         if (status == OrderStatus.PAID || status == OrderStatus.SERVED || status == OrderStatus.READY_TO_PAY) {
-            throw new IllegalStateException("Order cannot be abandoned in state" + status");
+            throw new IllegalStateException("Order cannot be abandoned in state" + status);
         }
         status = OrderStatus.ABANDONED;
     }
