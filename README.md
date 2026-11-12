@@ -113,19 +113,42 @@ SC2002_Project
 - Run application : Run Main.java
 - Access test run : Open testNotes folder
 
-**Checklist for Stage 1 (Basic restuarant operation)**
-- Complete playable game containing:
-  > - Regular customers and three menu items
-  > - Waiter, Chef, Cashier, Table, Order and the waiting queue
-  > - Complete turn sequence: Satisfaction, abandonment, payment, victory and defeat
-- Player able to:
-  > - Sets seating, ordering, and serving priority through Waiter
-  > - Sets kitchen priority through Chef
-- Deterministic food-choice rule for customer:
-  > - Food choice index = Customer ID % Menu size
-- Enumeration with self-explanatory naming:
-  > - GameState
-  > - WaiterActionType
-  > - CustomerState
-  > - OrderStatus
-  > - MenuItemType
+**Checlist for Stage 2 (More customer type and discount policy)**
+New Classes Added for Stage 2
+- VIPCustomer
+- CriticCustomer (We define the behaviour to be choosing the most expensive food item on the menu)
+- DiscountPolicy (Interface)
+- VIPDiscountPolicy
+
+GameController 
+- Creates VIPCustomer #2 at turn 4
+- Creates CriticCustomer #4 at turn 10
+- The rest are RegularCustomer
+- Includes Customer type in arrival message
+
+Waiter
+- Uses cust.chooseMenuItem(menu) to obtain each customer food choice
+- obtain the customer discount through getDiscountPolicy()
+- Calls order.lockPrice() with an empty policy list or the VIP policy
+- Applies pricing before attaching the order and adding it to the preparation queue
+
+Order
+-A dded lockPrice(List<DiscountPolicy> policies)
+- Applies the policy to the menu price
+- Stores the calculated amount in finalPriceinCents
+- Receives the policy list through method injection without storing the list
+
+Cashier
+- Continues reading getFinalPriceInCents() to collect the correct payment
+- Requires no additional discount calculation
+
+CustomerView
+- Added the type field
+
+ViewBuilder
+- Supplies customer type when building CustomerView
+
+GameCLI
+- Display customer type in the waiting queue, occupied tables and customer selection prompt
+
+**
