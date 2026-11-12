@@ -8,6 +8,7 @@ import entity.menu.MenuItem;
 import java.util.Random;
 public abstract class Customer {
     protected int satisfaction = 100;
+    protected int penalty;
     private int customerID;
     private int arrivalTurn;
     private CustomerState state;
