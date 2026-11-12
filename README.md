@@ -1,127 +1,114 @@
-# SC2002_Project Stage 1
+# SC2002_Project Stage 2
 **FOLDER STRUCTURE (Obeying BCE framework)**
 ```bash
 SC2002_Project
-│   Main.java
-│   README.md
-│
-├───.idea
-│       .gitignore
-│       misc.xml
-│       modules.xml
-│       sc2002_project.iml
-│       vcs.xml
-│
-├───boundary
-│       GameCLI.java
-│       GameUI.java
-│
-├───control
-│   │   GameController.java
-│   │   GameDisplay.java
-│   │   GameState.java
-│   │   InvalidChoiceException.java
-│   │   ViewBuilder.java
-│   │   WaiterAction.java
-│   │   WaiterActionType.java
-│   │
-│   └───view
-│           CustomerView.java
-│           OrderView.java
-│           RestaurantView.java
-│           SummaryView.java
-│           TableView.java
-│
-├───entity
-│   │   Restaurant.java
-│   │   Table.java
-│   │   WaitingQueue.java
-│   │
-│   ├───customer
-│   │       Customer.java
-│   │       CustomerState.java
-│   │       RegularCustomer.java
-│   │
-│   ├───menu
-│   │       Menu.java
-│   │       MenuItem.java
-│   │       MenuItemType.java
-│   │
-│   ├───order
-│   │       Order.java
-│   │       OrderStatus.java
-│   │
-│   └───staff
-│           Cashier.java
-│           Chef.java
-│           Staff.java
-│           Waiter.java
-│
-├───out
-│   └───production
-│       └───sc2002_project
-│           │   Main.class
-│           │   README.md
-│           │
-│           ├───.idea
-│           │       .gitignore
-│           │       misc.xml
-│           │       modules.xml
-│           │       sc2002_project.iml
-│           │       vcs.xml
-│           │
-│           ├───boundary
-│           │       GameCLI.class
-│           │       GameUI.class
-│           │
-│           ├───control
-│           │   │   GameController$1.class
-│           │   │   GameController.class
-│           │   │   GameDisplay.class
-│           │   │   GameState.class
-│           │   │   InvalidChoiceException.class
-│           │   │   ViewBuilder.class
-│           │   │   WaiterAction.class
-│           │   │   WaiterActionType.class
-│           │   │
-│           │   └───view
-│           │           CustomerView.class
-│           │           OrderView.class
-│           │           RestaurantView.class
-│           │           SummaryView.class
-│           │           TableView.class
-│           │
-│           └───entity
-│               │   Restaurant.class
-│               │   Table.class
-│               │   WaitingQueue.class
-│               │
-│               ├───customer
-│               │       Customer.class
-│               │       CustomerState.class
-│               │       RegularCustomer.class
-│               │
-│               ├───menu
-│               │       Menu.class
-│               │       MenuItem.class
-│               │       MenuItemType.class
-│               │
-│               ├───order
-│               │       Order.class
-│               │       OrderStatus.class
-│               │
-│               └───staff
-│                       Cashier.class
-│                       Chef.class
-│                       Staff.class
-│                       Waiter.class
-│
-└───testNotes
-        defeat_input.txt
-        defeat_output.txt
-        victory_input.txt
-        victory_output.txt
-```
+├── boundary
+│   ├── GameCLI.java
+│   └── GameUI.java
+├── control
+│   ├── GameController.java
+│   ├── GameDisplay.java
+│   ├── GameState.java
+│   ├── GameUI.java
+│   ├── InvalidChoiceException.java
+│   ├── view
+│   │   ├── CustomerView.java
+│   │   ├── OrderView.java
+│   │   ├── RestaurantView.java
+│   │   ├── SummaryView.java
+│   │   └── TableView.java
+│   ├── ViewBuilder.java
+│   ├── WaiterAction.java
+│   └── WaiterActionType.java
+├── entity
+│   ├── customer
+│   │   ├── CriticCustomer.java
+│   │   ├── Customer.java
+│   │   ├── CustomerState.java
+│   │   ├── RegularCustomer.java
+│   │   └── VIPCustomer.java
+│   ├── DiscountPolicy
+│   │   ├── DiscountPolicy.java
+│   │   └── VIPDiscountPolicy.java
+│   ├── menu
+│   │   ├── Menu.java
+│   │   ├── MenuItem.java
+│   │   └── MenuItemType.java
+│   ├── order
+│   │   ├── Order.java
+│   │   └── OrderStatus.java
+│   ├── Restaurant.java
+│   ├── staff
+│   │   ├── Cashier.java
+│   │   ├── Chef.java
+│   │   ├── Staff.java
+│   │   └── Waiter.java
+│   ├── Table.java
+│   └── WaitingQueue.java
+├── Main.java
+├── out
+│   └── production
+│       └── sc2002_project
+│           ├── boundary
+│           │   ├── GameCLI.class
+│           │   └── GameUI.class
+│           ├── control
+│           │   ├── GameController.class
+│           │   ├── GameController$1.class
+│           │   ├── GameDisplay.class
+│           │   ├── GameState.class
+│           │   ├── GameUI.class
+│           │   ├── InvalidChoiceException.class
+│           │   ├── view
+│           │   │   ├── CustomerView.class
+│           │   │   ├── OrderView.class
+│           │   │   ├── RestaurantView.class
+│           │   │   ├── SummaryView.class
+│           │   │   └── TableView.class
+│           │   ├── ViewBuilder.class
+│           │   ├── WaiterAction.class
+│           │   └── WaiterActionType.class
+│           ├── entity
+│           │   ├── customer
+│           │   │   ├── CriticCustomer.class
+│           │   │   ├── Customer.class
+│           │   │   ├── CustomerState.class
+│           │   │   ├── RegularCustomer.class
+│           │   │   └── VIPCustomer.class
+│           │   ├── DiscountPolicy
+│           │   │   ├── DiscountPolicy.class
+│           │   │   └── VIPDiscountPolicy.class
+│           │   ├── menu
+│           │   │   ├── Menu.class
+│           │   │   ├── MenuItem.class
+│           │   │   └── MenuItemType.class
+│           │   ├── order
+│           │   │   ├── Order.class
+│           │   │   └── OrderStatus.class
+│           │   ├── Restaurant.class
+│           │   ├── staff
+│           │   │   ├── Cashier.class
+│           │   │   ├── Chef.class
+│           │   │   ├── Staff.class
+│           │   │   └── Waiter.class
+│           │   ├── Table.class
+│           │   └── WaitingQueue.class
+│           ├── Main.class
+│           ├── README.md
+│           └── testNotes
+│               ├── defeat_input.txt
+│               ├── defeat_output.txt
+│               ├── victory_input.txt
+│               └── victory_output.txt
+├── README.md
+└── testNotes
+    ├── defeat_input.txt
+    ├── defeat_output.txt
+    ├── victory_input.txt
+    └── victory_output.txt
+
+24 directories, 81 files
+
 **Access note**
 - Run application : Run Main.java
 - Access test run : Open testNotes folder
