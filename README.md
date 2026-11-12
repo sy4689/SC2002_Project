@@ -108,7 +108,7 @@ SC2002_Project
     └── victory_output.txt
 
 24 directories, 81 files
-
+```
 **Access note**
 - Run application : Run Main.java
 - Access test run : Open testNotes folder
