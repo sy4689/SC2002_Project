@@ -2,6 +2,8 @@ package entity.customer;
 
 import entity.order.Order;
 import entity.order.OrderStatus;
+import entity.DiscountPolicy.DiscountPolicy;
+import entity.DiscountPolicy.VIPDiscountPolicy;
 import entity.menu.Menu;
 import entity.menu.MenuItem;
 import java.util.Random;
