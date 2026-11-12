@@ -95,6 +95,7 @@ public abstract class Customer {
     public boolean isAbandoned(){
         return (state == CustomerState.ABANDONED);
     }
-
-
+    public DiscountPolicy getDiscountPolicy() {
+        return null;
+    }
 }

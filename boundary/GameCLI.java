@@ -39,7 +39,8 @@ public class GameCLI implements GameUI, GameDisplay {
         List<CustomerView> queue = view.getQueue();
         System.out.println("Waiting queue: " + ((queue.isEmpty()) ? "(Empty)" : ""));
         for (CustomerView c : queue) {
-            System.out.println(" #" + c.getId() + " " + " satisfaction" + c.getSatisfaction());
+            System.out.println(
+                    " #" + c.getId() + " (" + c.getType() + ")" + " satisfaction " + c.getSatisfaction());
         }
 
         System.out.println("Tables:");
@@ -54,7 +55,8 @@ public class GameCLI implements GameUI, GameDisplay {
             String orderText = (o == null)? "no order yet"
                     : "Order " + o.getId() + " " + o.getItemName() + " " + formatMoney(o.getPriceInCents())
                     + " [" + o.getStatus() + (o.isAwaitingPreparation()? ", " + o.getRemainingPrepUnits() + " unit(s) left]" : "]");
-            System.out.println("   Table " + t.getId() + ": #" + c.getId() + " " + " satisfaction " + c.getSatisfaction() + " " + c.getState() + " " + orderText);
+            System.out.println(
+                    "   Table " + t.getId() + ": #" + c.getId() + " (" + c.getType() + ")" + " satisfaction " + c.getSatisfaction() + " " + c.getState() + " " + orderText);
         }
         System.out.println("Staff tasks available:");
         System.out.println("   Waiter (1 task) : seat (" + queue.size() + " queued, " + view.getFreeTableIDs().size() + " free table(s)) | take order ("
@@ -165,7 +167,8 @@ public class GameCLI implements GameUI, GameDisplay {
     private int promptQueuedCustomer(List<CustomerView> queue) {
         System.out.println("Queued Customers: ");
         for (CustomerView c : queue) {
-            System.out.println("   #" + c.getId() + "    satisfaction " + c.getSatisfaction());
+            System.out.println(
+                    "   #" + c.getId() + " (" + c.getType() + ")" + " satisfaction " + c.getSatisfaction());
         }
         return inputHandling("Customer ID: ");
     }

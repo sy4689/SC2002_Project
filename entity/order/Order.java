@@ -1,6 +1,8 @@
 package entity.order;
 
 import entity.menu.MenuItem;
+import entity.DiscountPolicy.DiscountPolicy;
+import java.util.List;
 
 public class Order {
     private int orderID;
@@ -26,6 +28,15 @@ public class Order {
 
     public int getFinalPriceInCents(){
         return finalPriceinCents;
+    }
+    public void lockPrice(List<DiscountPolicy> policies) {
+        int cents = item.getPriceInCents();
+
+        for (DiscountPolicy policy : policies) {
+            cents = policy.applyDiscount(cents);
+        }
+
+        finalPriceinCents = cents;
     }
     public MenuItem getItem(){
         return item;

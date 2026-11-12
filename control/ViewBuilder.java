@@ -83,12 +83,17 @@ public class ViewBuilder {
                 o.getRemainingPrepUnits(),
                 awaitingPreparation);
     }
-
+    // this supplies the new constructor argument. ID, satisafaction and state are passed through exactly as before.
+    //getClass() is used only to produce label
     public CustomerView customerView(Customer c) {
         return new CustomerView(
                 c.getCustomerID(),
                 c.getSatisfaction(),
-                c.getState().name());
+                c.getState().name(),
+                c.getClass().getSimpleName()
+                        .replace("Customer", " Customer")
+                        .trim()
+        );
     }
 
     // --- Helper Methods ---

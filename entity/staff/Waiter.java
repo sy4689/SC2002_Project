@@ -8,6 +8,10 @@ import entity.menu.MenuItem;
 import entity.order.Order;
 import entity.Restaurant;
 
+import entity.DiscountPolicy.DiscountPolicy;
+import java.util.List;
+
+
 public class Waiter extends Staff {
     public Waiter(String name) {
         super(name);
@@ -40,6 +44,11 @@ public class Waiter extends Staff {
         markBusy();
         MenuItem item = cust.chooseMenuItem(menu);
         Order order = new Order(r.getNextOrderID(), t.getTableID(), item);
+        //the waiter forwards the existing policy and applies it once while taking the order.
+        // Its task limit, validation,customer state changes and kitchen-que insertion are preserved.
+        DiscountPolicy policy = cust.getDiscountPolicy();
+        order.lockPrice(policy == null ? List.of() : List.of(policy));
+
         cust.setCurrentOrder(order);
         cust.setState(CustomerState.ORDERED);
         r.addToPrepQueue(order);

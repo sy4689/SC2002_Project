@@ -13,6 +13,9 @@ import entity.Restaurant;
 import entity.Table;
 import entity.order.Order;
 
+import entity.customer.VIPCustomer;
+import entity.customer.CriticCustomer;
+
 public class GameController
 {
     public static final int MAX_TURNS = 18;
@@ -66,9 +69,17 @@ public class GameController
 
         if (hasArrival) {
             int id = nextCustomerID++;
-            Customer c = new RegularCustomer(id, turn);
+            Customer c;
+            switch (id) {
+                case 2 -> c = new VIPCustomer(id, turn);
+                case 4 -> c = new CriticCustomer(id, turn);
+                default -> c = new RegularCustomer(id, turn);
+            }
+
             restaurant.enqueueCustomer(c);
-            ui.displayAction("Customer #" + c.getCustomerID() + " joins the queue.");
+            ui.displayAction(
+                    c.getClass().getSimpleName() + " #" + c.getCustomerID() + " joins the queue."
+            );
         } else {
             ui.displayAction("No customer joins the queue this turn!");
         }
