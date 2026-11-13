@@ -1,5 +1,5 @@
 # SC2002_Project Stage 2
-**FOLDER STRUCTURE (Obeying BCE framework)**
+<h2>FOLDER STRUCTURE (Obeying BCE framework)</h2>
 
 ```diff
 @@ Folder structure legend: @@
@@ -123,32 +123,47 @@ SC2002_Project
 24 directories, 81 files
 ```
 
-**Access note**
-- Run application : Run Main.java
-- Access test run : Open testNotes folder
+<h2>FILE SUMMARY:</h2>
+
+*1. Enumeration with self-explanatory naming:*
+> <code>GameState</code>,<code>WaiterActionType</code> , <code>CustomerState</code>, <code>OrderStatus</code>, <code>MenuItemType</code>
+
+*2. <code>view</code> folder + <code>ViewBuilder.java</code>:*
+> - Bridge communication from control class to boundary class
+> - Control class get access to entity class's getter or operations, then pass the raw result back to boundary class
+> - <code>CustomerView</code>, <code>OrderView</code>, <code>RestaurantView</code>, <code>SummaryView</code>, <code>TableView</code>
+
+*3. <code>DiscountPolicy</code> folder:*
+> - Classify all discount-related classes or interfaces
 <br></br>
 
-**Additional details for changes for Stage 2:**<br></br>
-*1.  Additional classes / interfaces for Stage 2*
-> - VIPCustomer (Dependency on VIPDiscountPolicy)
-> - CriticCustomer (Unique Behaviour: Choose priciest food item from the menu)
-> - DiscountPolicy 
-> - VIPDiscountPolicy
+<h2>ACCESS NOTE:</h2>
 
-*2.  GameController*
+> - Run application : Run Main.java
+> - Access test run : Open testNotes folder
+<br></br>
+
+<h2>ADDITIONAL DETAILS FOR CHANGES IN STAGE 2:</h2>
+
+*1.  Additional classes / interfaces for Stage 2*
+> - <code>VIPCustomer</code> (Dependency on VIPDiscountPolicy)
+> - <code>CriticCustomer</code> (Unique Behaviour: Choose priciest food item from the menu)
+> - <code>DiscountPolicy</code> 
+> - <code>VIPDiscountPolicy</code>
+
+*2.  <code>GameController</code>*
 > Updated game-flow:
-> - VIPCustomer #2 at turn 4, CriticCustomer #4 at turn 10, rest are RegularCustomer
+> - <code>VIPCustomer</code> #2 at turn 4, <code>CriticCustomer</code> #4 at turn 10, rest are <code>RegularCustomer</code>
 > - Send request to customer-related entities to obtain customer type for arrival message 
 
-*3.  Waiter*
-> - Send request to customer-related entities to obtain customer's privileged discount (if not, null is received)
-> - Send request to order entity to lock price for customer order 
+*3.  <code>Waiter</code>*
+> - Send request to customer-related entities to obtain customer's privileged discount (if not, <code>null</code> is received)
+> - Send request to order entity to lock price for customer's order 
 
-*4.  Order*
+*4.  <code>Order</code>*
 > - Adjust method to pricing system to accommodate the newly added discount system
 > - Apply discount on original menu prices to get final price 
 
-*5.  CustomerView, ViewBuilder, GameCLI*
+*5.  <code>CustomerView</code>, <code>ViewBuilder</code>, <code>GameCLI</code>*
 > - UX integration : Update new attribute to display customer type in game
-
 
