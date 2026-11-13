@@ -1,3 +1,5 @@
+//added getDiscountPolicy
+
 package entity.customer;
 
 import entity.order.Order;

@@ -1,3 +1,6 @@
+//added VIP Customer;
+//each turn -5 satisfaction from applyWaitingPenalty();
+//every VIP customer has a discount policy where the price is 10% off his chosen menu item;
 package entity.customer;
 
 import entity.DiscountPolicy.DiscountPolicy;

@@ -1,3 +1,7 @@
+//added CriticCustomer
+//each turn -12 satisfaction from applyWaitingPenalty()
+//we define the behaviour to be choosing the most expensive menu item
+
 package entity.customer;
 
 import entity.menu.Menu;
