@@ -1,3 +1,15 @@
+/**
+ * Performs one of the following per turn: seating a customer, take a seated customer order,
+ * serving prepared food or waiting
+ *
+ * Customers then choose their food and with discount policy for VIP customer. Waiter
+ * creates an Order, gives price calculation to lockPrice, links the order
+ * to the customer and adds it to preparation queue for chef. Serving checks
+ * that food became READY on an earlier turn before starting the customer's eating.
+ *
+
+ */
+
 package entity.staff;
 
 import entity.customer.CustomerState;

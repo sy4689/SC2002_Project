@@ -1,3 +1,12 @@
+/**
+ * inherit from Staff
+ * Performs one preparation unit per turn or waits if got no order.
+ *
+ * Preparation accepts a non-null PENDING or IN_KITCHEN order.
+ * Once preparation unit is 0, order marks the last unit READY with its completion turn
+ *
+ */
+
 package entity.staff;
 
 import entity.order.OrderStatus;

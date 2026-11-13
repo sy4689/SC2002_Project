@@ -1,3 +1,14 @@
+/**
+ * Inherit from Staff
+ * Cashier auto collects payment from customer after eating;
+ * Afterward, releases the customer's table.
+ *
+ * Both the customer and order must be ready to pay.
+ * Then, a successful action marks them paid, records the amount with Restaurant and frees the table.
+ * Then, the bill is read from Order; discount policies are not applied again here.
+ * Staff's availability rule limits collection to one payment per turn.
+
+ */
 
 package entity.staff;
 
