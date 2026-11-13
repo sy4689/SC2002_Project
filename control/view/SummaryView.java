@@ -1,5 +1,10 @@
 package control.view;
 
+/**
+ * Read-only snapshot of the game progress (paid customers, revenue, average
+ * satisfaction, unhappy departures) together with the targets to be met.
+ * averageSatisfaction is null when no customer has paid yet.
+ */
 public final class SummaryView {
     private final int servedAndPaidCount;
     private final int unhappyDepartures;

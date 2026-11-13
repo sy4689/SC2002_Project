@@ -1,5 +1,9 @@
 package control.view;
 
+/**
+ * Read-only snapshot of one table for the UI.
+ * customer and order are null when the table is free or no order was taken yet.
+ */
 public final class TableView {
     private final int id;
     private final boolean occupied;

@@ -2,6 +2,13 @@ package control.view;
 
 import java.util.List;
 
+/**
+ * Read-only snapshot of the whole restaurant for the UI.
+ * It contains statistics : revenue, served and paid count, average satisfaction of paid customers
+ * It also carries the pre-computed lists of valid choices
+ * (free tables, tables awaiting an order, tables with a READY order, prep queue),
+ * so UI can build the option list without knowing any game rules.
+ */
 public final class RestaurantView {
     private final int revenueInCents;
     private final int servedAndPaidCount;

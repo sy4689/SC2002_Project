@@ -1,5 +1,8 @@
 package control;
 
+/**
+ * Description of the one task the waiter will do this turn.
+ */
 public class WaiterAction {
     private final WaiterActionType actionType;
     private final int targetTableID;

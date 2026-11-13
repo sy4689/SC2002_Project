@@ -1,9 +1,15 @@
 package control.view;
 
+/**
+ * Read-only snapshot of a customer for the UI.
+ * State and type are stored as Strings so the boundary layer never needs to
+ * import entity classes
+ */
 public final class CustomerView {
     private final int id;
     private final int satisfaction;
     private final String state;
+    // Update new attribute : Customer Type for stage 2
     private final String type;
 
     public CustomerView(

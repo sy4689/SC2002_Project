@@ -1,5 +1,10 @@
 package control.view;
 
+/**
+ * Read-only snapshot of an order for the UI.
+ * awaitingPreparation is true while the order is still in the kitchen, which
+ * tells the UI whether remainingPrepUnits should be displayed.
+ */
 public final class OrderView {
     private final int id;
     private final int tableID;

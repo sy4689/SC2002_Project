@@ -9,10 +9,22 @@ import control.GameState;
 import control.WaiterAction;
 import control.GameDisplay;
 
+
+/**
+ * Command-line interface of the game
+ * It only prints information and reads input; all game rules stay in
+ * GameController. It talks to the controller through GameDisplay and
+ * read-only view objects, so it never touches entity classes directly.
+ */
 public class GameCLI implements GameUI, GameDisplay {
     private final Scanner sc = new Scanner(System.in);
     private final GameController manager;
 
+    /**
+     * Creates the CLI.
+     *
+     * @param manager  Accepts the GameController which runs the game logic.
+     */
     public GameCLI(GameController manager) {
         this.manager = manager;
     }
@@ -20,9 +32,11 @@ public class GameCLI implements GameUI, GameDisplay {
     // --- Game UI ---
     @Override
     public void start() {
+        // Hand control to the controller; "this" is passed as the display it calls back
         manager.startGame(this);
     }
     // --- DISPLAY ---
+
 
     @Override
     public void displayTurnHeader(int turn, int maxTurns) {
@@ -30,6 +44,12 @@ public class GameCLI implements GameUI, GameDisplay {
         System.out.println("==================== TURN " + turn + " / " + maxTurns + " ====================");
     }
 
+    /**
+     * Prints the full restaurant statistics: revenue, average satisfaction of paid customers, the waiting queue, occupied tables,
+     * each customer's satisfaction, order status, and the staff tasks available
+     *
+     * @param view  Accepts a read-only snapshot of the restaurant
+     */
     @Override
     public void displayRestaurantState(RestaurantView view) {
         System.out.println("Revenue: " + formatMoney(view.getRevenueInCents())
@@ -45,6 +65,7 @@ public class GameCLI implements GameUI, GameDisplay {
 
         System.out.println("Tables:");
         for (TableView t : view.getTables()) {
+            // A free table has no customer/order, so print and skip to the next table
             if (!t.isOccupied()) {
                 System.out.println("   Table " + t.getId() + ": free");
                 continue;
@@ -52,6 +73,8 @@ public class GameCLI implements GameUI, GameDisplay {
 
             CustomerView c = t.getCustomer();
             OrderView o = t.getOrder();
+            // Order text depends on whether the customer has ordered, and whether
+            // the order is still being prepared in the kitchen (then show units left)
             String orderText = (o == null)? "no order yet"
                     : "Order " + o.getId() + " " + o.getItemName() + " " + formatMoney(o.getPriceInCents())
                     + " [" + o.getStatus() + (o.isAwaitingPreparation()? ", " + o.getRemainingPrepUnits() + " unit(s) left]" : "]");
@@ -124,6 +147,15 @@ public class GameCLI implements GameUI, GameDisplay {
 
 
     // --- PROMPTS ---
+
+    /**
+     * Shows the waiter task options to the player and creates a WaiterAction from the player's input
+     * Only the format of the input is checked here; the GameController validates
+     * whether the chosen IDs are really allowed.
+     *
+     * @param view  Accepts a read-only snapshot used to list valid options.
+     * @return      The WaiterAction chosen by the player.
+     */
     @Override
     public WaiterAction promptWaiterTask(RestaurantView view) {
         System.out.println();
@@ -133,10 +165,13 @@ public class GameCLI implements GameUI, GameDisplay {
         System.out.println("   2) Take a seated customer's order");
         System.out.println("   3) Serve a READY order");
 
+        // Loop until the player enters one of the listed options
         while (true) {
             int choice = inputHandling("Choice (e.g. 1): ");
             switch (choice) {
                 case 1:
+                    // If nothing can be seated, return a dummy action (-1,-1) so the
+                    // GameController rejects it with a proper error message
                     if (view.getQueue().isEmpty() || view.getFreeTableIDs().isEmpty()) {
                         return WaiterAction.seat(-1,-1);
                     }
@@ -144,12 +179,14 @@ public class GameCLI implements GameUI, GameDisplay {
                     int freeTableID = promptTargetTable("Free tables: ", view.getFreeTableIDs());
                     return WaiterAction.seat(queuedCustID, freeTableID);
                 case 2:
+                    // Same dummy-action approach when there is no table awaiting an order
                     if (view.getTablesAwaitingOrder().isEmpty()) {
                         return WaiterAction.takeOrder(-1);
                     }
                     int awaitingOrderTableID = promptTargetTable("Tables awaiting an order: ", view.getTablesAwaitingOrder());
                     return WaiterAction.takeOrder(awaitingOrderTableID);
                 case 3:
+                    // Same dummy-action approach when no order is READY
                     if (view.getTablesWithReadyOrder().isEmpty()) {
                         return WaiterAction.serve(-1);
                     }
@@ -182,6 +219,13 @@ public class GameCLI implements GameUI, GameDisplay {
         return inputHandling("Table ID: ");
     }
 
+    /**
+     * Lists the orders waiting in the kitchen and asks which one the chef
+     * should work on this turn.
+     *
+     * @param view   Accepts a read-only snapshot containing the prep
+     * @return       The chosen order ID, or WAIT_CHOICE if the chef should wait
+     */
     public int promptChefOrderPriority(RestaurantView view) {
         System.out.println();
         System.out.println("Chef - orders to prepare:");
@@ -194,14 +238,23 @@ public class GameCLI implements GameUI, GameDisplay {
     }
 
     // --- HELPER METHODS---
+    // Converts cents to a dollar string, e.g. 1250 -> "$12.50" (%02d pads cents to 2 digits)
     private static String formatMoney(int cents) {
         return String.format("$%d.%02d", cents / 100, cents % 100);
     }
 
+    // The average is null when nobody has paid yet, so show "N/A" instead of a number
     private static String averageSatisfactionText(Double average) {
         return (average == null ? "N/A" : String.format("%.1f", average));
     }
 
+    /**
+     * Prompts repeatedly until the player enters a whole number (format checking).
+     *
+     * @param prompt   Accepts the text to show before reading input
+     * @return         The integer entered by the player
+     * @throws IllegalStateException   if the input stream ends before the game is finished.
+     */
     private int inputHandling(String prompt) {
         while (true) {
             System.out.print(prompt);
