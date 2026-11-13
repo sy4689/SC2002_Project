@@ -142,13 +142,8 @@ Cashier
 - Continues reading getFinalPriceInCents() to collect the correct payment
 - Requires no additional discount calculation
 
-CustomerView
-- Added the type field
+CustomerView, ViewBuilder, GameCLI
+- Added the type field and displayed in queue, tables and prompts
 
-ViewBuilder
-- Supplies customer type when building CustomerView
-
-GameCLI
-- Display customer type in the waiting queue, occupied tables and customer selection prompt
 
 **
