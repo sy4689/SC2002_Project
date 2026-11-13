@@ -7,19 +7,29 @@ import entity.Restaurant;
 import entity.customer.Customer;
 import entity.customer.CustomerState;
 
+ /**
+ * Class describing operation carried out by cashier
+ */
 public class Cashier extends Staff {
     private final int payCapacity = 1;
 
     /**
      * Creates a cashier with the inherited name and available task allowance.
+     *
+     * @param name name identifying this cashier in task-limit messages
      */
     public Cashier(String name) {
         super(name);
     }
 
     /**
-     * Collects a ready customer stored bill using one task, marks the customer and order paid, records revenue and releases the table.
-     * Reads the stored final price without applying discounts again
+     * Collects a ready customer stored bill and marks the customer as PAID.
+     *
+     * @param t non-null table whose customer is ready to pay
+     * @param r restaurant receiving the payment record
+     * @return amount collected in integer cents
+     * @throws IllegalStateException if the customer or order is not ready to pay,
+     *         or the cashier has already used its task
      */
     public int processPayment(Table t, Restaurant r) {
         Customer cust = t.getCurrentCustomer();

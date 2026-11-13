@@ -1,5 +1,8 @@
 package entity.menu;
 
+/**
+ * Enumeration describe all single food item
+ */
 public enum MenuItemType implements MenuItem {
     SALAD("Salad",900,1),
     BURGER("Burger",1500,1),
@@ -10,7 +13,12 @@ public enum MenuItemType implements MenuItem {
     private final int prepUnits;
 
     /**
-     * Initialise the food name, its price in cents and preparation unit
+     * Initialises the display name, base price and preparation work for one
+     * menu enum constant.
+     *
+     * @param name display name of the dish
+     * @param priceInCents base price of the dish in integer cents
+     * @param prepUnits preparation units required to complete the dish
      */
     MenuItemType(String name, int priceInCents, int prepUnits){
         foodName = name;
@@ -19,19 +27,25 @@ public enum MenuItemType implements MenuItem {
     }
 
     /**
-     * getter method to return Food name
+     * Returns the display name stored for this dish.
+     *
+     * @return the dish's food name
      */
     public String getFoodName() { return foodName; }
 
     /**
-     * getter method to return food price in cents
+     * Returns the base price stored for this dish before customer discounts.
+     *
+     * @return the dish's price in integer cents
      */
     public int getPriceInCents(){
         return priceInCents;
     }
 
     /**
-     * getter method to return food preparation units
+     * Returns the preparation work stored for this dish.
+     *
+     * @return the dish's required preparation units
      */
     public int getPrepUnits() {
         return prepUnits;

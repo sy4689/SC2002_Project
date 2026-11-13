@@ -3,10 +3,16 @@ package entity.customer;
 import entity.menu.Menu;
 import entity.menu.MenuItem;
 
+/**
+ * Entity class that store information about critic customer
+ */
 public class CriticCustomer extends Customer {
 
     /**
-     * Creates a critic customer with satisfaction 100 and 12 point waiting penalty.
+     * Creates a critic customer with satisfaction 100 and a twelve-point waiting penalty.
+     *
+     * @param customerID identifier assigned to the critic customer
+     * @param arrivalTurn turn on which the customer joins the restaurant
      */
     public CriticCustomer(int customerID, int arrivalTurn) {
 
@@ -15,10 +21,9 @@ public class CriticCustomer extends Customer {
     }
 
     /**
-     * Deducts 12 satisfaction points while this critic customer is queuing, seated and ordered, or ordered but not served.
-     * Lowest point is 0 so we take max (0 or satisfaction - 8)
+     * Deducts critic customer's waiting penalty except after food get served
+     * Floors the score at zero and marks ABANDONED at zero
      * customer is ABANDONED at zero.
-     * Restaurant will perform departure cleanup separately.
      */
     @Override
     public void applyWaitingPenalty() {
@@ -33,9 +38,13 @@ public class CriticCustomer extends Customer {
             }
         }
     }
+
     /**
-     * We define our criticcustomer behaviour to choose item with the highest menu price
-     * Keeps the first maximum when prices tie.
+     * Chooses the item with the highest base menu price as the critic's
+     * defined preference. Keeps the first maximum when prices tie.
+     *
+     * @param menu non-null, non-empty menu to inspect
+     * @return the first menu item with the highest base price
      */
     @Override
     public MenuItem chooseMenuItem(Menu menu) {

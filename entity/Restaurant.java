@@ -11,6 +11,9 @@ import entity.order.OrderStatus;
 import entity.menu.Menu;
 
 
+/**
+ * Class recording game state of the restaurant game
+ */
 public class Restaurant{
     public static final int TABLE_COUNT = 2;
     public static final int TARGET_PAID_CUSTOMERS = 4;
@@ -28,8 +31,10 @@ public class Restaurant{
     private int nextOrderID = 1;
 
     /**
-     * Creates a restaurant with the menu and two initially empty tables.
-     * Initialises empty waiting, preparation and paid-customer.
+     * Creates a restaurant with the supplied menu and two initially empty tables.
+     * Initialises empty waiting, preparation and paid-customer collections.
+     *
+     * @param menu menu associated with this restaurant
      */
     public Restaurant(Menu menu) {
         this.menu = menu;
@@ -41,14 +46,18 @@ public class Restaurant{
     // --- Menu ---
 
     /**
-     * getter method to return menu
+     * Getter method to return the menu associated with this restaurant.
+     *
+     * @return the restaurant's menu
      */
     public Menu getMenu() {
         return menu;
     }
 
     /**
-     * getter method to return nextOrderID
+     * Allocates the next order identifier and increments the internal counter.
+     *
+     * @return the newly allocated order ID
      */
     public int getNextOrderID() {
         return nextOrderID++;
@@ -57,15 +66,19 @@ public class Restaurant{
     // --- Queue ---
 
     /**
-     * Adds a customer to the end of the waiting list.
-    */
+     * Adds a customer to the end of the waiting collection.
+     *
+     * @param cust customer joining the restaurant's waiting queue
+     */
     public void enqueueCustomer(Customer cust) {
         waitingQueue.enqueueCustomer(cust);
     }
 
     /**
-     * Removes the specified customer from the waiting list if present.
+     * Removes the specified customer from the waiting collection if present.
      * Does not change the customer's state or assign a table.
+     *
+     * @param cust customer to remove from the waiting queue
      */
     public void dequeueCustomer(Customer cust) {
         waitingQueue.dequeueCustomer(cust);
@@ -73,13 +86,18 @@ public class Restaurant{
 
     /**
      * Finds a waiting customer by identifier.
+     *
+     * @param customerID identifier of the customer to find
+     * @return the matching customer, or null if the ID is not in the waiting queue
      */
     public Customer findQueuedCustomer(int customerID) {
         return waitingQueue.findByID(customerID);
     }
 
     /**
-     * getter method to return the list of customers currently waiting to be seated.
+     * Getter method to return an unmodifiable view of customers currently waiting to be seated.
+     *
+     * @return the waiting customers in insertion order
      */
     public List<Customer> getWaitingQueue() {
         return waitingQueue.getCustomers();
@@ -88,7 +106,9 @@ public class Restaurant{
     // --- Tables ---
 
     /**
-     * getter method to return the list of tables in restaurant.
+     * Getter method to return an unmodifiable view of the restaurant's tables.
+     *
+     * @return the tables belonging to this restaurant
      */
     public List<Table> getTables() {
         return Collections.unmodifiableList(tables);
@@ -96,6 +116,10 @@ public class Restaurant{
 
     /**
      * Finds a restaurant table by identifier.
+     *
+     * @param tableID identifier of the table to find
+     * @return the matching table
+     * @throws IllegalStateException if no table has the supplied identifier
      */
     public Table findTable(int tableID) {
         for (Table t : tables) {
@@ -107,8 +131,10 @@ public class Restaurant{
     }
 
     /**
-     * getter method to collect the tables that are currently unoccupied.
-    */
+     * Collects the tables that are currently unoccupied.
+     *
+     * @return a new list of free tables, or an empty list if all tables are occupied
+     */
     public List<Table> getAvailableTables() {
         List<Table> result = new ArrayList<>();
         for (Table t : tables) {
@@ -120,7 +146,9 @@ public class Restaurant{
     }
 
     /**
-     * getter method to collect occupied tables whose customers are SEATED and awaiting an order.
+     * Collects occupied tables whose customers are SEATED and awaiting an order.
+     *
+     * @return a new list of tables with customers ready to order
      */
     public List<Table> getTablesAwaitingOrder() {
         List<Table> result = new ArrayList<>();
@@ -133,9 +161,12 @@ public class Restaurant{
     }
 
     /**
-     * getter method to collect occupied tables whose current orders have READY status.
-     * This does not check the preparation-completion turn; Waiter check that timing separately before serving.
-    */
+     * Collects occupied tables whose current orders have READY status.
+     * This query does not check the preparation-completion turn; Waiter checks
+     * that timing separately before serving.
+     *
+     * @return a new list of tables with READY orders
+     */
     public List<Table> getTablesWithReadyOrder() {
         List<Table> result = new ArrayList<>();
         for (Table t : tables) {
@@ -150,7 +181,10 @@ public class Restaurant{
     }
 
     /**
-     * Selects the table with the lowest customer ID among customers in WAITING_TO_PAY state. Customer IDs increase with arrival order in normal play.
+     * Selects the table with the lowest customer ID among customers in
+     * WAITING_TO_PAY state. Customer IDs increase with arrival order in normal play.
+     *
+     * @return the selected payment table, or null if no customer is waiting to pay
      */
     public Table findTableToCollect() {
         Table oldest = null;
@@ -168,6 +202,8 @@ public class Restaurant{
 
     /**
      * Adds an order to the restaurant's preparation queue.
+     *
+     * @param order order to make available for kitchen preparation
      */
     public void addToPrepQueue(Order order) {
         prepQueue.add(order);
@@ -175,6 +211,10 @@ public class Restaurant{
 
     /**
      * Removes the specified order from the preparation queue.
+     *
+     * @param order order to remove from kitchen preparation
+     * @throws IllegalStateException if the queue is empty or does not contain
+     *         the supplied order
      */
     public void removeFromPrepQueue(Order order) {
         if (prepQueue.isEmpty()){
@@ -189,7 +229,9 @@ public class Restaurant{
     }
 
     /**
-     * getter method to return list of the orders in the preparation queue.
+     * Getter method to return an unmodifiable view of the orders in the preparation queue.
+     *
+     * @return orders currently available for kitchen preparation
      */
     public List<Order> getPrepQueue() {
         return Collections.unmodifiableList(prepQueue);
@@ -198,8 +240,13 @@ public class Restaurant{
     // --- Processing for each turn ---
     /**
      * Advances eating for customers currently in EATING state.
-     * Customers who finish to move to WAITING_TO_PAY, and their orders to move to READY_TO_PAY.
-     * Eating cannot finish during the turn in which food was served.
+     * Customers who finish move to WAITING_TO_PAY, and their orders move to
+     * READY_TO_PAY. Eating cannot finish during the turn in which food was served.
+     *
+     * @param currentTurn turn being processed
+     * @return a new list of customers who became ready to pay during this call
+     * @throws IllegalStateException if a finished customer's order cannot
+     *         transition to READY_TO_PAY
      */
     public List<Customer> processEatingCust(int currentTurn) {
         List<Customer> finished = new ArrayList<>();
@@ -218,7 +265,10 @@ public class Restaurant{
     }
 
     /**
-     * getter method to collect waiting-queue entries and table customers who are still queued, seated or ordered but unserved
+     * Collects waiting-queue entries and table customers who are still queued,
+     * seated or ordered but unserved, for turn-end satisfaction processing.
+     *
+     * @return a new list of customers to consider for waiting penalties
      */
     public List<Customer> getUnservedCustomer() {
         List<Customer> result = new ArrayList<>(waitingQueue.getCustomers());
@@ -234,8 +284,12 @@ public class Restaurant{
     }
 
     /**
-     * Adds a completed payment to revenue, increase the paid-customer count and retains the customer for satisfaction statistics.
-     * The caller is responsible for recording a valid payment only once.
+     * Adds a completed payment to revenue, increments the paid-customer count
+     * and retains the customer for satisfaction statistics. The caller is
+     * responsible for recording a valid payment only once.
+     *
+     * @param cust customer whose payment was completed
+     * @param amount amount collected, in integer cents
      */
     public void recordPayment(Customer cust, int amount) {
         revenueIntCents += amount;
@@ -244,8 +298,12 @@ public class Restaurant{
     }
 
     /**
-     * Records the departure of an unserved customer.
-     * Then, marks the customer ABANDONED, removes queue or table occupancy, cancels any associated order, removes its preparation work and increase unhappy departures.
+     * Marks the customer ABANDONED, removes queue or table occupancy, cancels any associated order,
+     * removes its preparation work and increments unhappy departures.
+     *
+     * @param cust unserved customer leaving without payment
+     * @throws IllegalStateException if the associated order is already SERVED,
+     *         READY_TO_PAY or PAID and cannot be abandoned
      */
     public void recordAbandoned(Customer cust) {
         cust.setState(CustomerState.ABANDONED);
@@ -268,36 +326,47 @@ public class Restaurant{
     // --- Statistics ---
 
     /**
-     * getter method to return the total amount recorded from completed payments.
+     * Getter method to return the total amount recorded from completed payments.
+     *
+     * @return collected revenue in integer cents
      */
+
     public int getRevenueInCents() {
         return revenueIntCents;
     }
 
     /**
-     * getter method to return the total number of customer recorded as served and paid.
+     * Getter method to return the number of customers recorded as served and paid.
+     *
+     * @return the completed paid-customer count
      */
     public int getServeAndPaidCount() {
         return serveAndPaidCount;
     }
 
     /**
-     * getter method to return the total number of paid customers
+     * Getter method to return the total number of paid customers
+     *
+     * @return the restaurant's mutable paid-customer list
      */
     public List<Customer> getPaidCustomers() {
         return paidCustomers;
     }
 
     /**
-     * getter method to return the total number of abandoned customer (without paying)
+     * Getter method to return the total number of abandoned customer (without paying)
+     *
+     * @return the unhappy-departure count
      */
     public int getUnhappyDeparture() {
         return unhappyDeparture;
     }
 
     /**
-     * getter method to calculate the mean satisfaction of the recorded paid-customers.
+     * Calculates the mean satisfaction of the retained paid-customer objects.
      * Returns zero when no payment has been recorded.
+     *
+     * @return the average paid-customer satisfaction, or 0.0 for an empty list
      */
     public double getAveragePaidSatisfaction() {
         if (paidCustomers.isEmpty()) {
@@ -312,8 +381,10 @@ public class Restaurant{
     }
 
     /**
-     * Checks whether all three restaurant targets are satisfied: at least 4 paid customers, at least 4500 cents of revenue and average paid satisfaction of at least 60.
+     * Checks whether all three restaurant targets are satisfied.
      * The controller determines when this result becomes final.
+     *
+     * @return true if every objective threshold is met; false otherwise
      */
     public boolean isObjectiveMet() {
         return serveAndPaidCount >= TARGET_PAID_CUSTOMERS

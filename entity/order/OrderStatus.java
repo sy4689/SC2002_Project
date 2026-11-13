@@ -1,5 +1,8 @@
 package entity.order;
 
+/**
+ * Enumeration storing all possible status for an order under the game-flow
+ */
 public enum OrderStatus {
     PENDING,
     IN_KITCHEN,

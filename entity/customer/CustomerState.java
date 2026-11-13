@@ -1,5 +1,8 @@
 package entity.customer;
 
+/**
+ * The overall state of a customer during the whole game-flow
+ */
 public enum CustomerState {
     WAITING_IN_QUEUE,
     SEATED,

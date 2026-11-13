@@ -4,6 +4,9 @@ import entity.menu.MenuItem;
 import entity.DiscountPolicy.DiscountPolicy;
 import java.util.List;
 
+/**
+ * Class describing information about an order for a particular customer
+ */
 public class Order {
     private int orderID;
     private int tableID;
@@ -14,7 +17,11 @@ public class Order {
     private MenuItem item;
 
     /**
-     * Creates a PENDING order with the selected item price and preparation units. The order-taking workflow applies any pricing policies separately through lockPrice before publishing the order.
+     * Initialize a PENDING order with a specific menu item
+     *
+     * @param orderID identifier assigned to the order
+     * @param tableID identifier of the table placing the order
+     * @param item non-null menu item selected by the customer
      */
     public Order(int orderID, int tableID, MenuItem item){
         this.orderID = orderID;
@@ -26,22 +33,29 @@ public class Order {
     }
 
     /**
-     * getter method to return food remaining preparation unit;
+     * Getter method to return food remaining preparation unit;
+     *
+     * @return the remaining preparation units
      */
     public int getRemainingPrepUnits() {
         return remainingPrepUnits;
     }
 
     /**
-     * getter method to return food final price in cents after locking the price;
+     * Getter method to return the stored payable amount.
+     *
+     * @return the stored bill in integer cents
      */
     public int getFinalPriceInCents(){
         return finalPriceinCents;
     }
 
     /**
-     * Calculates and stores the bill by starting from the item's original price and applying the supplied policies in list order.
-     * An empty list preserves full price.
+     * Calculates and stores the bill by applying the supplied
+     * policies in list order on an item's base price
+     *
+     * @param policies non-null list of pricing policies with no null entries
+     * @throws NullPointerException if the list or one of its policies is null
      */
     public void lockPrice(List<DiscountPolicy> policies) {
         int cents = item.getPriceInCents();
@@ -53,28 +67,36 @@ public class Order {
         finalPriceinCents = cents;
     }
     /**
-     * getter method to return food item;
+     * Getter method to return the menu item selected for this order.
+     *
+     * @return the ordered food item
      */
     public MenuItem getItem(){
         return item;
     }
 
     /**
-     * getter method to return food status;
+     * Getter method to return the order's current preparation/service lifecycle status.
+     *
+     * @return the current order status
      */
     public OrderStatus getStatus() {
         return status;
     }
 
     /**
-     * getter method to return order ID;
+     * Getter method to return the identifier assigned to this order.
+     *
+     * @return the order ID
      */
     public int getOrderID() {
         return orderID;
     }
 
     /**
-     * getter method to return table ID;
+     * Getter method to return the identifier of the table associated with this order.
+     *
+     * @return the associated table ID
      */
     public int getTableID() {
         return tableID;
@@ -84,6 +106,11 @@ public class Order {
      * Decrease the remaining preparation unit without going below zero
      * Marks unfinished work (prep unit >0) as IN_KITCHEN
      * After completing the last unit marks the food as READY and records the completion turn
+     *
+     * @param currentTurn turn in which this preparation work is performed
+     * @param prepCapacity positive number of preparation units to apply
+     * @throws IllegalStateException if the order is not PENDING or IN_KITCHEN,
+     *         has no preparation work left, or the capacity is not positive
      */
     public void decrementPrepUnits(int currentTurn, int prepCapacity){
         if (status != OrderStatus.PENDING && status != OrderStatus.IN_KITCHEN){
@@ -105,6 +132,8 @@ public class Order {
 
     /**
      * Changes a READY order to SERVED status.
+     *
+     * @throws IllegalStateException if the order is not READY
      */
 
     public void markServed(){
@@ -116,6 +145,8 @@ public class Order {
 
     /**
      * Changes a READY_TO_PAY order to PAID status.
+     *
+     * @throws IllegalStateException if the order is not READY_TO_PAY
      */
     public void markPaid(){
         if (status != OrderStatus.READY_TO_PAY) {
@@ -127,7 +158,8 @@ public class Order {
     /**
      * Marks an unserved order as ABANDONED.
      * Does not remove preparation-queue entries or release a table.
-     * Restaurant performs cleanup separately.
+     *
+     * @throws IllegalStateException if the order is SERVED, READY_TO_PAY or PAID
      */
     public void markAbandoned(){
         if (status == OrderStatus.PAID || status == OrderStatus.SERVED || status == OrderStatus.READY_TO_PAY) {
@@ -137,7 +169,9 @@ public class Order {
     }
 
     /**
-     * Changes a SERVED order to READY_TO_PAY after customer eat finish
+     * Changes a SERVED order to READY_TO_PAY after eating has finished.
+     *
+     * @throws IllegalStateException if the order is not SERVED
      */
     public void markReadyToPay() {
         if (status != OrderStatus.SERVED) {
@@ -147,7 +181,11 @@ public class Order {
     }
 
     /**
-     * Checks both READY status and whether preparation is finished strictly on an earlier turn than the supplied turn.
+     * Checks both READY status and whether preparation finished on a strictly
+     * earlier turn than the supplied turn.
+     *
+     * @param currentTurn turn in which service is being considered
+     * @return true if the order is READY and was completed on an earlier turn
      */
     public boolean isReady(int currentTurn){
         return status == OrderStatus.READY && turnReady < currentTurn;

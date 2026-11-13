@@ -3,6 +3,9 @@ package entity;
 import entity.customer.Customer;
 import entity.customer.CustomerState;
 
+/**
+ * Class describing information about table in restaurant
+ */
 public class Table {
     private int tableID;
     private boolean isOccupied = false;
@@ -10,20 +13,26 @@ public class Table {
 
     /**
      * Creates an empty table with the ID
+     *
+     * @param tableID table ID for newly added table
      */
     public Table (int tableID){
         this.tableID = tableID;
     }
 
     /**
-     * getter method to return table ID
+     * Getter method to return the identifier assigned to this table.
+     *
+     * @return the table ID
      */
     public int getTableID() {
         return tableID;
     }
 
     /**
-     * getter method to return current customer
+     * Getter method to return the customer currently assigned to this table.
+     *
+     * @return the assigned customer, or null when the table has no customer
      */
     public Customer getCurrentCustomer(){
         return currentCustomer;
@@ -31,14 +40,21 @@ public class Table {
 
     /**
      * Checks whether the table is currently occupied.
+     *
+     * @return true if a customer is assigned; false otherwise
      */
     public boolean isOccupied(){
         return isOccupied;
     }
 
     /**
-     * Assigns a queued customer to this table and changes the customer's state to SEATED.
-     * The caller removes the customer from the waiting queue separately.
+     * Assigns a queued customer to this table and changes the customer's state
+     * to SEATED. The caller removes the customer from the waiting queue separately.
+     *
+     * @param cust customer to seat at this table
+     * @throws IllegalArgumentException if the customer is null
+     * @throws IllegalStateException if the table is occupied or the customer is not
+     *         WAITING_IN_QUEUE
      */
     public void assignCustomer(Customer cust) {
         if (cust == null) {
@@ -60,7 +76,10 @@ public class Table {
 
     /**
      * Releases the table after its customer has paid and left or abandoned.
-     * Leaves the table unchanged if the customer's state does not need to release.
+     * Leaves the table unchanged if the customer's state does not permit release.
+     *
+     * @return the departing customer, or null if the table is empty or cannot
+     *         currently be released
      */
     public Customer releaseTable() {
         if (currentCustomer == null) {

@@ -1,9 +1,18 @@
 package entity.DiscountPolicy;
 
+/**
+ * Interface to implement contract for discount policy
+ */
 public interface DiscountPolicy {
+
     /**
-     * Calculates the amount payable after applying this pricing policy.
-     * Input and output are integer cents; the result is the price after discount,not the amount saved.
+     * Abstract method to force implementing class to implement method calculating the
+     * amount payable after applying a custom pricing policy.
+     *
+     * Note that implementations define their rounding rule.
+     *
+     * @param priceInCents incoming price in cents
+     * @return payable amount in cents after this policy
      */
     public int applyDiscount(int priceInCents);
 }

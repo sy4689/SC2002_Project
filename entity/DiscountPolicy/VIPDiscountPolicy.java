@@ -1,11 +1,18 @@
 package entity.DiscountPolicy;
 
+/**
+ * Class to describe discount policy for VIP customer
+ */
 public class VIPDiscountPolicy implements  DiscountPolicy{
 
     private static final double DISCOUNT_RATE = 0.10;
 
     /**
-     * Calculate 90% of the original price and rounds the result to the nearest whole cent
+     * Calculate discounted price by applying VIP customer-specific discount
+     * formula to original menu price
+     *
+     *  @param priceInCents incoming price in integer cents
+     *  @return the discounted payable amount in integer cents
      */
     @Override
     public int applyDiscount(int priceInCents) {

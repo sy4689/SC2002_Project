@@ -11,20 +11,30 @@ import entity.Restaurant;
 import entity.DiscountPolicy.DiscountPolicy;
 import java.util.List;
 
-
+/**
+ * Class describing operations carried out by a waiter
+ */
 public class Waiter extends Staff {
 
     /**
      * Creates a waiter with the inherited name and available task allowance.
+     *
+     * @param name name identifying this waiter in task-limit messages
      */
     public Waiter(String name) {
         super(name);
     }
 
     /**
-     * Uses one task to seat a queued customer at a free table.
-     * Table assignment also changes the customer state to SEATED
-     * The caller removes the customer from the waiting queue after successful seating.
+     * Seat a queued customer at a free table.
+     * Table assignment also changes the customer to SEATED.
+     *
+     * @param cust queued customer to seat
+     * @param t free table that will hold the customer
+     * @return true after the customer has been assigned successfully
+     * @throws IllegalArgumentException if the customer or table is null
+     * @throws IllegalStateException if the table is occupied, the customer is
+     *         not WAITING_IN_QUEUE, or the waiter has already used its task
      */
     public boolean seatCustomer(Customer cust, Table t) {
         if (cust == null || t == null) {
@@ -45,8 +55,16 @@ public class Waiter extends Staff {
     }
 
     /**
-     * Uses one task to take a seated customer's food order.
-     * Obtains the optional customer policy, provide price calculation to Order,links the order, changes the customer to ORDERED and queues preparation work.
+     * Take a seated customer's self-selected food order.
+     * Obtains the optional customer policy, delegates price calculation to Order,
+     * links the order, changes the customer to ORDERED and queues preparation work.
+     *
+     * @param t non-null table whose customer is waiting to order
+     * @param menu non-null menu offered to the customer
+     * @param r restaurant supplying the order ID and preparation queue
+     * @return the new PENDING order with its payable price calculated
+     * @throws IllegalStateException if no SEATED customer is present or the
+     *         waiter has already used its task
      */
     public Order takeOrder(Table t, Menu menu, Restaurant r) {
         Customer cust = t.getCurrentCustomer();
@@ -69,8 +87,13 @@ public class Waiter extends Staff {
     }
 
     /**
-     * Uses one task to serve an order completed on an earlier turn.
+     * Serve an order completed on an earlier turn.
      * Marks the order SERVED before asking the customer to start eating.
+     *
+     * @param t non-null table whose order is being served
+     * @param currentTurn turn in which service is attempted
+     * @throws IllegalStateException if there is no eligible READY order, the
+     *         customer cannot start eating, or the waiter has already used its task
      */
     public void serveOrder(Table t, int currentTurn) {
         Customer cust = t.getCurrentCustomer();
@@ -82,9 +105,12 @@ public class Waiter extends Staff {
         order.markServed();
         cust.startEating(currentTurn);
     }
+
     /**
-     * If decides to wait, consumes this turn's waiter task without seating, taking an order or serving.
-    */
+     * Consumes this turn's waiter task without seating, taking an order or serving.
+     *
+     * @throws IllegalStateException if the waiter has already used its task
+     */
     public void waitTurn() {
         markBusy();
     }
