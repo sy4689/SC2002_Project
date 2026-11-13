@@ -139,8 +139,8 @@ SC2002_Project
 
 <h2>ACCESS NOTE:</h2>
 
-> - Run application : Run Main.java
-> - Access test run : Open testNotes folder
+> - Run application : Run <code>Main.java</code>
+> - Access test run : Open <code>testNotes</code> folder
 <br></br>
 
 <h2>ADDITIONAL DETAILS FOR CHANGES IN STAGE 2:</h2>
