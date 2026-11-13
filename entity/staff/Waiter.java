@@ -1,15 +1,3 @@
-/**
- * Performs one of the following per turn: seating a customer, take a seated customer order,
- * serving prepared food or waiting
- *
- * Customers then choose their food and with discount policy for VIP customer. Waiter
- * creates an Order, gives price calculation to lockPrice, links the order
- * to the customer and adds it to preparation queue for chef. Serving checks
- * that food became READY on an earlier turn before starting the customer's eating.
- *
-
- */
-
 package entity.staff;
 
 import entity.customer.CustomerState;
@@ -25,10 +13,19 @@ import java.util.List;
 
 
 public class Waiter extends Staff {
+
+    /**
+     * Creates a waiter with the inherited name and available task allowance.
+     */
     public Waiter(String name) {
         super(name);
     }
 
+    /**
+     * Uses one task to seat a queued customer at a free table.
+     * Table assignment also changes the customer state to SEATED
+     * The caller removes the customer from the waiting queue after successful seating.
+     */
     public boolean seatCustomer(Customer cust, Table t) {
         if (cust == null || t == null) {
         throw new IllegalArgumentException("Customer and table must be provided. Can't seat a customer");
@@ -47,6 +44,10 @@ public class Waiter extends Staff {
         return true;
     }
 
+    /**
+     * Uses one task to take a seated customer's food order.
+     * Obtains the optional customer policy, provide price calculation to Order,links the order, changes the customer to ORDERED and queues preparation work.
+     */
     public Order takeOrder(Table t, Menu menu, Restaurant r) {
         Customer cust = t.getCurrentCustomer();
         if (cust == null || cust.getState() != CustomerState.SEATED) {
@@ -67,6 +68,10 @@ public class Waiter extends Staff {
         return order;
     }
 
+    /**
+     * Uses one task to serve an order completed on an earlier turn.
+     * Marks the order SERVED before asking the customer to start eating.
+     */
     public void serveOrder(Table t, int currentTurn) {
         Customer cust = t.getCurrentCustomer();
         Order order = (cust == null) ? null : cust.getCurrentOrder();
@@ -77,7 +82,9 @@ public class Waiter extends Staff {
         order.markServed();
         cust.startEating(currentTurn);
     }
-
+    /**
+     * If decides to wait, consumes this turn's waiter task without seating, taking an order or serving.
+    */
     public void waitTurn() {
         markBusy();
     }

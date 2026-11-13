@@ -15,10 +15,17 @@ import entity.order.Order;
 public class Chef extends Staff {
     private final int prepCapacity = 1;
 
+    /**
+     * Creates a chef with the inherited name and available task allowance.
+     */
     public Chef (String name) {
         super(name);
     }
 
+    /**
+     * Uses one task to advance a selected order by one preparation unit.
+     * The order updates its own preparation status and completion turn.
+     */
     public void prepOrder (Order order, int currentTurn) {
         if (order.getStatus() != OrderStatus.PENDING && order.getStatus() != OrderStatus.IN_KITCHEN)
             throw new IllegalStateException("Order " + order.getOrderID() + " do not need to be prepared.");
@@ -26,6 +33,9 @@ public class Chef extends Staff {
         order.decrementPrepUnits(currentTurn, prepCapacity);
     }
 
+    /**
+     * If decides to wait, consume this turn's chef task without advancing an order.
+     */
     public void waitTurn() {
         markBusy();
     }

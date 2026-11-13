@@ -8,21 +8,38 @@ public class Table {
     private boolean isOccupied = false;
     private Customer currentCustomer;
 
+    /**
+     * Creates an empty table with the ID
+     */
     public Table (int tableID){
         this.tableID = tableID;
     }
 
+    /**
+     * getter method to return table ID
+     */
     public int getTableID() {
         return tableID;
     }
 
+    /**
+     * getter method to return current customer
+     */
     public Customer getCurrentCustomer(){
         return currentCustomer;
     }
 
+    /**
+     * Checks whether the table is currently occupied.
+     */
     public boolean isOccupied(){
         return isOccupied;
     }
+
+    /**
+     * Assigns a queued customer to this table and changes the customer's state to SEATED.
+     * The caller removes the customer from the waiting queue separately.
+     */
     public void assignCustomer(Customer cust) {
         if (cust == null) {
             throw new IllegalArgumentException("Customer must be provided to be assigned to a table.");
@@ -41,6 +58,10 @@ public class Table {
         cust.setState(CustomerState.SEATED);
     }
 
+    /**
+     * Releases the table after its customer has paid and left or abandoned.
+     * Leaves the table unchanged if the customer's state does not need to release.
+     */
     public Customer releaseTable() {
         if (currentCustomer == null) {
             return null;

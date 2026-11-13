@@ -8,12 +8,22 @@ import entity.DiscountPolicy.VIPDiscountPolicy;
 
 public class VIPCustomer extends Customer {
 
+    /**
+     * Creates a VIP customer WAITING_IN_QUEUE state with satisfaction 100 and 5 point waiting penalty.
+     */
     public VIPCustomer(int customerID, int arrivalTurn) {
 
         super(customerID, arrivalTurn);
         penalty=5;
     }
 
+    /**
+     * Deducts 5 points while the VIP customer is in WAITING_IN_QUEUE, SEATED or ORDERED.
+     * Since minimum is 0, we take max (0 or satisfaction - penalty)
+     * If satisfaction is 0, we set the customer state to ABANDONED
+     * Then, restaurant cleanup is performed separately.
+     * Customers in other states are unchanged.
+     */
     @Override
     public void applyWaitingPenalty() {
         if (getState() == CustomerState.WAITING_IN_QUEUE ||
@@ -27,6 +37,10 @@ public class VIPCustomer extends Customer {
             }
         }
     }
+
+    /**
+     * Creates the pricing policy that gives VIP customer 10% off
+     */
     @Override
     public DiscountPolicy getDiscountPolicy() {
         DiscountPolicy policy = new VIPDiscountPolicy();

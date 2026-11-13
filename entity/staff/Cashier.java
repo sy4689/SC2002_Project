@@ -1,15 +1,3 @@
-/**
- * Inherit from Staff
- * Cashier auto collects payment from customer after eating;
- * Afterward, releases the customer's table.
- *
- * Both the customer and order must be ready to pay.
- * Then, a successful action marks them paid, records the amount with Restaurant and frees the table.
- * Then, the bill is read from Order; discount policies are not applied again here.
- * Staff's availability rule limits collection to one payment per turn.
-
- */
-
 package entity.staff;
 
 import entity.order.Order;
@@ -22,10 +10,17 @@ import entity.customer.CustomerState;
 public class Cashier extends Staff {
     private final int payCapacity = 1;
 
+    /**
+     * Creates a cashier with the inherited name and available task allowance.
+     */
     public Cashier(String name) {
         super(name);
     }
 
+    /**
+     * Collects a ready customer stored bill using one task, marks the customer and order paid, records revenue and releases the table.
+     * Reads the stored final price without applying discounts again
+     */
     public int processPayment(Table t, Restaurant r) {
         Customer cust = t.getCurrentCustomer();
         
