@@ -11,124 +11,124 @@
 
 SC2002_Project
    .
-├── boundary
-!│   ├── GameCLI.java
-│   └── GameUI.java
-├── control
-!│   ├── GameController.java
-!│   ├── GameDisplay.java
-│   ├── GameState.java
-│   ├── GameUI.java
-│   ├── InvalidChoiceException.java
-│   ├── view
-│   │   ├── CustomerView.java
-│   │   ├── OrderView.java
-│   │   ├── RestaurantView.java
-│   │   ├── SummaryView.java
-│   │   └── TableView.java
-│   ├── ViewBuilder.java
-│   ├── WaiterAction.java
-│   └── WaiterActionType.java
-├── entity
-!│   ├── customer
-│   │   ├── CriticCustomer.java
-│   │   ├── Customer.java
-│   │   ├── CustomerState.java
-│   │   ├── RegularCustomer.java
-│   │   └── VIPCustomer.java
-│   ├── DiscountPolicy
-│   │   ├── DiscountPolicy.java
-+│   │   ├── HappyHourDiscountPolicy.java
-│   │   └── VIPDiscountPolicy.java
-│   ├── Event
-+│   │   ├── Event.java
-+│   │   └── HappyHourEvent.java
-│   ├── menu
-+│   │   ├── ComboMeal.java
-!│   │   ├── Menu.java
-│   │   ├── MenuItem.java
-│   │   └── MenuItemType.java
-│   ├── order
-│   │   ├── Order.java
-│   │   └── OrderStatus.java
-│   ├── Restaurant.java
-│   ├── staff
-│   │   ├── Cashier.java
-│   │   ├── Chef.java
-+│   │   ├── Host.java
-+│   │   ├── Seater.java
-│   │   ├── Staff.java
-!│   │   └── Waiter.java
-│   ├── Table.java
-│   └── WaitingQueue.java
-├── Main.java
-├── out
-│   └── production
-│       └── sc2002_project
-│           ├── boundary
-│           │   ├── GameCLI.class
-│           │   └── GameUI.class
-│           ├── control
-│           │   ├── GameController.class
-│           │   ├── GameController$1.class
-│           │   ├── GameDisplay.class
-│           │   ├── GameState.class
-│           │   ├── GameUI.class
-│           │   ├── InvalidChoiceException.class
-│           │   ├── view
-│           │   │   ├── CustomerView.class
-│           │   │   ├── OrderView.class
-│           │   │   ├── RestaurantView.class
-│           │   │   ├── SummaryView.class
-│           │   │   └── TableView.class
-│           │   ├── ViewBuilder.class
-│           │   ├── WaiterAction.class
-│           │   └── WaiterActionType.class
-│           ├── entity
-│           │   ├── customer
-│           │   │   ├── CriticCustomer.class
-│           │   │   ├── Customer.class
-│           │   │   ├── CustomerState.class
-│           │   │   ├── RegularCustomer.class
-│           │   │   └── VIPCustomer.class
-│           │   ├── DiscountPolicy
-│           │   │   ├── DiscountPolicy.class
-│           │   │   ├── HappyHourDiscountPolicy.class
-│           │   │   └── VIPDiscountPolicy.class
-│           │   ├── Event
-│           │   │   ├── Event.class
-│           │   │   └── HappyHourEvent.class
-│           │   ├── menu
-│           │   │   ├── ComboMeal.class
-│           │   │   ├── Menu.class
-│           │   │   ├── MenuItem.class
-│           │   │   └── MenuItemType.class
-│           │   ├── order
-│           │   │   ├── Order.class
-│           │   │   └── OrderStatus.class
-│           │   ├── Restaurant.class
-│           │   ├── staff
-│           │   │   ├── Cashier.class
-│           │   │   ├── Chef.class
-│           │   │   ├── Host.class
-│           │   │   ├── Seater.class
-│           │   │   ├── Staff.class
-│           │   │   └── Waiter.class
-│           │   ├── Table.class
-│           │   └── WaitingQueue.class
-│           ├── Main.class
-│           ├── README.md
-│           └── testNotes
-│               ├── defeat_input.txt
-│               ├── defeat_output.txt
-│               ├── victory_input.txt
-│               └── victory_output.txt
-!├── README.md
-└── testNotes
-!    ├── defeat_input.txt
-!    ├── defeat_output.txt
-!    ├── victory_input.txt
-!    └── victory_output.txt
+   ├── boundary
+  !│   ├── GameCLI.java
+   │   └── GameUI.java
+   ├── control
+  !│   ├── GameController.java
+  !│   ├── GameDisplay.java
+   │   ├── GameState.java
+   │   ├── GameUI.java
+   │   ├── InvalidChoiceException.java
+   │   ├── view
+   │   │   ├── CustomerView.java
+   │   │   ├── OrderView.java
+   │   │   ├── RestaurantView.java
+   │   │   ├── SummaryView.java
+   │   │   └── TableView.java
+   │   ├── ViewBuilder.java
+   │   ├── WaiterAction.java
+   │   └── WaiterActionType.java
+   ├── entity
+  !│   ├── customer
+   │   │   ├── CriticCustomer.java
+   │   │   ├── Customer.java
+   │   │   ├── CustomerState.java
+   │   │   ├── RegularCustomer.java
+   │   │   └── VIPCustomer.java
+   │   ├── DiscountPolicy
+   │   │   ├── DiscountPolicy.java
+  +│   │   ├── HappyHourDiscountPolicy.java
+   │   │   └── VIPDiscountPolicy.java
+   │   ├── Event
+  +│   │   ├── Event.java
+  +│   │   └── HappyHourEvent.java
+   │   ├── menu
+  +│   │   ├── ComboMeal.java
+  !│   │   ├── Menu.java
+   │   │   ├── MenuItem.java
+   │   │   └── MenuItemType.java
+   │   ├── order
+   │   │   ├── Order.java
+   │   │   └── OrderStatus.java
+   │   ├── Restaurant.java
+   │   ├── staff
+   │   │   ├── Cashier.java
+   │   │   ├── Chef.java
+  +│   │   ├── Host.java
+  +│   │   ├── Seater.java
+   │   │   ├── Staff.java
+  !│   │   └── Waiter.java
+   │   ├── Table.java
+   │   └── WaitingQueue.java
+   ├── Main.java
+   ├── out
+   │   └── production
+   │       └── sc2002_project
+   │           ├── boundary
+   │           │   ├── GameCLI.class
+   │           │   └── GameUI.class
+   │           ├── control
+   │           │   ├── GameController.class
+   │           │   ├── GameController$1.class
+   │           │   ├── GameDisplay.class
+   │           │   ├── GameState.class
+   │           │   ├── GameUI.class
+   │           │   ├── InvalidChoiceException.class
+   │           │   ├── view
+   │           │   │   ├── CustomerView.class
+   │           │   │   ├── OrderView.class
+   │           │   │   ├── RestaurantView.class
+   │           │   │   ├── SummaryView.class
+   │           │   │   └── TableView.class
+   │           │   ├── ViewBuilder.class
+   │           │   ├── WaiterAction.class
+   │           │   └── WaiterActionType.class
+   │           ├── entity
+   │           │   ├── customer
+   │           │   │   ├── CriticCustomer.class
+   │           │   │   ├── Customer.class
+   │           │   │   ├── CustomerState.class
+   │           │   │   ├── RegularCustomer.class
+   │           │   │   └── VIPCustomer.class
+   │           │   ├── DiscountPolicy
+   │           │   │   ├── DiscountPolicy.class
+   │           │   │   ├── HappyHourDiscountPolicy.class
+   │           │   │   └── VIPDiscountPolicy.class
+   │           │   ├── Event
+   │           │   │   ├── Event.class
+   │           │   │   └── HappyHourEvent.class
+   │           │   ├── menu
+   │           │   │   ├── ComboMeal.class
+   │           │   │   ├── Menu.class
+   │           │   │   ├── MenuItem.class
+   │           │   │   └── MenuItemType.class
+   │           │   ├── order
+   │           │   │   ├── Order.class
+   │           │   │   └── OrderStatus.class
+   │           │   ├── Restaurant.class
+   │           │   ├── staff
+   │           │   │   ├── Cashier.class
+   │           │   │   ├── Chef.class
+   │           │   │   ├── Host.class
+   │           │   │   ├── Seater.class
+   │           │   │   ├── Staff.class
+   │           │   │   └── Waiter.class
+   │           │   ├── Table.class
+   │           │   └── WaitingQueue.class
+   │           ├── Main.class
+   │           ├── README.md
+   │           └── testNotes
+   │               ├── defeat_input.txt
+   │               ├── defeat_output.txt
+   │               ├── victory_input.txt
+   │               └── victory_output.txt
+  !├── README.md
+   └── testNotes
+   !    ├── defeat_input.txt
+   !    ├── defeat_output.txt
+   !    ├── victory_input.txt
+   !    └── victory_output.txt
 
 26 directories, 93 files
 ```
