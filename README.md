@@ -1,4 +1,4 @@
-# SC2002_Project Stage 2
+# SC2002_Project Stage 3
 <h2>FOLDER STRUCTURE (Obeying BCE framework)</h2>
 
 ```diff
@@ -10,117 +10,127 @@
 ** Additional details about changes can be referred below 
 
 SC2002_Project
-    ├── boundary
-!   │   ├── GameCLI.java (!! UPDATE OUTPUT FORMATTING !!)
-    │   └── GameUI.java
-    ├── control
-!   │   ├── GameController.java (!! UPDATE GAME-FLOW !!)
-    │   ├── GameDisplay.java
-    │   ├── GameState.java
-    │   ├── GameUI.java
-    │   ├── InvalidChoiceException.java
-    │   ├── view
-!   │   │   ├── CustomerView.java (!! UPDATE ADDITIONAL ATTRIBUTE FOR NEW OUTPUT FORMATTING !!)
-    │   │   ├── OrderView.java
-    │   │   ├── RestaurantView.java
-    │   │   ├── SummaryView.java
-    │   │   └── TableView.java
-!   │   ├── ViewBuilder.java (!! UPDATE CONSTRUCTOR ARGUMENT !!)
-    │   ├── WaiterAction.java
-    │   └── WaiterActionType.java
-    ├── entity
-    │   ├── customer
-+   │   │   ├── CriticCustomer.java 
-!   │   │   ├── Customer.java (!! ADDITIONAL METHOD for DISCOUNT !!)
-    │   │   ├── CustomerState.java
-    │   │   ├── RegularCustomer.java
-+   │   │   └── VIPCustomer.java
-    |   |
-+   │   ├── DiscountPolicy (!! NEW FOLDER !!)
-+   │   │   ├── DiscountPolicy.java (!! NEW INTERFACE !!)
-+   │   |   └── VIPDiscountPolicy.java
-    |   |
-    │   ├── menu
-    │   │   ├── Menu.java
-    │   │   ├── MenuItem.java
-    │   │   └── MenuItemType.java
-    │   ├── order
-!   │   │   ├── Order.java (!! UPDATE PRICE COUNTING METHOD'S PARAMETER !!)
-    │   │   └── OrderStatus.java
-    │   ├── Restaurant.java
-    │   ├── staff
-    │   │   ├── Cashier.java
-    │   │   ├── Chef.java
-    │   │   ├── Staff.java
-!   │   │   └── Waiter.java (!! UPDATE ORDER-TAKING METHOD TO CONSIDER DISCOUNT !!)
-    │   ├── Table.java
-    │   └── WaitingQueue.java
-    ├── Main.java
-    ├── out
-    │   └── production
-    │       └── sc2002_project
-    │           ├── boundary
-!   │           │   ├── GameCLI.class
-    │           │   └── GameUI.class
-    │           ├── control
-!   │           │   ├── GameController.class
-    │           │   ├── GameController$1.class
-    │           │   ├── GameDisplay.class
-    │           │   ├── GameState.class
-    │           │   ├── GameUI.class
-    │           │   ├── InvalidChoiceException.class
-    │           │   ├── view
-!   │           │   │   ├── CustomerView.class
-    │           │   │   ├── OrderView.class
-    │           │   │   ├── RestaurantView.class
-    │           │   │   ├── SummaryView.class
-    │           │   │   └── TableView.class
-!   │           │   ├── ViewBuilder.class
-    │           │   ├── WaiterAction.class
-    │           │   └── WaiterActionType.class
-    │           ├── entity
-    │           │   ├── customer
-+   │           │   │   ├── CriticCustomer.class
-!   │           │   │   ├── Customer.class
-    │           │   │   ├── CustomerState.class
-    │           │   │   ├── RegularCustomer.class
-+   │           │   │   └── VIPCustomer.class 
-    |           |   |
-+   │           |   ├── DiscountPolicy (!! NEW FOLDER !!)
-+   │           |   │   ├── DiscountPolicy.java
-+   │           |   |   └── VIPDiscountPolicy.java
-    |           |   |
-    │           │   ├── menu
-    │           │   │   ├── Menu.class
-    │           │   │   ├── MenuItem.class
-    │           │   │   └── MenuItemType.class
-    │           │   ├── order
-!   │           │   │   ├── Order.class
-    │           │   │   └── OrderStatus.class
-    │           │   ├── Restaurant.class
-    │           │   ├── staff
-    │           │   │   ├── Cashier.class
-    │           │   │   ├── Chef.class
-    │           │   │   ├── Staff.class
-!   │           │   │   └── Waiter.class
-    │           │   ├── Table.class
-    │           │   └── WaitingQueue.class
-    │           ├── Main.class
-    │           ├── README.md
-    │           └── testNotes
-    │               ├── defeat_input.txt
-    │               ├── defeat_output.txt
-    │               ├── victory_input.txt
-    │               └── victory_output.txt
-!   ├── README.md 
-    |
-!   └── testNotes (!! EXCULSIVE TEST CASE FOR STAGE 2 !!)
-!       ├── defeat_input.txt
-!       ├── defeat_output.txt
-!       ├── victory_input.txt
-!       └── victory_output.txt
-    
-24 directories, 81 files
+   .
+├── boundary
+│   ├── GameCLI.java
+│   └── GameUI.java
+├── control
+│   ├── GameController.java
+│   ├── GameDisplay.java
+│   ├── GameState.java
+│   ├── GameUI.java
+│   ├── InvalidChoiceException.java
+│   ├── view
+│   │   ├── CustomerView.java
+│   │   ├── OrderView.java
+│   │   ├── RestaurantView.java
+│   │   ├── SummaryView.java
+│   │   └── TableView.java
+│   ├── ViewBuilder.java
+│   ├── WaiterAction.java
+│   └── WaiterActionType.java
+├── entity
+│   ├── customer
+│   │   ├── CriticCustomer.java
+│   │   ├── Customer.java
+│   │   ├── CustomerState.java
+│   │   ├── RegularCustomer.java
+│   │   └── VIPCustomer.java
+│   ├── DiscountPolicy
+│   │   ├── DiscountPolicy.java
+│   │   ├── HappyHourDiscountPolicy.java
+│   │   └── VIPDiscountPolicy.java
+│   ├── Event
+│   │   ├── Event.java
+│   │   └── HappyHourEvent.java
+│   ├── menu
+│   │   ├── ComboMeal.java
+│   │   ├── Menu.java
+│   │   ├── MenuItem.java
+│   │   └── MenuItemType.java
+│   ├── order
+│   │   ├── Order.java
+│   │   └── OrderStatus.java
+│   ├── Restaurant.java
+│   ├── staff
+│   │   ├── Cashier.java
+│   │   ├── Chef.java
+│   │   ├── Host.java
+│   │   ├── Seater.java
+│   │   ├── Staff.java
+│   │   └── Waiter.java
+│   ├── Table.java
+│   └── WaitingQueue.java
+├── Main.java
+├── out
+│   └── production
+│       └── sc2002_project
+│           ├── boundary
+│           │   ├── GameCLI.class
+│           │   └── GameUI.class
+│           ├── control
+│           │   ├── GameController.class
+│           │   ├── GameController$1.class
+│           │   ├── GameDisplay.class
+│           │   ├── GameState.class
+│           │   ├── GameUI.class
+│           │   ├── InvalidChoiceException.class
+│           │   ├── view
+│           │   │   ├── CustomerView.class
+│           │   │   ├── OrderView.class
+│           │   │   ├── RestaurantView.class
+│           │   │   ├── SummaryView.class
+│           │   │   └── TableView.class
+│           │   ├── ViewBuilder.class
+│           │   ├── WaiterAction.class
+│           │   └── WaiterActionType.class
+│           ├── entity
+│           │   ├── customer
+│           │   │   ├── CriticCustomer.class
+│           │   │   ├── Customer.class
+│           │   │   ├── CustomerState.class
+│           │   │   ├── RegularCustomer.class
+│           │   │   └── VIPCustomer.class
+│           │   ├── DiscountPolicy
+│           │   │   ├── DiscountPolicy.class
+│           │   │   ├── HappyHourDiscountPolicy.class
+│           │   │   └── VIPDiscountPolicy.class
+│           │   ├── Event
+│           │   │   ├── Event.class
+│           │   │   └── HappyHourEvent.class
+│           │   ├── menu
+│           │   │   ├── ComboMeal.class
+│           │   │   ├── Menu.class
+│           │   │   ├── MenuItem.class
+│           │   │   └── MenuItemType.class
+│           │   ├── order
+│           │   │   ├── Order.class
+│           │   │   └── OrderStatus.class
+│           │   ├── Restaurant.class
+│           │   ├── staff
+│           │   │   ├── Cashier.class
+│           │   │   ├── Chef.class
+│           │   │   ├── Host.class
+│           │   │   ├── Seater.class
+│           │   │   ├── Staff.class
+│           │   │   └── Waiter.class
+│           │   ├── Table.class
+│           │   └── WaitingQueue.class
+│           ├── Main.class
+│           ├── README.md
+│           └── testNotes
+│               ├── defeat_input.txt
+│               ├── defeat_output.txt
+│               ├── victory_input.txt
+│               └── victory_output.txt
+├── README.md
+└── testNotes
+    ├── defeat_input.txt
+    ├── defeat_output.txt
+    ├── victory_input.txt
+    └── victory_output.txt
+
+26 directories, 93 files
 ```
 
 <h2>FILE SUMMARY:</h2>
