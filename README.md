@@ -133,32 +133,55 @@ SC2002_Project
 ```
 
 <h2>FILE SUMMARY:</h2>
-New classes and interface added for Stage 3
-- Host
-  - Seats at most one queued customer per turn, in addition to the Waiter's task, or waits.
-- Seater — interface
-  - Defines seatCustomer(Customer cust, Table t) for both Host and Waiter.
-  - Allows the controller to reuse the same seating helper for either staff member.
-- ComboMeal
-  - Implements MenuItem and combines two existing menu items.
-  - Price is 90% of the combined component prices, rounded to the nearest cent.
-- Event
-  - Manages activation availability and remaining duration.
-  - Allows one activation and starts a two-turn duration.
-  - Provides activate(), canActivate(), isActive(), getTurnsRemaining() and decrementDuration().
-- HappyHourEvent
-  - Extends Event and provides the Happy Hour discount policy.
-  - During each active turn, restores 15 satisfaction to queued, seated or ordered-but-unserved customers, capped at 100.
-- HappyHourDiscountPolicy
-  - Implements DiscountPolicy.
-  - Applies a 20% reduction to the supplied bill, rounded to the nearest cent.
 
-Customer
-- Adds recoverSatisfaction(int pts) to restore satisfaction up to 100.
-- Retains the existing customer-specific waiting penalties and menu-selection methods.
-Menu and customer food choice
-- Registers Salad + Pasta as the fourth menu item: $24.30 and three preparation units.
-- Menu order is Salad, Burger, Pasta, then Salad + Pasta.
+*1. Enumeration with self-explanatory naming:*
+> <code>GameState</code>,<code>WaiterActionType</code> , <code>CustomerState</code>, <code>OrderStatus</code>, <code>MenuItemType</code>
 
-GameDisplay and GameCLI
-- Add promptHappyHourActivation(), displayHappyHourStatus(int turnsRemaining) and promptHostTask(RestaurantView view).
+*2. <code>view</code> folder + <code>ViewBuilder.java</code>:*
+> - Bridge communication from control class to boundary class
+> - Control class get access to entity class's getter or operations, then pass the raw result back to boundary class
+> - <code>CustomerView</code>, <code>OrderView</code>, <code>RestaurantView</code>, <code>SummaryView</code>, <code>TableView</code>
+
+*3. <code>DiscountPolicy</code> folder:*
+> - Classify all discount-related classes or interfaces
+
+*4. <code>Event</code> folder:*
+> - Classify all event-related classes
+> - <code>Event</code>, <code>HappyHourEvent</code>
+<br></br>
+
+<h2>ACCESS NOTE:</h2>
+
+> - Run application : Run <code>Main.java</code>
+> - Access test run : Open <code>testNotes</code> folder
+<br></br>
+
+<h2>ADDITIONAL DETAILS FOR CHANGES IN STAGE 3:</h2>
+
+*1.  Additional classes / interfaces for Stage 3*
+> - <code>Host</code> (Seats a queued customer or waits, in addition to the Waiter's task each turn)
+> - <code>Seater</code> (Interface: defines <code>seatCustomer(Customer cust, Table t)</code> for both <code>Host</code> and <code>Waiter</code>, so the controller can reuse one seating helper)
+> - <code>ComboMeal</code> (Implements <code>MenuItem</code> by combining two existing menu items; discounted price, preparation units are summed)
+> - <code>Event</code> (Manages activation availability and remaining duration)
+> - <code>HappyHourEvent</code> (Extends <code>Event</code>; provides the Happy Hour discount policy and a satisfaction boost for waiting customers)
+> - <code>HappyHourDiscountPolicy</code> (Implements <code>DiscountPolicy</code>; reduces the supplied bill)
+
+*2.  <code>Customer</code>*
+> - Add <code>recoverSatisfaction(int pts)</code> to restore satisfaction up to the maximum
+> - Existing customer-specific waiting penalties and menu-selection methods are retained
+
+*3.  <code>Menu</code> and customer food choice*
+> - Register Salad + Pasta (<code>ComboMeal</code>) as an additional menu item after the single dishes
+> - Customer food choice follows the updated menu order
+
+*4.  <code>Waiter</code>*
+> - Accept additional discount policies when taking an order, so event discounts apply together with the customer's privileged discount
+
+*5.  <code>GameController</code>*
+> Updated game-flow:
+> - Offer Happy Hour activation at the start of a turn while it is still available, then apply its boost and track its duration
+> - Add a Host task step before the Waiter's task
+> - Pass active event discount to the Waiter when taking an order
+
+*6.  <code>GameDisplay</code>, <code>GameCLI</code>*
+> - UX integration : Add <code>promptHappyHourActivation()</code>, <code>displayHappyHourStatus(int turnsRemaining)</code> and <code>promptHostTask(RestaurantView view)</code>
