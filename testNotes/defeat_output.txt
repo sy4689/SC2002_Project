@@ -1,7 +1,10 @@
-/Users/shenyue/Library/Java/JavaVirtualMachines/openjdk-23.0.2/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=53054 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /Users/shenyue/Desktop/SC2002_Project_BrendanMain/out/production/sc2002_project Main
+/Users/shenyue/Library/Java/JavaVirtualMachines/openjdk-23.0.2/Contents/Home/bin/java -javaagent:/Applications/IntelliJ IDEA.app/Contents/lib/idea_rt.jar=50112 -Dfile.encoding=UTF-8 -Dsun.stdout.encoding=UTF-8 -Dsun.stderr.encoding=UTF-8 -classpath /Users/shenyue/Desktop/SC2002_stage3/out/production/sc2002_project Main
 
 ==================== TURN 1 / 18 ====================
  >>>>> RegularCustomer #1 joins the queue. <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 100
@@ -9,9 +12,16 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (1 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (1 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -30,6 +40,9 @@ Turns used: 1/18
 
 ==================== TURN 2 / 18 ====================
  >>>>> No customer joins the queue this turn! <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 92
@@ -37,9 +50,16 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (1 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (1 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -58,6 +78,9 @@ Turns used: 2/18
 
 ==================== TURN 3 / 18 ====================
  >>>>> No customer joins the queue this turn! <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 84
@@ -65,9 +88,16 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (1 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (1 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -86,6 +116,9 @@ Turns used: 3/18
 
 ==================== TURN 4 / 18 ====================
  >>>>> VIPCustomer #2 joins the queue. <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 76
@@ -94,9 +127,16 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (2 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (2 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -115,6 +155,9 @@ Turns used: 4/18
 
 ==================== TURN 5 / 18 ====================
  >>>>> No customer joins the queue this turn! <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 68
@@ -123,9 +166,16 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (2 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (2 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -144,6 +194,9 @@ Turns used: 5/18
 
 ==================== TURN 6 / 18 ====================
  >>>>> No customer joins the queue this turn! <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 60
@@ -152,9 +205,16 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (2 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (2 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -173,6 +233,9 @@ Turns used: 6/18
 
 ==================== TURN 7 / 18 ====================
  >>>>> RegularCustomer #3 joins the queue. <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 52
@@ -182,9 +245,16 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (3 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (3 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -203,6 +273,9 @@ Turns used: 7/18
 
 ==================== TURN 8 / 18 ====================
  >>>>> No customer joins the queue this turn! <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 44
@@ -212,15 +285,24 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (3 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (3 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
    1) Seat a queued customer
    2) Take a seated customer's order
    3) Serve a READY order
+Choice (e.g. 1): 
+Please enter a whole number.
 Choice (e.g. 1): 0
  >>>>> Waiter waits. <<<<<
  >>>>> Chef has nothing to prepare. <<<<<
@@ -233,6 +315,9 @@ Turns used: 8/18
 
 ==================== TURN 9 / 18 ====================
  >>>>> No customer joins the queue this turn! <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 36
@@ -242,9 +327,16 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (3 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (3 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -263,6 +355,9 @@ Turns used: 9/18
 
 ==================== TURN 10 / 18 ====================
  >>>>> CriticCustomer #4 joins the queue. <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 28
@@ -273,9 +368,16 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (4 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (4 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -294,6 +396,9 @@ Turns used: 10/18
 
 ==================== TURN 11 / 18 ====================
  >>>>> No customer joins the queue this turn! <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 20
@@ -304,9 +409,16 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (4 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (4 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -325,6 +437,9 @@ Turns used: 11/18
 
 ==================== TURN 12 / 18 ====================
  >>>>> No customer joins the queue this turn! <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 12
@@ -335,9 +450,16 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (4 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (4 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -356,6 +478,9 @@ Turns used: 12/18
 
 ==================== TURN 13 / 18 ====================
  >>>>> RegularCustomer #5 joins the queue. <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
  #1 (Regular Customer) satisfaction 4
@@ -367,17 +492,41 @@ Tables:
    Table 1: free
    Table 2: free
 Staff tasks available:
+   Host (1 task): seat (5 queued, 2 free table(s)) | wait
    Waiter (1 task) : seat (5 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 1
+Queued Customers: 
+   #1 (Regular Customer) satisfaction 4
+   #2 (VIP Customer) satisfaction 55
+   #3 (Regular Customer) satisfaction 52
+   #4 (Critic Customer) satisfaction 64
+   #5 (Regular Customer) satisfaction 100
+Customer ID: 1
+Free tables:  1 2
+Table ID: 1
+ >>>>> Host seats customer #1 at table 1. <<<<<
 
 Waiter Task:
    0) Wait
    1) Seat a queued customer
    2) Take a seated customer's order
    3) Serve a READY order
-Choice (e.g. 1): 0
- >>>>> Waiter waits. <<<<<
+Choice (e.g. 1): 1
+Queued Customers: 
+   #2 (VIP Customer) satisfaction 55
+   #3 (Regular Customer) satisfaction 52
+   #4 (Critic Customer) satisfaction 64
+   #5 (Regular Customer) satisfaction 100
+Customer ID: 2
+Free tables:  2
+Table ID: 2
+ >>>>> Waiter seats customer #2 at table 2. <<<<<
  >>>>> Chef has nothing to prepare. <<<<<
  >>>>> Customer #1 runs out of patience and leave without paying. <<<<<
 -------------------- END OF TURN 13 --------------------
@@ -389,19 +538,28 @@ Turns used: 13/18
 
 ==================== TURN 14 / 18 ====================
  >>>>> No customer joins the queue this turn! <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
- #2 (VIP Customer) satisfaction 50
  #3 (Regular Customer) satisfaction 44
  #4 (Critic Customer) satisfaction 52
  #5 (Regular Customer) satisfaction 92
 Tables:
    Table 1: free
-   Table 2: free
+   Table 2: #2 (VIP Customer) satisfaction 50 SEATED no order yet
 Staff tasks available:
-   Waiter (1 task) : seat (4 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
+   Host (1 task): seat (3 queued, 1 free table(s)) | wait
+   Waiter (1 task) : seat (3 queued, 1 free table(s)) | take order (1) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -420,19 +578,28 @@ Turns used: 14/18
 
 ==================== TURN 15 / 18 ====================
  >>>>> No customer joins the queue this turn! <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
- #2 (VIP Customer) satisfaction 45
  #3 (Regular Customer) satisfaction 36
  #4 (Critic Customer) satisfaction 40
  #5 (Regular Customer) satisfaction 84
 Tables:
    Table 1: free
-   Table 2: free
+   Table 2: #2 (VIP Customer) satisfaction 45 SEATED no order yet
 Staff tasks available:
-   Waiter (1 task) : seat (4 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
+   Host (1 task): seat (3 queued, 1 free table(s)) | wait
+   Waiter (1 task) : seat (3 queued, 1 free table(s)) | take order (1) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -451,37 +618,29 @@ Turns used: 15/18
 
 ==================== TURN 16 / 18 ====================
  >>>>> RegularCustomer #6 joins the queue. <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
- #2 (VIP Customer) satisfaction 40
  #3 (Regular Customer) satisfaction 28
  #4 (Critic Customer) satisfaction 28
  #5 (Regular Customer) satisfaction 76
  #6 (Regular Customer) satisfaction 100
 Tables:
    Table 1: free
-   Table 2: free
+   Table 2: #2 (VIP Customer) satisfaction 40 SEATED no order yet
 Staff tasks available:
-   Waiter (1 task) : seat (5 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
+   Host (1 task): seat (4 queued, 1 free table(s)) | wait
+   Waiter (1 task) : seat (4 queued, 1 free table(s)) | take order (1) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
 
-Waiter Task:
+Host Task:
    0) Wait
    1) Seat a queued customer
-   2) Take a seated customer's order
-   3) Serve a READY order
-Choice (e.g. 1): 1
-Queued Customers: 
-   #2 (VIP Customer) satisfaction 40
-   #3 (Regular Customer) satisfaction 28
-   #4 (Critic Customer) satisfaction 28
-   #5 (Regular Customer) satisfaction 76
-   #6 (Regular Customer) satisfaction 100
-Customer ID: 1
-Free tables:  1 2
-Table ID: 1
-!!! Invalid choice: Customer #1 is not one of the offered customers. Please choose again.
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -500,20 +659,29 @@ Turns used: 16/18
 
 ==================== TURN 17 / 18 ====================
  >>>>> No customer joins the queue this turn! <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
- #2 (VIP Customer) satisfaction 35
  #3 (Regular Customer) satisfaction 20
  #4 (Critic Customer) satisfaction 16
  #5 (Regular Customer) satisfaction 68
  #6 (Regular Customer) satisfaction 92
 Tables:
    Table 1: free
-   Table 2: free
+   Table 2: #2 (VIP Customer) satisfaction 35 SEATED no order yet
 Staff tasks available:
-   Waiter (1 task) : seat (5 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
+   Host (1 task): seat (4 queued, 1 free table(s)) | wait
+   Waiter (1 task) : seat (4 queued, 1 free table(s)) | take order (1) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -532,20 +700,29 @@ Turns used: 17/18
 
 ==================== TURN 18 / 18 ====================
  >>>>> No customer joins the queue this turn! <<<<<
+Happy Hour: 20% off new orders and +15 satisfaction for unserved customers, for this turn and the next.
+Activate Happy Hour? (1 = Yes, 0 = No): 0
+Happy Hour: inactive.
 Revenue: $0.00     Paid customers: 0     Average satisfaction (paid) : N/A
 Waiting queue: 
- #2 (VIP Customer) satisfaction 30
  #3 (Regular Customer) satisfaction 12
  #4 (Critic Customer) satisfaction 4
  #5 (Regular Customer) satisfaction 60
  #6 (Regular Customer) satisfaction 84
 Tables:
    Table 1: free
-   Table 2: free
+   Table 2: #2 (VIP Customer) satisfaction 30 SEATED no order yet
 Staff tasks available:
-   Waiter (1 task) : seat (5 queued, 2 free table(s)) | take order (0) | serve (0 READY) | wait
+   Host (1 task): seat (4 queued, 1 free table(s)) | wait
+   Waiter (1 task) : seat (4 queued, 1 free table(s)) | take order (1) | serve (0 READY) | wait
    Chef (1 prep unit): 0 order(s) to prepare | wait
    Cashier (automatic, 1 payment): 0 customer(s) ready to pay
+
+Host Task:
+   0) Wait
+   1) Seat a queued customer
+Host choice (1 or 0): 0
+ >>>>> Host waits. <<<<<
 
 Waiter Task:
    0) Wait
@@ -572,3 +749,4 @@ Turns used: 18/18
 RESULT: DEFEAT
 
 Process finished with exit code 0
+
