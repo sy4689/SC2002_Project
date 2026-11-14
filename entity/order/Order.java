@@ -1,7 +1,12 @@
 package entity.order;
 
 import entity.menu.MenuItem;
+import entity.DiscountPolicy.DiscountPolicy;
+import java.util.List;
 
+/**
+ * Class describing information about an order for a particular customer
+ */
 public class Order {
     private int orderID;
     private int tableID;
@@ -11,6 +16,13 @@ public class Order {
     private int finalPriceinCents;
     private MenuItem item;
 
+    /**
+     * Initialize a PENDING order with a specific menu item
+     *
+     * @param orderID identifier assigned to the order
+     * @param tableID identifier of the table placing the order
+     * @param item non-null menu item selected by the customer
+     */
     public Order(int orderID, int tableID, MenuItem item){
         this.orderID = orderID;
         this.tableID = tableID;
@@ -20,38 +32,96 @@ public class Order {
         this.finalPriceinCents = item.getPriceInCents();
     }
 
+    /**
+     * Getter method to return food remaining preparation unit;
+     *
+     * @return the remaining preparation units
+     */
     public int getRemainingPrepUnits() {
         return remainingPrepUnits;
     }
 
+    /**
+     * Getter method to return the stored payable amount.
+     *
+     * @return the stored bill in integer cents
+     */
     public int getFinalPriceInCents(){
         return finalPriceinCents;
     }
+
+    /**
+     * Calculates and stores the bill by applying the supplied
+     * policies in list order on an item's base price
+     *
+     * @param policies non-null list of pricing policies with no null entries
+     * @throws NullPointerException if the list or one of its policies is null
+     */
+    public void lockPrice(List<DiscountPolicy> policies) {
+        int cents = item.getPriceInCents();
+
+        for (DiscountPolicy policy : policies) {
+            cents = policy.applyDiscount(cents);
+        }
+
+        finalPriceinCents = cents;
+    }
+    /**
+     * Getter method to return the menu item selected for this order.
+     *
+     * @return the ordered food item
+     */
     public MenuItem getItem(){
         return item;
     }
+
+    /**
+     * Getter method to return the order's current preparation/service lifecycle status.
+     *
+     * @return the current order status
+     */
     public OrderStatus getStatus() {
         return status;
     }
 
+    /**
+     * Getter method to return the identifier assigned to this order.
+     *
+     * @return the order ID
+     */
     public int getOrderID() {
         return orderID;
     }
 
+    /**
+     * Getter method to return the identifier of the table associated with this order.
+     *
+     * @return the associated table ID
+     */
     public int getTableID() {
         return tableID;
     }
 
+    /**
+     * Decrease the remaining preparation unit without going below zero
+     * Marks unfinished work (prep unit >0) as IN_KITCHEN
+     * After completing the last unit marks the food as READY and records the completion turn
+     *
+     * @param currentTurn turn in which this preparation work is performed
+     * @param prepCapacity positive number of preparation units to apply
+     * @throws IllegalStateException if the order is not PENDING or IN_KITCHEN,
+     *         has no preparation work left, or the capacity is not positive
+     */
     public void decrementPrepUnits(int currentTurn, int prepCapacity){
         if (status != OrderStatus.PENDING && status != OrderStatus.IN_KITCHEN){
-            System.out.println("Order cannot be prepared");
+            throw new IllegalStateException("Order cannot be prepared in state" + status);
         }
-        else if (remainingPrepUnits <= 0) {
-            System.out.println("Order is already prepared");
+        if (remainingPrepUnits <= 0 || prepCapacity <= 0) {
+            throw new IllegalStateException("Invalid preparation or already completed order");
         }
-        else {
-            remainingPrepUnits -= prepCapacity;
-        }
+
+        remainingPrepUnits = Math.max(0, remainingPrepUnits - prepCapacity);
+
         if (remainingPrepUnits == 0) {
             status = OrderStatus.READY;
             turnReady = currentTurn;
@@ -60,32 +130,63 @@ public class Order {
         }
     }
 
+    /**
+     * Changes a READY order to SERVED status.
+     *
+     * @throws IllegalStateException if the order is not READY
+     */
+
     public void markServed(){
         if (status != OrderStatus.READY) {
-            System.out.println("Order is not ready");
+            throw new IllegalStateException("Order is not ready");
         }
-        else status = OrderStatus.SERVED;
+        status = OrderStatus.SERVED;
     }
+
+    /**
+     * Changes a READY_TO_PAY order to PAID status.
+     *
+     * @throws IllegalStateException if the order is not READY_TO_PAY
+     */
     public void markPaid(){
         if (status != OrderStatus.READY_TO_PAY) {
-            System.out.println("Order is not ready for payment");
+            throw new IllegalStateException("Order is not ready for payment");
         }
-        else status = OrderStatus.PAID;
+        status = OrderStatus.PAID;
     }
+
+    /**
+     * Marks an unserved order as ABANDONED.
+     * Does not remove preparation-queue entries or release a table.
+     *
+     * @throws IllegalStateException if the order is SERVED, READY_TO_PAY or PAID
+     */
     public void markAbandoned(){
         if (status == OrderStatus.PAID || status == OrderStatus.SERVED || status == OrderStatus.READY_TO_PAY) {
-            System.out.println("Order cannot be abandoned");
-
+            throw new IllegalStateException("Order cannot be abandoned in state" + status);
         }
-        else status = OrderStatus.ABANDONED;
+        status = OrderStatus.ABANDONED;
     }
 
+    /**
+     * Changes a SERVED order to READY_TO_PAY after eating has finished.
+     *
+     * @throws IllegalStateException if the order is not SERVED
+     */
     public void markReadyToPay() {
         if (status != OrderStatus.SERVED) {
-            System.out.println("Order is not served yet.");
+            throw new IllegalStateException("Order has not served yet.");
         }
-        else status = OrderStatus.READY_TO_PAY;
+        status = OrderStatus.READY_TO_PAY;
     }
+
+    /**
+     * Checks both READY status and whether preparation finished on a strictly
+     * earlier turn than the supplied turn.
+     *
+     * @param currentTurn turn in which service is being considered
+     * @return true if the order is READY and was completed on an earlier turn
+     */
     public boolean isReady(int currentTurn){
         return status == OrderStatus.READY && turnReady < currentTurn;
 
