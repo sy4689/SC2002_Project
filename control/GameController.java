@@ -102,7 +102,10 @@ public class GameController
             ui.displayAction("Happy Hour activated.");
         }
         happyHour.applyEventAction(restaurant.getUnservedCustomer());
-        ui.displayHappyHourStatus(happyHour.getTurnsRemaining());
+        ui.displayEventStatus(happyHour.getClass().getSimpleName()
+                             .replace("Event", "")
+                             .trim(),
+                             happyHour.getTurnsRemaining());
     }
 
     private void handleHostTask() {

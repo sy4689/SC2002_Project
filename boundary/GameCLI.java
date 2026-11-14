@@ -160,10 +160,10 @@ public class GameCLI implements GameUI, GameDisplay {
     }
 
     @Override
-    public void displayHappyHourStatus(int turnsRemaining) {
+    public void displayEventStatus(String eventName, int turnsRemaining) {
         System.out.println(turnsRemaining > 0
-                ? "Happy Hour: ACTIVE, " + turnsRemaining + " turn(s) remaining (including this turn)."
-                : "Happy Hour: inactive.");
+                ?  eventName + ": ACTIVE, " + turnsRemaining + " turn(s) remaining (including this turn)."
+                : eventName + ": inactive.");
     }
 
     @Override

@@ -16,7 +16,7 @@ public interface GameDisplay {
 
     void displayTurnHeader(int turn, int maxTurns);
     boolean promptHappyHourActivation();
-    void displayHappyHourStatus(int turnsRemaining);
+    void displayEventStatus(String eventName, int turnsRemaining);
     WaiterAction promptHostTask(RestaurantView view);
     void displayRestaurantState(RestaurantView view);
     void displayAction(String msg);
