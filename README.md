@@ -3,20 +3,20 @@
 
 ```diff
 @@ Folder structure legend: @@
-+ (Green label) : Additional code for Stage 2
-! (Orange label): Modified code for Stage 2
-- (Red label)   : Removed code for Stage 2
++ (Green label) : Additional code for Stage 3
+! (Orange label): Modified code for Stage 3
+- (Red label)   : Removed code for Stage 3
 
 ** Additional details about changes can be referred below 
 
 SC2002_Project
    .
 ├── boundary
-│   ├── GameCLI.java
+!│   ├── GameCLI.java
 │   └── GameUI.java
 ├── control
-│   ├── GameController.java
-│   ├── GameDisplay.java
+!│   ├── GameController.java
+!│   ├── GameDisplay.java
 │   ├── GameState.java
 │   ├── GameUI.java
 │   ├── InvalidChoiceException.java
@@ -30,7 +30,7 @@ SC2002_Project
 │   ├── WaiterAction.java
 │   └── WaiterActionType.java
 ├── entity
-│   ├── customer
+!│   ├── customer
 │   │   ├── CriticCustomer.java
 │   │   ├── Customer.java
 │   │   ├── CustomerState.java
@@ -38,14 +38,14 @@ SC2002_Project
 │   │   └── VIPCustomer.java
 │   ├── DiscountPolicy
 │   │   ├── DiscountPolicy.java
-│   │   ├── HappyHourDiscountPolicy.java
++│   │   ├── HappyHourDiscountPolicy.java
 │   │   └── VIPDiscountPolicy.java
 │   ├── Event
-│   │   ├── Event.java
-│   │   └── HappyHourEvent.java
++│   │   ├── Event.java
++│   │   └── HappyHourEvent.java
 │   ├── menu
-│   │   ├── ComboMeal.java
-│   │   ├── Menu.java
++│   │   ├── ComboMeal.java
+!│   │   ├── Menu.java
 │   │   ├── MenuItem.java
 │   │   └── MenuItemType.java
 │   ├── order
@@ -55,10 +55,10 @@ SC2002_Project
 │   ├── staff
 │   │   ├── Cashier.java
 │   │   ├── Chef.java
-│   │   ├── Host.java
-│   │   ├── Seater.java
++│   │   ├── Host.java
++│   │   ├── Seater.java
 │   │   ├── Staff.java
-│   │   └── Waiter.java
+!│   │   └── Waiter.java
 │   ├── Table.java
 │   └── WaitingQueue.java
 ├── Main.java
@@ -123,12 +123,12 @@ SC2002_Project
 │               ├── defeat_output.txt
 │               ├── victory_input.txt
 │               └── victory_output.txt
-├── README.md
+!├── README.md
 └── testNotes
-    ├── defeat_input.txt
-    ├── defeat_output.txt
-    ├── victory_input.txt
-    └── victory_output.txt
+!    ├── defeat_input.txt
+!    ├── defeat_output.txt
+!    ├── victory_input.txt
+!    └── victory_output.txt
 
 26 directories, 93 files
 ```
