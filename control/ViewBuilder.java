@@ -56,15 +56,15 @@ public class ViewBuilder {
         }
 
         return new RestaurantView(restaurant.getRevenueInCents(),
-                                restaurant.getServeAndPaidCount(),
-                                averageSatisfactionHelper(restaurant),
-                                queue,
-                                tables,
-                                getTableIDs(restaurant.getAvailableTables()),
-                                getTableIDs(restaurant.getTablesAwaitingOrder()),
-                                getTableIDs(restaurant.getTablesWithReadyOrder()),
-                                prepQueue,
-                                toPay);
+                restaurant.getServeAndPaidCount(),
+                averageSatisfactionHelper(restaurant),
+                queue,
+                tables,
+                getTableIDs(restaurant.getAvailableTables()),
+                getTableIDs(restaurant.getTablesAwaitingOrder()),
+                getTableIDs(restaurant.getTablesWithReadyOrder()),
+                prepQueue,
+                toPay);
     }
 
     /**
@@ -126,11 +126,11 @@ public class ViewBuilder {
     }
 
     // --- Helper Methods ---
-    // Collect the table IDs into a list for display
+
     private static Double averageSatisfactionHelper(Restaurant restaurant) {
         return restaurant.getPaidCustomers().isEmpty()? null : restaurant.getAveragePaidSatisfaction();
     }
-
+    // Collect the table IDs into a list for display
     private static List<Integer> getTableIDs(List<Table> tables) {
         List<Integer> ids = new ArrayList<>();
         for (Table t : tables) {

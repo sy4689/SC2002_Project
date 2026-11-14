@@ -64,11 +64,11 @@ public class Table {
         if (isOccupied) {
             throw new IllegalStateException("Table chosen is already occupied. Can't assign customer to table.");
         }
-    
+
         if (cust.getState() != CustomerState.WAITING_IN_QUEUE) {
             throw new IllegalStateException("Only a customer waiting in the queue can be assigned.");
         }
-    
+
         currentCustomer = cust;
         isOccupied = true;
         cust.setState(CustomerState.SEATED);

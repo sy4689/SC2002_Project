@@ -39,3 +39,4 @@ public final class CustomerView {
     public String getType() {return type;
     }
 }
+

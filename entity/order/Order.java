@@ -121,7 +121,7 @@ public class Order {
         }
 
         remainingPrepUnits = Math.max(0, remainingPrepUnits - prepCapacity);
-        
+
         if (remainingPrepUnits == 0) {
             status = OrderStatus.READY;
             turnReady = currentTurn;
@@ -139,7 +139,7 @@ public class Order {
     public void markServed(){
         if (status != OrderStatus.READY) {
             throw new IllegalStateException("Order is not ready");
-        } 
+        }
         status = OrderStatus.SERVED;
     }
 
@@ -151,7 +151,7 @@ public class Order {
     public void markPaid(){
         if (status != OrderStatus.READY_TO_PAY) {
             throw new IllegalStateException("Order is not ready for payment");
-        } 
+        }
         status = OrderStatus.PAID;
     }
 

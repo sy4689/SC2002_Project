@@ -10,12 +10,12 @@ import entity.Restaurant;
 
 import entity.DiscountPolicy.DiscountPolicy;
 import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Class describing operations carried out by a waiter
  */
-public class Waiter extends Staff {
-
+public class Waiter extends Staff implements Seater {
     /**
      * Creates a waiter with the inherited name and available task allowance.
      *
@@ -38,17 +38,17 @@ public class Waiter extends Staff {
      */
     public boolean seatCustomer(Customer cust, Table t) {
         if (cust == null || t == null) {
-        throw new IllegalArgumentException("Customer and table must be provided. Can't seat a customer");
+            throw new IllegalArgumentException("Customer and table must be provided. Can't seat a customer");
         }
 
         if (t.isOccupied()) {
             throw new IllegalStateException("Table chosen is already occupied. Can't seat a customer");
         }
-    
+
         if (cust.getState() != CustomerState.WAITING_IN_QUEUE) {
             throw new IllegalStateException("Only a customer waiting in the queue can be seated.");
         }
-    
+
         markBusy();
         t.assignCustomer(cust);
         return true;
@@ -66,7 +66,7 @@ public class Waiter extends Staff {
      * @throws IllegalStateException if no SEATED customer is present or the
      *         waiter has already used its task
      */
-    public Order takeOrder(Table t, Menu menu, Restaurant r) {
+    public Order takeOrder(Table t, Menu menu, Restaurant r, List<DiscountPolicy> additionalPolicies) {
         Customer cust = t.getCurrentCustomer();
         if (cust == null || cust.getState() != CustomerState.SEATED) {
             throw new IllegalStateException("No seated customer.");
@@ -77,8 +77,15 @@ public class Waiter extends Staff {
         Order order = new Order(r.getNextOrderID(), t.getTableID(), item);
         //the waiter forwards the existing policy and applies it once while taking the order.
         // Its task limit, validation,customer state changes and kitchen-que insertion are preserved.
+        List<DiscountPolicy> policies = new ArrayList<>();
+
         DiscountPolicy policy = cust.getDiscountPolicy();
-        order.lockPrice(policy == null ? List.of() : List.of(policy));
+        if (policy != null) {
+            policies.add(policy);
+        }
+
+        policies.addAll(additionalPolicies);
+        order.lockPrice(policies);
 
         cust.setCurrentOrder(order);
         cust.setState(CustomerState.ORDERED);

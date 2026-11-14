@@ -1,3 +1,4 @@
+
 package boundary;
 
 import java.util.Scanner;
@@ -5,7 +6,7 @@ import java.util.List;
 
 import control.GameController;
 import control.view.*;
-import control.GameState;
+        import control.GameState;
 import control.WaiterAction;
 import control.GameDisplay;
 
@@ -44,12 +45,6 @@ public class GameCLI implements GameUI, GameDisplay {
         System.out.println("==================== TURN " + turn + " / " + maxTurns + " ====================");
     }
 
-    /**
-     * Prints the full restaurant statistics: revenue, average satisfaction of paid customers, the waiting queue, occupied tables,
-     * each customer's satisfaction, order status, and the staff tasks available
-     *
-     * @param view  Accepts a read-only snapshot of the restaurant
-     */
     @Override
     public void displayRestaurantState(RestaurantView view) {
         System.out.println("Revenue: " + formatMoney(view.getRevenueInCents())
@@ -65,7 +60,6 @@ public class GameCLI implements GameUI, GameDisplay {
 
         System.out.println("Tables:");
         for (TableView t : view.getTables()) {
-            // A free table has no customer/order, so print and skip to the next table
             if (!t.isOccupied()) {
                 System.out.println("   Table " + t.getId() + ": free");
                 continue;
@@ -73,8 +67,6 @@ public class GameCLI implements GameUI, GameDisplay {
 
             CustomerView c = t.getCustomer();
             OrderView o = t.getOrder();
-            // Order text depends on whether the customer has ordered, and whether
-            // the order is still being prepared in the kitchen (then show units left)
             String orderText = (o == null)? "no order yet"
                     : "Order " + o.getId() + " " + o.getItemName() + " " + formatMoney(o.getPriceInCents())
                     + " [" + o.getStatus() + (o.isAwaitingPreparation()? ", " + o.getRemainingPrepUnits() + " unit(s) left]" : "]");
@@ -82,11 +74,13 @@ public class GameCLI implements GameUI, GameDisplay {
                     "   Table " + t.getId() + ": #" + c.getId() + " (" + c.getType() + ")" + " satisfaction " + c.getSatisfaction() + " " + c.getState() + " " + orderText);
         }
         System.out.println("Staff tasks available:");
+        System.out.println("   Host (1 task): seat (" + queue.size() + " queued, " + view.getFreeTableIDs().size() + " free table(s)) | wait");
         System.out.println("   Waiter (1 task) : seat (" + queue.size() + " queued, " + view.getFreeTableIDs().size() + " free table(s)) | take order ("
                 + view.getTablesAwaitingOrder().size() + ") | serve (" + view.getTablesWithReadyOrder().size() + " READY) | wait");
         System.out.println("   Chef (1 prep unit): " + view.getPrepQueue().size() + " order(s) to prepare | wait");
         System.out.println("   Cashier (automatic, 1 payment): " + view.getToPayCount() + " customer(s) ready to pay");
     }
+
 
     @Override
     public void displayAction(String msg) {
@@ -129,11 +123,11 @@ public class GameCLI implements GameUI, GameDisplay {
         System.out.println();
         System.out.println("==================== GAME OVER ====================");
         System.out.println(" Paid Customers: " + s.getPaidCount()+ " (Target: " + s.getTargetPaidCustomers() + ")\n"
-                        + "Revenue: " + formatMoney(s.getRevenueCents()) + " (Target: " + formatMoney(s.getTargetRevenueCents()) + ")\n"
-                        + "Average Satisfaction (Paid): " + averageSatisfactionText(s.getAverageSatisfaction()) + " (Target: " + s.getTargetAverageSatisfaction() + ")\n"
-                        + "Unhappy departures: " + s.getUnhappyDepartures() + "\n"
-                        + "Turns used: " + maxTurns + "/" + maxTurns + "\n"
-                        + "RESULT: " + (result == GameState.VICTORY ? "VICTORY" : "DEFEAT"));
+                + "Revenue: " + formatMoney(s.getRevenueCents()) + " (Target: " + formatMoney(s.getTargetRevenueCents()) + ")\n"
+                + "Average Satisfaction (Paid): " + averageSatisfactionText(s.getAverageSatisfaction()) + " (Target: " + s.getTargetAverageSatisfaction() + ")\n"
+                + "Unhappy departures: " + s.getUnhappyDepartures() + "\n"
+                + "Turns used: " + maxTurns + "/" + maxTurns + "\n"
+                + "RESULT: " + (result == GameState.VICTORY ? "VICTORY" : "DEFEAT"));
     }
 
     @Override
@@ -147,6 +141,54 @@ public class GameCLI implements GameUI, GameDisplay {
 
 
     // --- PROMPTS ---
+
+
+    @Override
+    public boolean promptHappyHourActivation() {
+        System.out.println("Happy Hour: 20% off new orders and +15 satisfaction for unserved customers,"
+                + " for this turn and the next.");
+        while (true) {
+            int choice = inputHandling("Activate Happy Hour? (1 = Yes, 0 = No): ");
+            if (choice == 1) {
+                return true;
+            }
+            if (choice == 0) {
+                return false;
+            }
+            displayChoiceError("Please enter 1 or 0.");
+        }
+    }
+
+    @Override
+    public void displayHappyHourStatus(int turnsRemaining) {
+        System.out.println(turnsRemaining > 0
+                ? "Happy Hour: ACTIVE, " + turnsRemaining + " turn(s) remaining (including this turn)."
+                : "Happy Hour: inactive.");
+    }
+
+    @Override
+    public WaiterAction promptHostTask(RestaurantView view) {
+        System.out.println();
+        System.out.println("Host Task:");
+        System.out.println("   " + WAIT_CHOICE + ") Wait");
+        System.out.println("   1) Seat a queued customer");
+        while (true) {
+            int choice = inputHandling("Host choice (1 or 0): ");
+            switch (choice) {
+                case 1:
+                    if (view.getQueue().isEmpty() || view.getFreeTableIDs().isEmpty()) {
+                        return WaiterAction.seat(-1, -1);
+                    }
+                    int customerID = promptQueuedCustomer(view.getQueue());
+                    int tableID = promptTargetTable("Free tables: ", view.getFreeTableIDs());
+                    return WaiterAction.seat(customerID, tableID);
+                case WAIT_CHOICE:
+                    return WaiterAction.waiting();
+                default:
+                    displayChoiceError("Host can only seat a customer or wait.");
+            }
+        }
+    }
 
     /**
      * Shows the waiter task options to the player and creates a WaiterAction from the player's input
@@ -273,3 +315,4 @@ public class GameCLI implements GameUI, GameDisplay {
 
 
 }
+

@@ -17,6 +17,8 @@ public class Menu {
         for (MenuItemType type : MenuItemType.values()) {
             items.add(type);
         }
+
+        items.add(new ComboMeal(MenuItemType.SALAD, MenuItemType.PASTA));
     }
 
     /**

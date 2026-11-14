@@ -7,7 +7,7 @@ import entity.Restaurant;
 import entity.customer.Customer;
 import entity.customer.CustomerState;
 
- /**
+/**
  * Class describing operation carried out by cashier
  */
 public class Cashier extends Staff {
@@ -33,7 +33,7 @@ public class Cashier extends Staff {
      */
     public int processPayment(Table t, Restaurant r) {
         Customer cust = t.getCurrentCustomer();
-        
+
         if (cust == null || cust.getState() != CustomerState.WAITING_TO_PAY) {
             throw new IllegalStateException("Nobody at table " + t.getTableID() + " is ready to pay");
         }
@@ -43,13 +43,13 @@ public class Cashier extends Staff {
         if (order == null || order.getStatus() != OrderStatus.READY_TO_PAY){
             throw new IllegalStateException("Customer's order is not ready for payment");
         }
-        
+
         markBusy();
         int bill = order.getFinalPriceInCents();
-        
+
         order.markPaid();
         cust.setState(CustomerState.PAID_AND_LEFT);
-        
+
         r.recordPayment(cust, bill);
         t.releaseTable();
         return bill;

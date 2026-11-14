@@ -1,7 +1,9 @@
 package control;
 
 /**
- * Description of the one task the waiter will do this turn.
+ * Describes a selected Waiter task and its target IDs.
+ * Also used for Host seating or waiting decisions in Stage 3.
+ * The controller validates the permitted actions and targets.
  */
 public class WaiterAction {
     private final WaiterActionType actionType;

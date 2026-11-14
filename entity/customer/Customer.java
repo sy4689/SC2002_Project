@@ -187,4 +187,19 @@ public abstract class Customer {
     public DiscountPolicy getDiscountPolicy() {
         return null;
     }
+
+    /**
+     * Adds recovery points to satisfaction, capping the resulting score at 100.
+     * The customer's lifecycle state and current order are not changed.
+     * @param pts non-negative number of satisfaction points to restore
+     * @throws IllegalArgumentException if the recovery points are negative
+     */
+    public void recoverSatisfaction(int pts) {
+        if (pts < 0) {
+            throw new IllegalArgumentException(
+                    "Recovery points cannot be negative.");
+        }
+
+        satisfaction = Math.min(100, satisfaction + pts);
+    }
 }

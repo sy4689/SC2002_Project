@@ -14,7 +14,7 @@ import entity.menu.Menu;
 /**
  * Class recording game state of the restaurant game
  */
-public class Restaurant{
+public class Restaurant {
     public static final int TABLE_COUNT = 2;
     public static final int TARGET_PAID_CUSTOMERS = 4;
     public static final int TARGET_REVENUE_IN_CENTS = 4500;
@@ -214,14 +214,14 @@ public class Restaurant{
      *
      * @param order order to remove from kitchen preparation
      * @throws IllegalStateException if the queue is empty or does not contain
-     *         the supplied order
+     *                               the supplied order
      */
     public void removeFromPrepQueue(Order order) {
-        if (prepQueue.isEmpty()){
+        if (prepQueue.isEmpty()) {
             throw new IllegalStateException("Preparing queue in kitchen is empty. Can't remove any READY order");
         }
 
-        if(!prepQueue.contains(order)){
+        if (!prepQueue.contains(order)) {
             throw new IllegalStateException("Supposed READY order that need be removed can't be found from the current preparing queue in the kitchen");
         }
 
@@ -238,6 +238,7 @@ public class Restaurant{
     }
 
     // --- Processing for each turn ---
+
     /**
      * Advances eating for customers currently in EATING state.
      * Customers who finish move to WAITING_TO_PAY, and their orders move to
@@ -246,13 +247,13 @@ public class Restaurant{
      * @param currentTurn turn being processed
      * @return a new list of customers who became ready to pay during this call
      * @throws IllegalStateException if a finished customer's order cannot
-     *         transition to READY_TO_PAY
+     *                               transition to READY_TO_PAY
      */
     public List<Customer> processEatingCust(int currentTurn) {
         List<Customer> finished = new ArrayList<>();
         for (Table t : tables) {
             Customer c = t.getCurrentCustomer();
-            if (c != null && c.getState() == CustomerState.EATING){
+            if (c != null && c.getState() == CustomerState.EATING) {
                 c.decrementEatingTurns(currentTurn);
                 if (c.isFinishedEating()) {
                     c.setState(CustomerState.WAITING_TO_PAY);
@@ -275,8 +276,8 @@ public class Restaurant{
         for (Table t : tables) {
             Customer c = t.getCurrentCustomer();
             if ((c != null) && (c.getState() == CustomerState.WAITING_IN_QUEUE
-                          || c.getState() == CustomerState.SEATED
-                          || c.getState() == CustomerState.ORDERED)) {
+                    || c.getState() == CustomerState.SEATED
+                    || c.getState() == CustomerState.ORDERED)) {
                 result.add(c);
             }
         }
@@ -288,7 +289,7 @@ public class Restaurant{
      * and retains the customer for satisfaction statistics. The caller is
      * responsible for recording a valid payment only once.
      *
-     * @param cust customer whose payment was completed
+     * @param cust   customer whose payment was completed
      * @param amount amount collected, in integer cents
      */
     public void recordPayment(Customer cust, int amount) {
@@ -303,7 +304,7 @@ public class Restaurant{
      *
      * @param cust unserved customer leaving without payment
      * @throws IllegalStateException if the associated order is already SERVED,
-     *         READY_TO_PAY or PAID and cannot be abandoned
+     *                               READY_TO_PAY or PAID and cannot be abandoned
      */
     public void recordAbandoned(Customer cust) {
         cust.setState(CustomerState.ABANDONED);
