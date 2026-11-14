@@ -1,10 +1,31 @@
 package entity.Event;
 
-public class Event {
-    // One activation allowed per game.
+import java.util.List;
+
+import entity.customer.Customer;
+import entity.DiscountPolicy.DiscountPolicy;
+
+public abstract class Event {    // One activation allowed per game.
     // Inactive until activate() is called.
     private int countUsage = 1;
     private int turnsRemaining = 0;
+
+    /**
+     * Performs this event's turn-start actions for the supplied customers.
+     * Implementations must have no effect while inactive and must not activate the event or decrement its duration here.
+     * @param customers non-null customers to consider for this turn's effects
+     */
+    public abstract void applyEventAction(List<Customer> customers);
+
+    /**
+     * Supplies this event's pricing policy.
+     * The default leaves the price unchanged.
+     * The caller checks event activity before applying the policy.
+     * @return a non-null pricing policy
+     */
+    public DiscountPolicy getDiscountPolicy() {
+        return priceInCents -> priceInCents;
+    }
 
     /**
      * Uses the event's single activation and starts a two-turn active duration.

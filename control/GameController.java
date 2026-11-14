@@ -14,8 +14,9 @@ import entity.Table;
 import entity.order.Order;
 import entity.staff.Host;
 import entity.staff.Seater;
-import entity.Event.HappyHourEvent;
 import entity.DiscountPolicy.DiscountPolicy;
+import entity.Event.Event;
+import entity.Event.HappyHourEvent;
 
 import entity.customer.VIPCustomer;
 import entity.customer.CriticCustomer;
@@ -30,7 +31,7 @@ public class GameController
     private final Chef chef = new Chef("Chef");
     private final Cashier cashier = new Cashier("Cashier");
     private final Host host = new Host("Host");
-    private final HappyHourEvent happyHour = new HappyHourEvent();
+    private final Event happyHour = new HappyHourEvent();
     private final ViewBuilder viewBuilder = new ViewBuilder();
 
     private GameDisplay ui;
@@ -100,7 +101,7 @@ public class GameController
             happyHour.activate();
             ui.displayAction("Happy Hour activated.");
         }
-        happyHour.applyTurnStartBoost(restaurant.getUnservedCustomer());
+        happyHour.applyEventAction(restaurant.getUnservedCustomer());
         ui.displayHappyHourStatus(happyHour.getTurnsRemaining());
     }
 

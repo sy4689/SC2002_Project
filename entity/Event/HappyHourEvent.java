@@ -15,12 +15,23 @@ public class HappyHourEvent extends Event {
             new HappyHourDiscountPolicy();
 
     /**
+     * Performs Happy Hour's turn-start action using the existing recovery rules.
+     *
+     * @param customers non-null customers to consider for satisfaction recovery
+     */
+    @Override
+    public void applyEventAction(List<Customer> customers) {
+        applyTurnStartBoost(customers);
+    }
+    /**
      * While active, it restores 15 satisfaction to each supplied customer who is waiting in the queue, seated or ordered but unserved.
      * Recovery is capped at 100 for all customer.
      * This method does not activate the event or consume its duration; the controller schedules one call per turn.
      *
      * @param customers non-null customers to consider for this turn's recovery
      */
+
+
     public void applyTurnStartBoost(List<Customer> customers) {
         // An inactive event must not affect customers.
         if (!isActive()) {
@@ -41,6 +52,7 @@ public class HappyHourEvent extends Event {
     }
 
     // Supplies the pricing formula for orders taken while active.
+    @Override
     public DiscountPolicy getDiscountPolicy() {
         return discountPolicy;
     }
