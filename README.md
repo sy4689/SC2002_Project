@@ -11,11 +11,11 @@
 
 SC2002_Project
       ├── boundary
-!     │   ├── GameCLI.java
+!     │   ├── GameCLI.java (!! Update UX + UI !!)
       │   └── GameUI.java
       ├── control
-!     │   ├── GameController.java
-!     │   ├── GameDisplay.java
+!     │   ├── GameController.java (!! Updated game-flow !!)
+!     │   ├── GameDisplay.java (!! Update additional attribute for new UI !!)
       │   ├── GameState.java
       │   ├── GameUI.java
       │   ├── InvalidChoiceException.java
@@ -29,7 +29,7 @@ SC2002_Project
       │   ├── WaiterAction.java
       │   └── WaiterActionType.java
       ├── entity
-!     │   ├── customer
+!     │   ├── customer (!! Add new method !!)
       │   │   ├── CriticCustomer.java
       │   │   ├── Customer.java
       │   │   ├── CustomerState.java
@@ -37,14 +37,14 @@ SC2002_Project
       │   │   └── VIPCustomer.java
       │   ├── DiscountPolicy
       │   │   ├── DiscountPolicy.java
-+     │   │   ├── HappyHourDiscountPolicy.java
++     │   │   ├── HappyHourDiscountPolicy.java (!! Implement new discount policy !!)
       │   │   └── VIPDiscountPolicy.java
       │   ├── Event
-+     │   │   ├── Event.java
-+     │   │   └── HappyHourEvent.java
++     │   │   ├── Event.java (!! New abstract class !!)
++     │   │   └── HappyHourEvent.java (!! Implement new event !!)
       │   ├── menu
-+     │   │   ├── ComboMeal.java
-!     │   │   ├── Menu.java
++     │   │   ├── ComboMeal.java 
+!     │   │   ├── Menu.java (!! Add combo meal into menu !!)
       │   │   ├── MenuItem.java
       │   │   └── MenuItemType.java
       │   ├── order
@@ -54,10 +54,10 @@ SC2002_Project
       │   ├── staff
       │   │   ├── Cashier.java
       │   │   ├── Chef.java
-+     │   │   ├── Host.java
-+     │   │   ├── Seater.java
++     │   │   ├── Host.java 
++     │   │   ├── Seater.java (!! New interface !!)
       │   │   ├── Staff.java
-!     │   │   └── Waiter.java
+!     │   │   └── Waiter.java (!! Accept additional discount policy !!)
       │   ├── Table.java
       │   └── WaitingQueue.java
       ├── Main.java
